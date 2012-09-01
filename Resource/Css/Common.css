@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,body,#container{
+    height: 100%;
+}
+
+
+#leftContent{
+    float: left;
+    width: 220px;
+    border-right: 1px solid yellow;
+    text-align: right;
+    height:100%;
+    overflow-y: hidden;
+}
+
+#leftContent ul{
+    list-style:none;
+    line-height:25px;
+}
+
+#leftContent a{
+    color:#f7f6f0;
+    background:#bd3f09;
+}
+
+#leftContent .current a{
+    color:#993400;
+    background: white;
+    border-left: #FFF 1px solid;
+    border-right: #FFF 1px solid;
+}
