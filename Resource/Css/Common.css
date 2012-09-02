@@ -1,13 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
-}
+*{margin: 0;padding: 0;}
 
-html,body,#container{
-    height: 100%;
-}
+html,body,#container{height: 100%;}
 
-
+/* 左边菜单的css */
 #leftContent{
     float: left;
     width: 220px;
@@ -30,6 +25,42 @@ html,body,#container{
 #leftContent .current a{
     color:#993400;
     background: white;
-    border-left: #FFF 1px solid;
-    border-right: #FFF 1px solid;
+}
+
+/* 右边内容 */
+#rightContent{
+    float:left;
+    height: 100%;
+}
+
+#rightTop ul{
+    list-style:none;
+    line-height:25px;
+}
+
+#rightTop li{
+    float:left;
+    margin-right: 20px;
+}
+
+#rightTop a{
+    color:white;
+    background:#ff66cc;
+}
+
+#rightTop .current a{
+    color:black;
+    background: white;
+}
+
+/* login.html */
+.loginform p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+label{
+    width: 100px;
+    text-align: right;
+    float: left;
 }

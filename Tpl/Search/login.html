@@ -4,6 +4,7 @@
     <head>
         <title>系统登陆</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <css href="__CSS__/Common.css" />
     <js href="__JS__/jquery172.js"/>
     <script type="text/javascript">
         function fleshVerify(){
@@ -13,12 +14,12 @@
     </script>
 </head>
 <body>
-    <form name="loginform" method="post" action="__URL__/checkUser">
+    <form name="loginform" class="loginform" method="post" action="__URL__/checkUser">
         <p><label>用户名：</label><input type="text" name="username"/></p>
         <p><label>密码：</label><input type="password" name="password"/></p>
         <p><label>验证码：</label><input type="text" name="verify" /></p>
-        <p><img id="Verify" src="__APP__/Search/verify" onclick="fleshVerify()" title="刷新页面或点击图片更换验证码" style="cursor:pointer"/></p>
-        <p><input type="submit" value="登录" class="submit" /></p>
+        <p><label>&nbsp;</label><img id="Verify" src="__APP__/Search/verify" onclick="fleshVerify()" title="刷新页面或点击图片更换验证码" style="cursor:pointer"/></p>
+        <p><label>&nbsp;</label><input type="submit" value="登录" class="submit" /></p>
     </form>
 </body>
 </html>

@@ -8,9 +8,16 @@
 </head>
 <body>
     <div id="container">
-        <include file="Public:left" />
+        <div id="leftContent">
+            <include file="Public:left" />
+        </div>
         <div id="rightContent">
-            {__CONTENT__}
+            <div id="rightTop">
+                <include file="Public:top" />
+            </div>
+            <div id="rightBottom">
+                {__CONTENT__}
+            </div>
         </div>
         <div style="clear: both"></div>
     </div>
