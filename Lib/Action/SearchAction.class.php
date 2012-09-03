@@ -41,6 +41,7 @@ class SearchAction extends Action {
 
         $result = $m_user->where($condition)->find();
         if ($result) {
+            session("uid", $result["id"]);
             session("username", $result["username"]);
             session("truename", $result["truename"]);
             session("right", $result["right"]);

@@ -24,7 +24,6 @@ function get_second_menu($module, $action) {
             break;
     }
 
-
     $str = "<ul>";
     foreach ($tmp as $k => $v) {
         if ($k == $action)
@@ -33,6 +32,12 @@ function get_second_menu($module, $action) {
             $str.="<li><a href='__APP__/$module/$k'>$v</a></li>";
     }
     return $str . "</ul>";
+}
+
+//获取用户登陆后的uid，即用户的id，自动填充到donater表的handman字段，标识这条数据最后的操作人员
+function get_session_user_id() {
+    if (isset($_SESSION["uid"]))
+        return $_SESSION["uid"];
 }
 
 ?>
