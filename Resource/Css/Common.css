@@ -2,7 +2,37 @@
 
 html,body,#container{height: 100%;}
 
-/* 左边菜单的css */
+#message{
+    background-color: #FFF0A5;
+    width: auto;
+    height: 25px;
+    position: fixed;
+    top: 0;
+    left: 45%;
+    padding: 12px;
+    display: none;
+}
+
+/* login.html */
+.loginform p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+label{
+    width: 100px;
+    text-align: right;
+    float: left;
+}
+
+/*header*/
+#topContent{
+    height:80px;
+    width: 100%;
+    border-bottom: 1px solid #bd3f09;
+}
+
+/* 左边菜单的 */
 #leftContent{
     float: left;
     width: 220px;
@@ -28,11 +58,13 @@ html,body,#container{height: 100%;}
 }
 
 /* 右边内容 */
+
 #rightContent{
     float:left;
     height: 100%;
+    width:900px;
 }
-
+/*右上子菜单*/
 #rightTop{
     height: 50px;
     margin-top: 28px;
@@ -48,16 +80,6 @@ html,body,#container{height: 100%;}
     float:left;
     margin-right: 20px;
 }
-
-/*#rightTop a{
-    color:white;
-    background:#ff66cc;
-}
-
-#rightTop .current a{
-    color:black;
-    background: white;
-}*/
 
 .basic-button {
     width: 158px;
@@ -81,20 +103,51 @@ html,body,#container{height: 100%;}
     text-shadow: none;
 }
 
+/*右下，具体操作的地方*/
 #rightBottom{
     height:100%;
     margin-top: 20px;
     margin-left: 30px;
 }
 
-/* login.html */
-.loginform p{
+/*表格样式,需重新设计 */
+.common_table
+{
     margin-bottom: 10px;
-    margin-top: 10px;
+    width:100%;
+    border-collapse:collapse;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-label{
-    width: 100px;
-    text-align: right;
-    float: left;
+.common_table th{
+    background-color: #fff;
+    height: 30px;
+    font-size:13px;
+    border:1px solid #98bf21;
+    padding:3px 7px 2px 7px;
+}
+.common_table td{
+    background-color: #fff;
+    height: 15px;
+    font-size:13px;
+    border:1px solid #98bf21;
+    padding:3px 7px 2px 7px;
+}
+.common_table th
+{
+    font-size:13px;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#A7C942;
+    color:#ffffff;
+}
+
+.common_table tr{
+    color:#000000;
+}
+.common_table tr:hover
+{
+    color:#000000;
+    background-color:#EAF2D3;
 }

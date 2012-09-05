@@ -3,22 +3,26 @@
     <head>
         <title>义仓物资管理信息系统</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <css href="__CSS__/Common.css" />
-    <js href="__JS__/jquery172.js,__JS__/Common.js" />
+    <css href="__CSS__/Common.css,__CSS__/plugin/jquery.qtip.css" />
+    <js href="__JS__/jquery172.js,__JS__/Common.js,__JS__/plugin/jquery.qtip.js" />
 </head>
 <body>
     <div id="container">
+        <div id="topContent">
+            <include file="Public:top" />
+        </div>
         <div id="leftContent">
             <include file="Public:left" />
         </div>
         <div id="rightContent">
             <div id="rightTop">
-                <include file="Public:top" />
+                <include file="Public:righttop" />
             </div>
             <div id="rightBottom">
                 {__CONTENT__}
             </div>
         </div>
+        <div id="message"></div>
         <div style="clear: both"></div>
     </div>
 </body>

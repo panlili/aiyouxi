@@ -1,1 +1,46 @@
-用户管理页面
+<table class="common_table">
+    <thead>
+    <th>编号</th>
+    <th>用户名</th>
+    <th>姓名</th>
+    <th>权限级别</th>
+    <th>备注</th>
+    <th>添加时间</th>
+    <th>上次登陆</th>
+    <th>登陆IP</th>
+    <th>登陆次数</th>
+    <th>状态</th>
+</thead>
+<tbody>
+<volist name="users" id="each">
+    <tr id="{$each.id}">
+        <td>{$each.id}</td>
+        <td>{$each.username}</td>
+        <td>{$each.truename}</td>
+        <td>{$each.right}</td>
+        <td>{$each.comment}</td>
+        <td>{$each.addtime|date="Y-m-d,H:m:s",###}</td>
+        <td>{$each.lastlogintime|date="Y-m-d,H:m:s",###}</td>
+        <td>{$each.lastloginip}</td>
+        <td>{$each.logincount}</td>
+        <td><a class="status" href="#" onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}');return false;">{$each.status|get_status_str_by_int}</a></td>
+    </tr>
+</volist>
+</tbody>
+</table>
+
+<script type="text/javascript">
+    $(function(){
+        $("a.status").qtip({
+            content: {
+                text:function(){
+                    return $(this).text()=="启用中"?"点击禁用用户":"点击启用用户";
+                }
+            },
+            position: {
+                my: 'top left',
+                at: 'bottom right'
+            }
+        });
+    });
+</script>

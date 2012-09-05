@@ -2,6 +2,7 @@
 
 return array(
     'URL_CASE_INSENSITIVE' => true,
+    'LOAD_EXT_FILE' => 'tpl',
     'LAYOUT_ON' => true,
     'DEFAULT_MODULE' => 'Search',
     'DEFAULT_ACTION' => 'index',
