@@ -8,8 +8,8 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-// $Id: ParseTemplateBehavior.class.php 2766 2012-02-20 15:58:21Z luofei614@gmail.com $
-
+// $Id: ParseTemplateBehavior.class.php 1090 2012-08-23 08:33:46Z luofei614@126.com $
+defined('THINK_PATH') or exit();
 /**
  +------------------------------------------------------------------------------
  * 系统行为扩展 模板解析
@@ -45,13 +45,15 @@ class ParseTemplateBehavior extends Behavior {
     // 行为扩展的执行入口必须是run
     public function run(&$_data){
         $engine  = strtolower(C('TMPL_ENGINE_TYPE'));
+        $_content   =   empty($_data['content'])?$_data['file']:$_data['content'];
         if('think'==$engine){ //[sae] 采用Think模板引擎
-            if($this->checkCache($_data['file'])) { // 缓存有效
-                SaeMC::include_file(md5($_data['file']).C('TMPL_CACHFILE_SUFFIX'),$_data['var']);
+            if(empty($_data['content']) && $this->checkCache($_data['file'])) { // 缓存有效
+                //[sae]，为方便saeCacheBuilder编译， 模板编译缓存不分组
+                SaeMC::include_file(CACHE_PATH.md5($_data['file']).C('TMPL_CACHFILE_SUFFIX'),$_data['var']);
             }else{
                 $tpl = Think::instance('ThinkTemplate');
                 // 编译并加载模板文件
-                $tpl->fetch($_data['file'],$_data['var']);
+                $tpl->fetch($_content,$_data['var']);
             }
         }else{
             // 调用第三方模板引擎解析和输出
@@ -64,16 +66,14 @@ class ParseTemplateBehavior extends Behavior {
             }
             if(require_cache($path.'Driver/Template/'.$class.'.class.php')) {
                 $tpl   =  new $class;
-                $tpl->fetch($_data['file'],$_data['var']);
+                $tpl->fetch($_content,$_data['var']);
             }else {  // 类没有定义
                 throw_exception(L('_NOT_SUPPERT_').': ' . $class);
             }
         }
         //[sae] 添加trace信息。
-        trace(array(
-            '[SAE]核心缓存'=>$_SERVER['HTTP_APPVERSION'].'/'.RUNTIME_FILE,
-            '[SAE]模板缓存'=>$_SERVER['HTTP_APPVERSION'].'/'.md5($_data['file']).C('TMPL_CACHFILE_SUFFIX')
-        ));
+        if(APP_DEBUG) trace($_SERVER['HTTP_APPVERSION'].'/'.RUNTIME_FILE,'核心缓存','SAE');
+        if(APP_DEBUG) trace($_SERVER['HTTP_APPVERSION'].'/'.CACHE_PATH.md5($_data['file']).C('TMPL_CACHFILE_SUFFIX'),'模版缓存','SAE');
     }
 
     /**
@@ -93,7 +93,7 @@ class ParseTemplateBehavior extends Behavior {
         if (!C('TMPL_CACHE_ON')) // 优先对配置设定检测
             return false;
         //[sae] 不加模版目录，简化模版名称
-        $tmplCacheFile = md5($tmplTemplateFile).C('TMPL_CACHFILE_SUFFIX');
+        $tmplCacheFile = CACHE_PATH.md5($tmplTemplateFile).C('TMPL_CACHFILE_SUFFIX');
         if(!SaeMC::file_exists($tmplCacheFile)){
             return false;
         //}elseif (filemtime($tmplTemplateFile) > filemtime($tmplCacheFile)) {

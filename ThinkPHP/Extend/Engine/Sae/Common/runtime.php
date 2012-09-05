@@ -8,24 +8,25 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-// $Id: runtime.php 2821 2012-03-16 06:17:49Z luofei614@gmail.com $
+// $Id: runtime.php 1090 2012-08-23 08:33:46Z luofei614@126.com $
 
 /**
  +------------------------------------------------------------------------------
  * ThinkPHP 运行时文件 编译后不再加载
  +------------------------------------------------------------------------------
  */
-if (!defined('THINK_PATH')) exit();
+defined('THINK_PATH') or exit();
 if (version_compare(PHP_VERSION, '5.2.0', '<')) die('require PHP > 5.2.0 !');
 //  版本信息
-define('THINK_VERSION', '3.0');
-define('THINK_RELEASE', '20120313');
+define('THINK_VERSION', '3.1RC');
 
 //   系统信息
-if(version_compare(PHP_VERSION,'5.4.0','<') ) {
+if(version_compare(PHP_VERSION,'5.3.0','<')) {
     //[sae]下不支持这个函数  
     //@set_magic_quotes_runtime (0);
     define('MAGIC_QUOTES_GPC',get_magic_quotes_gpc()?True:False);
+}else{
+    define('MAGIC_QUOTES_GPC',True);
 }
 define('IS_CGI',substr(PHP_SAPI, 0,3)=='cgi' ? 1 : 0 );
 define('IS_WIN',strstr(PHP_OS, 'WIN') ? 1 : 0 );
@@ -101,7 +102,7 @@ function load_runtime_file() {
     //[sae]在sae下不对目录结构进行检查
     if(APP_DEBUG){
         //[sae] 调试模式切换删除编译缓存
-        if(SaeMC::file_exists(RUNTIME_FILE)) SaeMC::unlink(RUNTIME_FILE) ;
+        if(!SAE_RUNTIME && SaeMC::file_exists(RUNTIME_FILE)) SaeMC::unlink(RUNTIME_FILE) ;
     }
 }
 

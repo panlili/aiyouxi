@@ -8,8 +8,8 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-// $Id: alias.php 2766 2012-02-20 15:58:21Z luofei614@gmail.com $
-if (!defined('THINK_PATH')) exit();
+// $Id: alias.php 1090 2012-08-23 08:33:46Z luofei614@126.com $
+defined('THINK_PATH') or exit();
 // 系统别名定义文件
 return array(
     'Model'         => CORE_PATH.'Core/Model.class.php',

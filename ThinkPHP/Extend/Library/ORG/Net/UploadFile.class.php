@@ -8,127 +8,77 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-// $Id: UploadFile.class.php 2568 2012-01-10 12:15:45Z liu21st $
 
 /**
- +------------------------------------------------------------------------------
  * 文件上传类
- +------------------------------------------------------------------------------
  * @category   ORG
  * @package  ORG
  * @subpackage  Net
  * @author    liu21st <liu21st@gmail.com>
- * @version   $Id: UploadFile.class.php 2568 2012-01-10 12:15:45Z liu21st $
- +------------------------------------------------------------------------------
  */
 class UploadFile {//类定义开始
 
-    // 上传文件的最大值
-    public $maxSize = -1;
-
-    // 是否支持多文件上传
-    public $supportMulti = true;
-
-    // 允许上传的文件后缀
-    //  留空不作后缀检查
-    public $allowExts = array();
-
-    // 允许上传的文件类型
-    // 留空不做检查
-    public $allowTypes = array();
-
-    // 使用对上传图片进行缩略图处理
-    public $thumb   =  false;
-    // 图库类包路径
-    public $imageClassPath = 'ORG.Util.Image';
-    // 缩略图最大宽度
-    public $thumbMaxWidth;
-    // 缩略图最大高度
-    public $thumbMaxHeight;
-    // 缩略图前缀
-    public $thumbPrefix   =  'thumb_';
-    public $thumbSuffix  =  '';
-    // 缩略图保存路径
-    public $thumbPath = '';
-    // 缩略图文件名
-    public $thumbFile		=	'';
-    // 是否移除原图
-    public $thumbRemoveOrigin = false;
-    // 压缩图片文件上传
-    public $zipImages = false;
-    // 启用子目录保存文件
-    public $autoSub   =  false;
-    // 子目录创建方式 可以使用hash date
-    public $subType   = 'hash';
-    public $dateFormat = 'Ymd';
-    public $hashLevel =  1; // hash的目录层次
-    // 上传文件保存路径
-    public $savePath = '';
-    public $autoCheck = true; // 是否自动检查附件
-    // 存在同名是否覆盖
-    public $uploadReplace = false;
-
-    // 上传文件命名规则
-    // 例如可以是 time uniqid com_create_guid 等
-    // 必须是一个无需任何参数的函数名 可以使用自定义函数
-    public $saveRule = '';
-
-    // 上传文件Hash规则函数名
-    // 例如可以是 md5_file sha1_file 等
-    public $hashType = 'md5_file';
+    private $config =   array(
+        'maxSize' => -1,    // 上传文件的最大值
+        'supportMulti' => true,    // 是否支持多文件上传
+        'allowExts'=> array(),    // 允许上传的文件后缀 留空不作后缀检查
+        'allowTypes' => array(),    // 允许上传的文件类型 留空不做检查
+        'thumb'   =>  false,    // 使用对上传图片进行缩略图处理
+        'imageClassPath' => 'ORG.Util.Image',    // 图库类包路径
+        'thumbMaxWidth'   =>'',// 缩略图最大宽度
+        'thumbMaxHeight'    =>'',// 缩略图最大高度
+        'thumbPrefix'   =>  'thumb_',// 缩略图前缀
+        'thumbSuffix'  =>  '',
+        'thumbPath' => '',// 缩略图保存路径
+        'thumbFile'		=>'',// 缩略图文件名
+        'thumbRemoveOrigin' => false,// 是否移除原图
+        'zipImages' => false,// 压缩图片文件上传
+        'autoSub'   =>  false,// 启用子目录保存文件
+        'subType'   => 'hash',// 子目录创建方式 可以使用hash date
+        'dateFormat' => 'Ymd',
+        'hashLevel' =>  1, // hash的目录层次
+        'savePath' => '',// 上传文件保存路径
+        'autoCheck' => true, // 是否自动检查附件
+        'uploadReplace' => false,// 存在同名是否覆盖
+        'saveRule'=>'',// 上传文件命名规则
+        'hashType'=>'md5_file',// 上传文件Hash规则函数名
+        );
 
     // 错误信息
     private $error = '';
-
     // 上传成功的文件信息
     private $uploadFileInfo ;
 
-    /**
-     +----------------------------------------------------------
-     * 架构函数
-     +----------------------------------------------------------
-     * @access public
-     +----------------------------------------------------------
-     */
-    public function __construct($maxSize='',$allowExts='',$allowTypes='',$savePath='',$saveRule='') {
-        if(!empty($maxSize) && is_numeric($maxSize)) {
-            $this->maxSize = $maxSize;
+    public function __get($name){
+        if(isset($this->config[$name])) {
+            return $this->config[$name];
         }
-        if(!empty($allowExts)) {
-            if(is_array($allowExts)) {
-                $this->allowExts = array_map('strtolower',$allowExts);
-            }else {
-                $this->allowExts = explode(',',strtolower($allowExts));
-            }
+        return null;
+    }
+
+    public function __set($name,$value){
+        if(isset($this->config[$name])) {
+            $this->config[$name]    =   $value;
         }
-        if(!empty($allowTypes)) {
-            if(is_array($allowTypes)) {
-                $this->allowTypes = array_map('strtolower',$allowTypes);
-            }else {
-                $this->allowTypes = explode(',',strtolower($allowTypes));
-            }
-        }
-        if(!empty($saveRule)) {
-            $this->saveRule = $saveRule;
-        }else{
-            $this->saveRule	=	C('UPLOAD_FILE_RULE');
-        }
-        $this->savePath = $savePath;
     }
 
     /**
-     +----------------------------------------------------------
-     * 上传一个文件
-     +----------------------------------------------------------
+     * 架构函数
      * @access public
-     +----------------------------------------------------------
+     * @param array $config  上传参数
+     */
+    public function __construct($config=array()) {
+        if(is_array($config)) {
+            $this->config   =   array_merge($this->config,$config);
+        }
+    }
+
+    /**
+     * 上传一个文件
+     * @access public
      * @param mixed $name 数据
      * @param string $value  数据表名
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
-     * @throws ThinkExecption
-     +----------------------------------------------------------
      */
     private function save($file) {
         $filename = $file['savepath'].$file['savename'];
@@ -155,13 +105,18 @@ class UploadFile {//类定义开始
                 $thumbPrefix		=	explode(',',$this->thumbPrefix);
                 $thumbSuffix = explode(',',$this->thumbSuffix);
                 $thumbFile			=	explode(',',$this->thumbFile);
-                $thumbPath    =  $this->thumbPath?$this->thumbPath:$file['savepath'];
+                $thumbPath    =  $this->thumbPath?$this->thumbPath:dirname($filename).'/';
                 // 生成图像缩略图
                 import($this->imageClassPath);
-                $realFilename  =  $this->autoSub?basename($file['savename']):$file['savename'];
                 for($i=0,$len=count($thumbWidth); $i<$len; $i++) {
-                    $thumbname	=	$thumbPath.$thumbPrefix[$i].substr($realFilename,0,strrpos($realFilename, '.')).$thumbSuffix[$i].'.'.$file['extension'];
-                    Image::thumb($filename,$thumbname,'',$thumbWidth[$i],$thumbHeight[$i],true);
+                    if(!empty($thumbFile[$i])) {
+                        $thumbname  =   $thumbFile[$i];
+                    }else{
+                        $prefix =   isset($thumbPrefix[$i])?$thumbPrefix[$i]:$thumbPrefix[0];
+                        $suffix =   isset($thumbSuffix[$i])?$thumbSuffix[$i]:$thumbSuffix[0];
+                        $thumbname  =   $prefix.basename($filename,'.'.$file['extension']).$suffix;
+                    }
+                    Image::thumb($filename,$thumbPath.$thumbname.'.'.$file['extension'],'',$thumbWidth[$i],$thumbHeight[$i],true);
                 }
                 if($this->thumbRemoveOrigin) {
                     // 生成缩略图之后删除原图
@@ -177,17 +132,10 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 上传所有文件
-     +----------------------------------------------------------
      * @access public
-     +----------------------------------------------------------
      * @param string $savePath  上传文件保存路径
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
-     * @throws ThinkExecption
-     +----------------------------------------------------------
      */
     public function upload($savePath ='') {
         //如果不指定保存文件名，则由系统默认
@@ -254,18 +202,11 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 上传单个上传字段中的文件 支持多附件
-     +----------------------------------------------------------
      * @access public
-     +----------------------------------------------------------
      * @param array $file  上传文件信息
      * @param string $savePath  上传文件保存路径
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
-     * @throws ThinkExecption
-     +----------------------------------------------------------
      */
     public function uploadOne($file,$savePath=''){
         //如果不指定保存文件名，则由系统默认
@@ -274,7 +215,7 @@ class UploadFile {//类定义开始
         // 检查上传目录
         if(!is_dir($savePath)) {
             // 尝试创建目录
-            if(!mk_dir($savePath)){
+            if(!mkdir($savePath,0777,true)){
                 $this->error  =  '上传目录'.$savePath.'不存在';
                 return false;
             }
@@ -326,15 +267,10 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 转换上传文件数组变量为正确的方式
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param array $files  上传的文件变量
-     +----------------------------------------------------------
      * @return array
-     +----------------------------------------------------------
      */
     private function dealFiles($files) {
        $fileArray = array();
@@ -357,17 +293,10 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 获取错误代码信息
-     +----------------------------------------------------------
      * @access public
-     +----------------------------------------------------------
      * @param string $errorNo  错误号码
-     +----------------------------------------------------------
      * @return void
-     +----------------------------------------------------------
-     * @throws ThinkExecption
-     +----------------------------------------------------------
      */
     protected function error($errorNo) {
          switch($errorNo) {
@@ -396,15 +325,10 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 根据上传文件命名规则取得保存文件名
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param string $filename 数据
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
      */
     private function getSaveName($filename) {
         $rule = $this->saveRule;
@@ -422,26 +346,21 @@ class UploadFile {//类定义开始
         if($this->autoSub) {
             // 使用子目录保存文件
             $filename['savename'] = $saveName;
-            $saveName = $this->getSubName($filename).'/'.$saveName;
+            $saveName = $this->getSubName($filename).$saveName;
         }
         return $saveName;
     }
 
     /**
-     +----------------------------------------------------------
      * 获取子目录的名称
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param array $file  上传的文件信息
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
      */
     private function getSubName($file) {
         switch($this->subType) {
             case 'date':
-                $dir   =  date($this->dateFormat,time());
+                $dir   =  date($this->dateFormat,time()).'/';
                 break;
             case 'hash':
             default:
@@ -453,21 +372,16 @@ class UploadFile {//类定义开始
                 break;
         }
         if(!is_dir($file['savepath'].$dir)) {
-            mk_dir($file['savepath'].$dir);
+            mkdir($file['savepath'].$dir,0777,true);
         }
         return $dir;
     }
 
     /**
-     +----------------------------------------------------------
      * 检查上传的文件
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param array $file 文件信息
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function check($file) {
         if($file['error']!== 0) {
@@ -520,15 +434,10 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 检查上传的文件类型是否合法
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param string $type 数据
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function checkType($type) {
         if(!empty($this->allowTypes))
@@ -538,15 +447,10 @@ class UploadFile {//类定义开始
 
 
     /**
-     +----------------------------------------------------------
      * 检查上传的文件后缀是否合法
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param string $ext 后缀名
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function checkExt($ext) {
         if(!empty($this->allowExts))
@@ -555,45 +459,30 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 检查文件大小是否合法
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param integer $size 数据
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function checkSize($size) {
         return !($size > $this->maxSize) || (-1 == $this->maxSize);
     }
 
     /**
-     +----------------------------------------------------------
      * 检查文件是否非法提交
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param string $filename 文件名
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function checkUpload($filename) {
         return is_uploaded_file($filename);
     }
 
     /**
-     +----------------------------------------------------------
      * 取得上传文件的后缀
-     +----------------------------------------------------------
      * @access private
-     +----------------------------------------------------------
      * @param string $filename 文件名
-     +----------------------------------------------------------
      * @return boolean
-     +----------------------------------------------------------
      */
     private function getExt($filename) {
         $pathinfo = pathinfo($filename);
@@ -601,29 +490,20 @@ class UploadFile {//类定义开始
     }
 
     /**
-     +----------------------------------------------------------
      * 取得上传文件的信息
-     +----------------------------------------------------------
      * @access public
-     +----------------------------------------------------------
      * @return array
-     +----------------------------------------------------------
      */
     public function getUploadFileInfo() {
         return $this->uploadFileInfo;
     }
 
     /**
-     +----------------------------------------------------------
      * 取得最后一次错误信息
-     +----------------------------------------------------------
      * @access public
-     +----------------------------------------------------------
      * @return string
-     +----------------------------------------------------------
      */
     public function getErrorMsg() {
         return $this->error;
     }
-
 }

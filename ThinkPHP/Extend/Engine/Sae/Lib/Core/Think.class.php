@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-// $Id: Think.class.php 2793 2012-03-02 05:34:40Z liu21st $
+// $Id: Think.class.php 1090 2012-08-23 08:33:46Z luofei614@126.com $
 
 /**
  +------------------------------------------------------------------------------
@@ -18,7 +18,7 @@
  * @package  Think
  * @subpackage  Core
  * @author    liu21st <liu21st@gmail.com>
- * @version   $Id: Think.class.php 2793 2012-03-02 05:34:40Z liu21st $
+ * @version   $Id: Think.class.php 1090 2012-08-23 08:33:46Z luofei614@126.com $
  +------------------------------------------------------------------------------
  */
 class Think {
@@ -34,8 +34,9 @@ class Think {
      * @return void
      +----------------------------------------------------------
      */
-    static public function Start() {
+    static public function start() {
         // 设定错误和异常处理
+        register_shutdown_function(array('Think','fatalError'));
         set_error_handler(array('Think','appError'));
         set_exception_handler(array('Think','appException'));
         // 注册AUTOLOAD方法
@@ -110,7 +111,8 @@ class Think {
             $list  =  array(
                 SAE_PATH.'Common/functions.php', //[sae] 标准模式函数库
                 SAE_PATH.'Common/sae_functions.php',//[sae]新增sae专用函数
-                SAE_PATH.'Lib/Core/Log.class.php',    // 日志处理类
+                SAE_PATH.'Lib/Core/Log.class.php',    //[sae] 日志处理类
+                SAE_PATH.'Lib/Core/Sms.class.php',    //[sae] 短信预警类
                 CORE_PATH.'Core/Dispatcher.class.php', // URL调度类
                 CORE_PATH.'Core/App.class.php',   // 应用程序类
                 SAE_PATH.'Lib/Core/Action.class.php', //[sae] 控制器类
@@ -187,7 +189,8 @@ class Think {
                 return ;
             }
         }elseif(substr($class,-5)=='Model'){ // 加载模型
-            if(require_cache(LIB_PATH.'Model/'.$class.'.class.php')
+            if((defined('GROUP_NAME') && require_cache(LIB_PATH.'Model/'.GROUP_NAME.'/'.$class.'.class.php'))
+                || require_cache(LIB_PATH.'Model/'.$class.'.class.php')
                 || require_cache(EXTEND_PATH.'Model/'.$class.'.class.php') ) {
                 return ;
             }
@@ -264,19 +267,31 @@ class Think {
     static public function appError($errno, $errstr, $errfile, $errline) {
       switch ($errno) {
           case E_ERROR:
+          case E_PARSE:
+          case E_CORE_ERROR:
+          case E_COMPILE_ERROR:
           case E_USER_ERROR:
-            $errorStr = "[$errno] $errstr ".basename($errfile)." 第 $errline 行.";
-            if(C('LOG_RECORD')) Log::write($errorStr,Log::ERR);
-            halt($errorStr);
+            ob_end_clean();
+            if(!ini_get('zlib.output_compression') && C('OUTPUT_ENCODE')) ob_start('ob_gzhandler');
+            $errorStr = "$errstr ".$errfile." 第 $errline 行.";
+            if(C('LOG_RECORD')) Log::write("[$errno] ".$errorStr,Log::ERR);
+            function_exists('halt')?halt($errorStr):exit('ERROR:'.$errorStr);
             break;
           case E_STRICT:
           case E_USER_WARNING:
           case E_USER_NOTICE:
           default:
-            $errorStr = "[$errno] $errstr ".basename($errfile)." 第 $errline 行.";
-            Log::record($errorStr,Log::NOTICE);
+            $errorStr = "[$errno] $errstr ".$errfile." 第 $errline 行.";
+            trace($errorStr,'','NOTIC');
             break;
       }
+    }
+    
+    // 致命错误捕获
+    static public function fatalError() {
+        if ($e = error_get_last()) {
+            Think::appError($e['type'],$e['message'],$e['file'],$e['line']);
+        }
     }
 
     /**
