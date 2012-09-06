@@ -43,6 +43,28 @@ class AdminAction extends BaseAction {
         }
     }
 
+    /**
+     * 添加ayx_user表中用户数据
+     * @param form的值
+     * @return message
+     */
+    public function addUser() {
+        if ($this->isAjax()) {
+            $m_user = D("User");
+            if ($m_user->create()) {
+                if ($m_user->add()) {
+                    $this->success("数据添加成功");
+                } else {
+                    $this->error("写入数据库错误");
+                }
+            } else {
+                $this->error($m_user->getError());
+            }
+        } else {
+            $this->redirect("Admin/users");
+        }
+    }
+
 }
 
 ?>

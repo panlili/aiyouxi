@@ -1,3 +1,6 @@
+<div>
+    <a class="adduser" href="#">添加用户</a>
+</div>
 <table class="common_table">
     <thead>
     <th>编号</th>
@@ -29,8 +32,50 @@
 </tbody>
 </table>
 
+<div id="adduserForm">
+    <form class="common_form">
+        <p><label>用户名:</label><input type="text" name="username"/></p>
+        <p><label>密码:</label><input type="text" name="password"/></p>
+        <p><label>姓名:</label><input type="text" name="truename"/></p>
+        <p><label>权限级别:</label><select name="right">
+                <option value="0">0级</option>
+                <option value="1">1级</option>
+                <option value="2">2级</option>
+            </select></p>
+        <p><label>备注：</label><textarea name="comment" rows="4" cols="20">
+            </textarea></p>
+        <input id="reset" type="reset" style="display: none"/>
+    </form>
+</div>
+
 <script type="text/javascript">
     $(function(){
+        //添加用户的dialog
+        var $dialog=$("#adduserForm").dialog({
+            autoOpen:false,
+            title: "添加新用户",
+            modal: true,
+            width:400,
+            close: function() {
+                $('#reset').click()
+            },
+            buttons: {
+                添加用户: function(){
+                    add_user("__APP__/Admin/addUser",$("#adduserForm .common_form").serialize());
+                },
+                取消: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $('.adduser').click(function() {
+            $dialog.dialog('open');
+            // prevent the default action, e.g., following a link
+            return false;
+        });
+
+        //更新用户状态的提示信息框
         $("a.status").qtip({
             content: {
                 text:function(){
