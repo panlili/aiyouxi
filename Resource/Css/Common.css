@@ -26,7 +26,6 @@ html,body,#container{height: 100%;}
     margin-right: 5px;
 }
 
-
 /*header*/
 #topContent{
     height:80px;
@@ -37,7 +36,7 @@ html,body,#container{height: 100%;}
 /* 左边菜单的 */
 #leftContent{
     float: left;
-    width:220px;
+    width: 220px;
     border-right: 1px solid yellow;
     text-align: right;
     height:100%;
