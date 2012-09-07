@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>“义仓”慈善捐赠流程管理系统</title>
+        <title>义仓物资管理信息系统</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <css href="__CSS__/Common.css,__CSS__/jquery.qtip.css" />
     <css href="__CSS__/jquery-ui-1.8.20.custom.css" />
@@ -13,17 +13,15 @@
         <div id="topContent">
             <include file="Public:top" />
         </div>
-        <div id="kkk">
-            <div id="leftContent">
-                <include file="Public:left" />
+        <div id="leftContent">
+            <include file="Public:left" />
+        </div>
+        <div id="rightContent">
+            <div id="rightTop">
+                <include file="Public:righttop" />
             </div>
-            <div id="rightContent">
-                <div id="rightTop">
-                    <include file="Public:righttop" />
-                </div>
-                <div id="rightBottom">
-                    {__CONTENT__}
-                </div>
+            <div id="rightBottom">
+                {__CONTENT__}
             </div>
         </div>
         <div id="message"></div>

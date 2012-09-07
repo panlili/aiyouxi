@@ -26,25 +26,17 @@ html,body,#container{height: 100%;}
     margin-right: 5px;
 }
 
-
 /*header*/
 #topContent{
     height:80px;
     width: 100%;
-    min-width: 960px;
     border-bottom: 1px solid #bd3f09;
-}
-/* 包裹页面header以下部分 */
-#kkk{
-    width: 100%;
-    min-width: 960px;
 }
 
 /* 左边菜单的 */
 #leftContent{
     float: left;
-    width: 15%;
-    min-width: 100px;
+    width: 220px;
     border-right: 1px solid yellow;
     text-align: right;
     height:100%;
@@ -71,8 +63,7 @@ html,body,#container{height: 100%;}
 #rightContent{
     float:left;
     height: 100%;
-    /*width:80%;*/
-    
+    width:900px;
 }
 /*右上子菜单*/
 #rightTop{
