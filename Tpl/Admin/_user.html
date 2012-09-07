@@ -1,0 +1,38 @@
+{__NOLAYOUT__}
+
+<!-- 新增的用户数据 -->
+<present name="newuser">
+    <tr class="userlist">
+        <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getUserEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$newuser.id}</a></td>
+        <td>{$newuser.username}</td>
+        <td>{$newuser.truename}</td>
+        <td>{$newuser.right}</td>
+        <td>{$newuser.comment}</td>
+        <td>{$newuser.addtime|date="Y-m-d,H:m:s",###}</td>
+        <td>{$newuser.lastlogintime|date="Y-m-d,H:m:s",###}</td>
+        <td>{$newuser.lastloginip}</td>
+        <td>{$newuser.logincount}</td>
+        <td>
+            <a id="status_{$newuser.id}" class="status" href="#"
+               onclick="toggle_status('__APP__/Admin/changeStatus','{$newuser.id}',callback_user_status);return false;">
+                {$newuser.status|get_status_str_by_int}
+            </a>
+        </td>
+    </tr>
+</present>
+
+<!-- 修改单条数据的表单 -->
+<present name="userdata">
+    <form class="common_form">
+        <p><label>*用户名:</label><input type="text" name="username" value="{$userdata.username}"/></p>
+        <p><label>*姓名:</label><input type="text" name="truename" value="{$userdata.truename}"/></p>
+        <p><label>权限级别:</label>{$userdata.right|right_select}</p>
+        <p><label>备注：</label><textarea name="comment" rows="4" cols="20">{$userdata.comment}
+            </textarea></p>
+        <p><label>&nbsp;</label>
+            <input type="button" value="修改数据"
+                   onclick="edit_data('__APP__/Admin/editUser',$('#tabs-3 .common_form').serialize(),callback_edit_user);"/>
+            <input type="reset" value="重置" /></p>
+        <input type="hidden" name="id" value="{$userdata.id}" />
+    </form>
+</present>

@@ -16,4 +16,25 @@ function get_status_str_by_int($status) {
     }
 }
 
+//输出权限选择的select
+function right_select($selected = "") {
+    $str = "";
+    if ("" == $selected) {
+        $str = '<select name="right">
+                <option value="0">0级</option>
+                <option value="1">1级</option>
+                <option value="2">2级</option>
+            </select>';
+    } else {
+        $str = '<select name="right">
+                <option value=' . $selected . '>' . $selected . '级</option>
+                <option value=' . $selected . '>--修改请重选--</option>
+                <option value="0">0级</option>
+                <option value="1">1级</option>
+                <option value="2">2级</option>
+            </select>';
+    }
+    return $str;
+}
+
 ?>

@@ -1,91 +1,73 @@
-<div>
-    <a class="adduser" href="#">添加用户</a>
-</div>
-<table class="common_table">
-    <thead>
-    <th>编号</th>
-    <th>用户名</th>
-    <th>姓名</th>
-    <th>权限级别</th>
-    <th>备注</th>
-    <th>添加时间</th>
-    <th>上次登陆</th>
-    <th>登陆IP</th>
-    <th>登陆次数</th>
-    <th>状态</th>
-</thead>
-<tbody>
-<volist name="users" id="each">
-    <tr id="{$each.id}">
-        <td>{$each.id}</td>
-        <td>{$each.username}</td>
-        <td>{$each.truename}</td>
-        <td>{$each.right}</td>
-        <td>{$each.comment}</td>
-        <td>{$each.addtime|date="Y-m-d,H:m:s",###}</td>
-        <td>{$each.lastlogintime|date="Y-m-d,H:m:s",###}</td>
-        <td>{$each.lastloginip}</td>
-        <td>{$each.logincount}</td>
-        <td><a class="status" href="#" onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}');return false;">{$each.status|get_status_str_by_int}</a></td>
-    </tr>
-</volist>
-</tbody>
-</table>
-
-<div id="adduserForm">
-    <form class="common_form">
-        <p><label>用户名:</label><input type="text" name="username"/></p>
-        <p><label>密码:</label><input type="text" name="password"/></p>
-        <p><label>姓名:</label><input type="text" name="truename"/></p>
-        <p><label>权限级别:</label><select name="right">
-                <option value="0">0级</option>
-                <option value="1">1级</option>
-                <option value="2">2级</option>
-            </select></p>
-        <p><label>备注：</label><textarea name="comment" rows="4" cols="20">
-            </textarea></p>
-        <input id="reset" type="reset" style="display: none"/>
-    </form>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">用户列表</a></li>
+        <li><a href="#tabs-2">添加用户</a></li>
+        <li><a href="#tabs-3">修改数据</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>编号</th><th>用户名</th><th>姓名</th><th>权限级别</th><th>备注</th><th>添加时间</th>
+                    <th>上次登陆</th><th>登陆IP</th><th>登陆次数</th><th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="users" id="each">
+                <tr class="userlist">
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getUserEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$each.id}</a></td>
+                    <td>{$each.username}</td>
+                    <td>{$each.truename}</td>
+                    <td>{$each.right}</td>
+                    <td>{$each.comment}</td>
+                    <td>{$each.addtime|date="Y-m-d,H:m:s",###}</td>
+                    <td>{$each.lastlogintime|date="Y-m-d,H:m:s",###}</td>
+                    <td>{$each.lastloginip}</td>
+                    <td>{$each.logincount}</td>
+                    <td>
+                        <a id="status_{$each.id}" class="status" href="#"
+                           onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}',callback_user_status);return false;">
+                            {$each.status|get_status_str_by_int}
+                        </a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <form class="common_form">
+            <p><label>*用户名:</label><input type="text" name="username"/></p>
+            <p><label>*密码:</label><input type="text" name="password"/></p>
+            <p><label>*姓名:</label><input type="text" name="truename"/></p>
+            <p><label>权限级别:</label><php>echo right_select();</php></p>
+            <p><label>备注：</label><textarea name="comment" rows="4" cols="20">
+                </textarea></p>
+            <p><label>&nbsp;</label>
+                <input type="button" value="添加用户"
+                       onclick="add_data('__APP__/Admin/addUser',$('#tabs-2 .common_form').serialize(),callback_add_user);"/>
+                <input type="reset" value="重置" /></p>
+        </form>
+    </div>
+    <div id="tabs-3">
+        请从用户列表选择数据!
+    </div>
 </div>
 
 <script type="text/javascript">
     $(function(){
-        //添加用户的dialog
-        var $dialog=$("#adduserForm").dialog({
-            autoOpen:false,
-            title: "添加新用户",
-            modal: true,
-            width:400,
-            close: function() {
-                $('#reset').click()
-            },
-            buttons: {
-                添加用户: function(){
-                    add_user("__APP__/Admin/addUser",$("#adduserForm .common_form").serialize());
-                },
-                取消: function() {
-                    $( this ).dialog( "close" );
-                }
-            }
-        });
-
-        $('.adduser').click(function() {
-            $dialog.dialog('open');
-            // prevent the default action, e.g., following a link
-            return false;
-        });
-
-        //更新用户状态的提示信息框
+        $("#tabs").tabs();
+        //按钮和重置键用Jquery ui 的button美化
+        $("input:button,input:reset").button();
+        //数据的id和禁用链接的数据提示
         $("a.status").qtip({
-            content: {
-                text:function(){
-                    return $(this).text()=="启用中"?"点击禁用用户":"点击启用用户";
-                }
-            },
-            position: {
-                my: 'top left',
-                at: 'bottom right'
-            }
+            content: {text:function(){return $.trim($(this).text())=="启用中"?"点击禁用用户":"点击启用用户";}},
+            position: {my: 'top left',at: 'bottom right'}
+        });
+
+        $("a.change").qtip({
+            content: {text:"点击修改用户数据"},
+            position: {my:  'left center',at: 'right center'}
         });
     });
 </script>
