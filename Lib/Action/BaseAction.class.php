@@ -3,7 +3,7 @@
 class BaseAction extends Action {
 
     public function _initialize() {
-        if (!session("?truename"))
+        if (!session("?truename") || !session("?uid"))
             $this->redirect("Search/index");
     }
 

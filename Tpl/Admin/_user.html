@@ -8,13 +8,13 @@
         <td>{$newuser.truename}</td>
         <td>{$newuser.right}</td>
         <td>{$newuser.comment}</td>
-        <td>{$newuser.addtime|date="Y-m-d,H:m:s",###}</td>
+        <td>{$newuser.addtime|date="Y-m-d",###}</td>
         <td>{$newuser.lastlogintime|date="Y-m-d,H:m:s",###}</td>
         <td>{$newuser.lastloginip}</td>
         <td>{$newuser.logincount}</td>
         <td>
             <a id="status_{$newuser.id}" class="status" href="#"
-               onclick="toggle_status('__APP__/Admin/changeStatus','{$newuser.id}',callback_user_status);return false;">
+               onclick="toggle_status('__APP__/Admin/changeStatus','{$newuser.id}',callback_toggle_user_status);return false;">
                 {$newuser.status|get_status_str_by_int}
             </a>
         </td>

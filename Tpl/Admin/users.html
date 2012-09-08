@@ -20,13 +20,13 @@
                     <td>{$each.truename}</td>
                     <td>{$each.right}</td>
                     <td>{$each.comment}</td>
-                    <td>{$each.addtime|date="Y-m-d,H:m:s",###}</td>
+                    <td>{$each.addtime|date="Y-m-d",###}</td>
                     <td>{$each.lastlogintime|date="Y-m-d,H:m:s",###}</td>
                     <td>{$each.lastloginip}</td>
                     <td>{$each.logincount}</td>
                     <td>
                         <a id="status_{$each.id}" class="status" href="#"
-                           onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}',callback_user_status);return false;">
+                           onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}',callback_toggle_user_status);return false;">
                             {$each.status|get_status_str_by_int}
                         </a>
                     </td>

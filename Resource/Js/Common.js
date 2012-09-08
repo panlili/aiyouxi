@@ -28,7 +28,7 @@ function edit_data(path,formdata,callback){
 }
 
 //ajax操作的回调函数
-function callback_user_status(json){
+function callback_toggle_user_status(json){
     if(1==json.status){
         //原来是禁用的文字改为启用，原来启用改成禁用，而不从数据库读其状态了。
         if($.trim($("a#status_"+json.data).text())=="启用中"){
