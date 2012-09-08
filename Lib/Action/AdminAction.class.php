@@ -31,11 +31,11 @@ class AdminAction extends BaseAction {
      */
     public function changeStatus() {
         if ($this->isAjax()) {
-            $user_id = $_GET["id"];
+            $user_id = $this->_param("id");
             $m_user = M("User");
             $old_status = $m_user->where("id=$user_id")->getField("status");
             $new_status = $old_status == 0 ? 1 : 0;
-            if (FALSE !== M("User")->where("id=$user_id")->setField("status", $new_status)) {
+            if (FALSE !== $m_user->where("id=$user_id")->setField("status", $new_status)) {
                 $this->ajaxReturn($user_id, "数据修改成功", 1);
             } else {
                 $this->error("数据修改失败");
@@ -77,7 +77,7 @@ class AdminAction extends BaseAction {
     public function getUserEditForm() {
         if ($this->isAjax()) {
             $m_user = M("User");
-            $d_user = $m_user->field("id,username,truename,right,comment")->find($_GET["id"]);
+            $d_user = $m_user->field("id,username,truename,right,comment")->find($this->_param("id"));
             if ($d_user) {
                 $this->assign("userdata", $d_user);
                 $content = $this->fetch("_user");

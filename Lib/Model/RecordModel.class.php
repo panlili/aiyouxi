@@ -4,7 +4,7 @@ class RecordModel extends RelationModel {
 
     protected $_validate = array(
         //领用记录每个物资只能分配一次
-        array("good_serial", "", "货物编号已存在", Model::EXISTS_VAILIDATE, "unique", Model:: MODEL_BOTH),
+        array("good_serial", "", "货物编号已存在", Model::EXISTS_VALIDATE, "unique", Model:: MODEL_BOTH),
     );
     protected $_auto = array(
         array("status", "1", Model::MODEL_INSERT),

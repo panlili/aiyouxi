@@ -1,8 +1,4 @@
-/**
- *各个模块Html可以共用的操作数据的函数
- *根据path的不同操作不同的model数据
- */
-
+//各模块通用的ajax函数，具体操作交由具体的回调函数做
 //交替变换status的值
 function toggle_status(path,id,callback){
     $.get(path, {
@@ -28,6 +24,7 @@ function edit_data(path,formdata,callback){
 }
 
 //ajax操作的回调函数
+//User相关
 function callback_toggle_user_status(json){
     if(1==json.status){
         //原来是禁用的文字改为启用，原来启用改成禁用，而不从数据库读其状态了。
@@ -68,9 +65,28 @@ function callback_edit_user(json){
         alert(json.info);
     }else{
         $("#message").html(json.info).show().slideUp(1500);
-       //修改一次后，如果不做任何修改在点按钮，会显示save数据时出错(error("数据写入错误"))
-       //没搞懂哪里的问题
-       $("#tabs-3").html("数据修改成功，刷新页面后进入用户列表能看到修改后的数据。");
+        //修改一次后，如果不做任何修改在点按钮，会显示save数据时出错(error("数据写入错误"))
+        //没搞懂哪里的问题
+        $("#tabs-3").html("数据修改成功，刷新页面后进入用户列表能看到修改后的数据。");
     }
 }
 
+//donater相关
+function callback_toggle_donater_status(json){
+    if(1==json.status){
+        $(".common_table tr#"+json.data).fadeOut("fast");
+        $("#message").html(json.info).show().slideUp(1500);
+    }else{
+        alert(json.info);
+    }
+}
+
+function callback_add_donater(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $(".donaterlist:first").before(json.data);
+        $("#tabs-2 input:reset").click();
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}

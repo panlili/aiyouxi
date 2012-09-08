@@ -40,4 +40,9 @@ function get_session_user_id() {
         return $_SESSION["uid"];
 }
 
+//根据用户id获取姓名
+function get_truename_by_id($id) {
+    return M("User")->where("id=$id")->getField("truename");
+}
+
 ?>
