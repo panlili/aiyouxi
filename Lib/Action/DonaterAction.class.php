@@ -56,6 +56,38 @@ class DonaterAction extends BaseAction {
         }
     }
 
+    public function getDonaterEditForm() {
+        if ($this->isAjax()) {
+            $m_donater = M("Donater");
+            $d_donater = $m_donater->field("id,serial,name,phone,sex,comment")->find($this->_param("id"));
+            if ($d_donater) {
+                $this->assign("donaterdata", $d_donater);
+                $content = $this->fetch("_donater");
+                $this->ajaxReturn($content, "数据获取成功", 1);
+            }
+            $this->error("数据不存在");
+        } else {
+            $this->redirect("index");
+        }
+    }
+
+    public function editDonater() {
+        if ($this->isAjax()) {
+            $m_donater = D("Donater");
+            if ($m_donater->create()) {
+                if ($m_donater->save()) {
+                    $this->success("数据更新成功");
+                } else {
+                    $this->error("写入数据库错误");
+                }
+            } else {
+                $this->error($m_donater->getError());
+            }
+        } else {
+            $this->redirect("index");
+        }
+    }
+
 }
 
 ?>

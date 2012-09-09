@@ -15,7 +15,7 @@
             <tbody>
             <volist name="donaters" id="each">
                 <tr class="donaterlist" id="{$each.id}">
-                    <td>{$each.id}</td>
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Donater/getDonaterEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.phone}</td>
@@ -38,20 +38,17 @@
     <div id="tabs-2">
         <form class="common_form">
             <p>
-                <label>编号：</label><input type="text" name="serial"/>
+                <label>*姓名：</label><input type="text" name="name"/>
             </p>
             <p>
-                <label>*姓名：</label><input type="text" name="name"/>
+                <label>编号：</label><input type="text" name="serial"/>
             </p>
             <p>
                 <label>联系电话：</label><input type="text" name="phone"/>
             </p>
             <p>
                 <label>性别：</label>
-                <select name="sex">
-                    <option value="男">男</option>
-                    <option value="女">女</option>
-                </select>
+            <php>echo sex_select();</php>
             </p>
             <p>
                 <label>备注：</label><textarea name="comment" cols="20" rows="5" wrap="virtual"></textarea>
@@ -72,5 +69,10 @@
     $(function(){
         $("#tabs").tabs();
         $("input:button,input:reset").button();
+        
+        $("a.change").qtip({
+            content: {text:"点击修改捐赠者数据"},
+            position: {my:  'left center',at: 'right center'}
+        });
     });
 </script>

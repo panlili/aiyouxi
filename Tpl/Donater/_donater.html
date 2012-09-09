@@ -1,7 +1,13 @@
 {__NOLAYOUT__}
+
+<!-- 新增的用户数据 -->
 <present name="newdonater">
     <tr class="donaterlist" id="{$newdonater.id}">
-        <td>{$newdonater.id}</td>
+        <td>
+            <a class="change" href="#" 
+               onclick='get_data("__APP__/Donater/getDonaterEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>
+                {$newdonater.id}</a>
+        </td>
         <td>{$newdonater.serial}</td>
         <td>{$newdonater.name}</td>
         <td>{$newdonater.phone}</td>
@@ -17,4 +23,21 @@
                 删除</a>
         </td>
     </tr>
+</present>
+
+<!-- 修改单条数据的表单 -->
+<present name="donaterdata">
+    <form class="common_form">
+        <p><label>*姓名:</label><input type="text" name="name" value="{$donaterdata.name}"/></p>
+        <p><label>编号:</label><input type="text" name="serial" value="{$donaterdata.serial}"/></p>
+        <p><label>联系电话:</label><input type="text" name="phone" value="{$donaterdata.phone}"/></p>
+        <p><label>性别:</label>{$donaterdata.sex|sex_select}</p>
+        <p><label>备注：</label><textarea name="comment" rows="4" cols="20">{$donaterdata.comment}
+            </textarea></p>
+        <p><label>&nbsp;</label>
+            <input type="button" value="修改数据"
+                   onclick="edit_data('__APP__/Donater/editDonater',$('#tabs-3 .common_form').serialize(),callback_edit_donater);"/>
+            <input type="reset" value="重置" /></p>
+        <input type="hidden" name="id" value="{$donaterdata.id}" />
+    </form>
 </present>

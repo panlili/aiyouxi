@@ -1,4 +1,5 @@
-//各模块通用的ajax函数，具体操作交由具体的回调函数做
+/*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
+
 //交替变换status的值
 function toggle_status(path,id,callback){
     $.get(path, {
@@ -23,7 +24,8 @@ function edit_data(path,formdata,callback){
     $.post(path, formdata, callback, "JSON");
 }
 
-//ajax操作的回调函数
+/* ajax操作的回调函数 */
+
 //User相关
 function callback_toggle_user_status(json){
     if(1==json.status){
@@ -67,7 +69,7 @@ function callback_edit_user(json){
         $("#message").html(json.info).show().slideUp(1500);
         //修改一次后，如果不做任何修改在点按钮，会显示save数据时出错(error("数据写入错误"))
         //没搞懂哪里的问题
-        $("#tabs-3").html("数据修改成功，刷新页面后进入用户列表能看到修改后的数据。");
+        $("#tabs-3").html("数据修改成功，刷新页面后进入数据列表能看到修改后的数据。");
     }
 }
 
@@ -89,4 +91,12 @@ function callback_add_donater(json){
         $("#tabs-2 input:reset").click();
         $("#message").html(json.info).show().slideUp(1500);
     }
+}
+
+function callback_get_donater_edit_form(json) {
+    callback_get_user_edit_form(json);
+}
+
+function callback_edit_donater(json){
+    callback_edit_user(json);
 }
