@@ -41,7 +41,7 @@ class AdminAction extends BaseAction {
                 $this->error("数据修改失败");
             }
         } else {
-            $this->redirect("Admin/users");
+            $this->redirect("Search/index");
         }
     }
 
@@ -65,7 +65,7 @@ class AdminAction extends BaseAction {
                 $this->error($m_user->getError());
             }
         } else {
-            $this->redirect("Admin/users");
+            $this->redirect("Search/index");
         }
     }
 
@@ -85,7 +85,7 @@ class AdminAction extends BaseAction {
             }
             $this->error("数据不存在");
         } else {
-            $this->redirect("Admin/users");
+            $this->redirect("Search/index");
         }
     }
 
@@ -107,7 +107,7 @@ class AdminAction extends BaseAction {
                 $this->error($m_user->getError());
             }
         } else {
-            $this->redirect("Admin/users");
+            $this->redirect("Search/index");
         }
     }
 

@@ -13,8 +13,8 @@
         <td>{$newdonater.phone}</td>
         <td>{$newdonater.sex}</td>
         <td>{$newdonater.comment}</td>
-        <td>{$newdonater.addtime|date="Y-m-d",###}</td>
-        <td>{$newdonater.uptime|date="Y-m-d",###}</td>
+        <td>{$newdonater.addtime|date="Y-m-d,H:i:s",###}</td>
+        <td>{$newdonater.uptime|date="Y-m-d,H:i:s",###}</td>
         <td>{$newdonater.handman|get_truename_by_id}</td>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>

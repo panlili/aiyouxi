@@ -59,9 +59,10 @@ class SearchAction extends Action {
     }
 
     public function logout() {
-        session(null);
         //清除用户信息缓存
-        F("login_user", null);
+        F("login_user" . $_SESSION["uid"], null);
+        session(null);
+
         $this->redirect("Search/index");
     }
 

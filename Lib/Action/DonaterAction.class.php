@@ -13,8 +13,13 @@ class DonaterAction extends BaseAction {
 
     public function donaters() {
         $m_donater = M("donater");
-        $donaterList = $m_donater->order("id desc")->where("status=1")->select();
+        import("ORG.Util.Page");
+        $count = $m_donater->where("status=1")->count();
+        $p = new Page($count, self::RECORDS_ONE_PAGE);
+        $page = $p->show();
+        $donaterList = $m_donater->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
         $this->assign("donaters", $donaterList);
+        $this->assign("page", $page);
         $this->display();
     }
 
@@ -33,7 +38,7 @@ class DonaterAction extends BaseAction {
                 $this->error("数据修改失败");
             }
         } else {
-            $this->redirect("index");
+            $this->redirect("Search/index");
         }
     }
 
@@ -52,7 +57,7 @@ class DonaterAction extends BaseAction {
                 $this->error($m_donater->getError());
             }
         } else {
-            $this->redirect("index");
+            $this->redirect("Search/index");
         }
     }
 
@@ -67,7 +72,7 @@ class DonaterAction extends BaseAction {
             }
             $this->error("数据不存在");
         } else {
-            $this->redirect("index");
+            $this->redirect("Search/index");
         }
     }
 
@@ -84,7 +89,7 @@ class DonaterAction extends BaseAction {
                 $this->error($m_donater->getError());
             }
         } else {
-            $this->redirect("index");
+            $this->redirect("Search/index");
         }
     }
 

@@ -21,8 +21,8 @@
                     <td>{$each.phone}</td>
                     <td>{$each.sex}</td>
                     <td>{$each.comment}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
-                    <td>{$each.uptime|date="Y-m-d",###}</td>
+                    <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
+                    <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
                     <td>{$each.handman|get_truename_by_id}</td>
                     <!-- 数据删除不真删除，而是将其status转换为0 -->
                     <td>
@@ -34,6 +34,7 @@
             </volist>
             </tbody>
         </table>
+        {$page}
     </div>
     <div id="tabs-2">
         <form class="common_form">
@@ -69,7 +70,7 @@
     $(function(){
         $("#tabs").tabs();
         $("input:button,input:reset").button();
-        
+
         $("a.change").qtip({
             content: {text:"点击修改捐赠者数据"},
             position: {my:  'left center',at: 'right center'}
