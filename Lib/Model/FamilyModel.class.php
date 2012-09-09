@@ -12,6 +12,13 @@ class FamilyModel extends RelationModel {
         array('uptime', 'time', Model::MODEL_UPDATE, 'function'),
     );
 
+    //不create也能用
+    public function _before_update(&$data, $options) {
+        parent::_before_update($data, $options);
+        $data["uptime"] = time();
+        $data["handman"] = get_session_user_id();
+    }
+
 }
 
 ?>

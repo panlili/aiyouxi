@@ -15,7 +15,7 @@
             <tbody>
             <volist name="donaters" id="each">
                 <tr class="donaterlist" id="{$each.id}">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Donater/getDonaterEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>{$each.id}</a></td>
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Donater/getEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.phone}</td>
@@ -56,7 +56,7 @@
             </p>
             <p>
                 <label>&nbsp;</label>
-                <input type="button" value="添加数据" onclick="add_data('__APP__/Donater/addDonater',$('#tabs-2 .common_form').serialize(),callback_add_donater);"/>
+                <input type="button" value="添加数据" onclick="add_data('__APP__/Donater/add',$('#tabs-2 .common_form').serialize(),callback_add_donater);"/>
                 <input type="reset" value="重置" />
             </p>
         </form>

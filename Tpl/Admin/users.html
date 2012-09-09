@@ -15,7 +15,7 @@
             <tbody>
             <volist name="users" id="each">
                 <tr class="userlist">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getUserEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$each.id}</a></td>
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.username}</td>
                     <td>{$each.truename}</td>
                     <td>{$each.right}</td>
@@ -45,7 +45,7 @@
                 </textarea></p>
             <p><label>&nbsp;</label>
                 <input type="button" value="添加用户"
-                       onclick="add_data('__APP__/Admin/addUser',$('#tabs-2 .common_form').serialize(),callback_add_user);"/>
+                       onclick="add_data('__APP__/Admin/add',$('#tabs-2 .common_form').serialize(),callback_add_user);"/>
                 <input type="reset" value="重置" /></p>
         </form>
     </div>
