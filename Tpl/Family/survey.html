@@ -1,1 +1,86 @@
-困难家庭调研
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">调研家庭列表</a></li>
+        <li><a href="#tabs-2">添加调研数据</a></li>
+        <li><a href="#tabs-3">修改数据</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th><th>家庭代表姓名</th><th>性别</th>
+                    <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th><th>详情</th><th>升级</th><th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="families" id="each">
+                <tr class="familylist" id="{$each.id}">
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Family/getEditForm",$(this).text(),callback_get_family_edit_form);return false;'>{$each.id}</a></td>
+                    <td>{$each.agent}</td>
+                    <td>{$each.sex}</td>
+                    <td>{$each.birthday}</td>
+                    <td>{$each.address}</td>
+                    <td>{$each.idcard}</td>
+                    <td>{$each.phone}</td>
+                    <td><a href="#" id="{$each.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+                    <td><a href="#" class="update">升级</a></td>
+                    <!-- 数据删除不真删除，而是将其status转换为0 -->
+                    <td>
+                        <a class="delete" href="#"
+                           onclick="toggle_status('__APP__/Family/changeStatus','{$each.id}',callback_toggle_family_status);return false;">
+                            删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        {$page}
+    </div>
+    <div id="tabs-2">
+        <form class="common_form">
+            <p><label>*家庭代表名：</label><input type="text" name="agent"/></p>
+            <p><label>性别：</label><php>echo sex_select();</php></p>
+            <p><label>出生日期：</label><input type="text" name="birthday"/></p>
+            <p><label>证件号码：</label><input type="text" name="idcard"/></p>
+            <p><label>联系地址：</label><input type="text" name="address"/></p>
+            <p><label>联系电话：</label><input type="text" name="phone"/></p>
+            <p><label>健康状况：</label><input type="text" name="health"/></p>
+            <p><label>婚姻情况：</label><input type="text" name="marry"/></p>
+            <p><label>家庭成员情况：</label><input type="text" name="member"/></p>
+            <p><label>职业：</label><input type="text" name="work"/></p>
+            <p><label>家庭收入：</label><input type="text" name="income"/></p>
+            <p><label>家庭保障情况：</label><input type="text" name="ensure"/></p>
+            <p><label>家庭主要问题：</label><textarea name="problem" cols="20" rows="5" wrap="virtual"></textarea></p>
+            <p><label>备注：</label><textarea name="comment" cols="20" rows="5" wrap="virtual"></textarea></p>
+
+            <p><label>调研人员：</label><input type="text" name="survery"/></p>
+            <p><label>帮扶建议：</label><textarea name="advice" cols="20" rows="5" wrap="virtual"></textarea></p>
+            <p>
+                <label>&nbsp;</label>
+                <input type="button" value="添加数据" onclick="add_data('__APP__/Family/add',$('#tabs-2 .common_form').serialize(),callback_add_family);"/>
+                <input type="reset" value="重置" />
+            </p>
+        </form>
+    </div>
+    <div id="tabs-3">
+        请从列表选择数据!
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("#tabs").tabs();
+        $("input:button,input:reset").button();
+
+        $("a.change").qtip({
+            content: {text:"点击修改家庭数据"},
+            position: {my:  'left center',at: 'right center'}
+        });
+
+        $("a.update").qtip({
+            content: {text:"点击升级此家庭为受捐家庭"},
+            position: {my:  'left center',at: 'right center'}
+        });
+
+    });
+</script>

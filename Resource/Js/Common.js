@@ -100,3 +100,43 @@ function callback_get_donater_edit_form(json) {
 function callback_edit_donater(json){
     callback_edit_user(json);
 }
+
+//family相关
+function callback_toggle_family_status(json){
+    callback_toggle_donater_status(json);
+}
+
+function callback_add_family(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $(".familylist:first").before(json.data);
+        $("#tabs-2 input:reset").click();
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}
+
+function callback_get_family_edit_form(json) {
+    callback_get_user_edit_form(json);
+}
+
+function callback_edit_family(json){
+    callback_edit_user(json);
+}
+
+function showFamilyDetail(path,id){
+    $.get(path,{
+        id:id
+    },function(json){
+        if(0==json.status){
+            alert(json.info)
+        }else{
+            $("<div class='common_form'>").html(json.data).dialog({
+                modal: true,
+                width: 500,
+                height: 650
+            });
+        }
+    },"JSON");
+
+}

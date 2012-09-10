@@ -7,3 +7,7 @@
 0903_01.zip
 	1.Good表确认人改为checkoutman领用人，在回来填写领用确认表（record）时使用物资的step和领用人（checkoutman）
 	获取所有出库中的物资。
+	
+0911_01.zip
+	1.为家庭表添加了problem字段
+	2.更改了几个字段的类型

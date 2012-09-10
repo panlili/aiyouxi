@@ -1,0 +1,79 @@
+{__NOLAYOUT__}
+
+{__NOLAYOUT__}
+
+<!-- 新增的用户数据 -->
+<present name="newdata">
+    <tr class="familylist" id="{$newdata.id}">
+        <td>
+            <a class="change" href="#"
+               onclick='get_data("__APP__/Family/getEditForm",$(this).text(),callback_get_family_edit_form);return false;'>
+                {$newdata.id}</a>
+        </td>
+        <td>{$newdata.agent}</td>
+        <td>{$newdata.sex}</td>
+        <td>{$newdata.birthday}</td>
+        <td>{$newdata.address}</td>
+        <td>{$newdata.idcard}</td>
+        <td>{$newdata.phone}</td>
+        <td><a href="#" id="{$newdata.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+        <td><a href="#" class="update">升级</a></td>
+        <!-- 数据删除不真删除，而是将其status转换为0 -->
+        <td>
+            <a class="delete" href="#"
+               onclick="toggle_status('__APP__/Family/changeStatus','{$newdata.id}',callback_toggle_family_status);return false;">
+                删除</a>
+        </td>
+    </tr>
+</present>
+
+<!-- 修改单条数据的表单 -->
+<present name="olddata">
+    <form class="common_form">
+        <p><label>*家庭代表名：</label><input type="text" name="agent" value="{$olddata.agent}"/></p>
+        <p><label>性别：</label>{$olddata.sex|sex_select}</p>
+        <p><label>出生日期：</label><input type="text" name="birthday" value="{$olddata.birthday}"/></p>
+        <p><label>证件号码：</label><input type="text" name="idcard" value="{$olddata.idcard}"/></p>
+        <p><label>联系地址：</label><input type="text" name="address" value="{$olddata.address}"/></p>
+        <p><label>联系电话：</label><input type="text" name="phone" value="{$olddata.phone}"/></p>
+        <p><label>健康状况：</label><input type="text" name="health" value="{$olddata.health}"/></p>
+        <p><label>婚姻情况：</label><input type="text" name="marry" value="{$olddata.marry}"/></p>
+        <p><label>家庭成员情况：</label><input type="text" name="member" value="{$olddata.member}"/></p>
+        <p><label>职业：</label><input type="text" name="work" value="{$olddata.work}"/></p>
+        <p><label>家庭收入：</label><input type="text" name="income" value="{$olddata.income}"/></p>
+        <p><label>家庭保障情况：</label><input type="text" name="ensure" value="{$olddata.ensure}"/></p>
+        <p><label>家庭主要问题：</label><textarea name="problem" cols="20" rows="5" wrap="virtual">{$olddata.problem}</textarea></p>
+        <p><label>备注：</label><textarea name="comment" cols="20" rows="5" wrap="virtual">{$olddata.comment}</textarea></p>
+        <p><label>调研人员：</label><input type="text" name="survery" value="{$olddata.survery}"/></p>
+        <p><label>帮扶建议：</label><textarea name="advice" cols="20" rows="5" wrap="virtual">{$olddata.advice}</textarea></p>
+        <p><label>&nbsp;</label>
+            <input type="button" value="修改数据"
+                   onclick="edit_data('__APP__/Family/edit',$('#tabs-3 .common_form').serialize(),callback_edit_family);"/>
+            <input type="reset" value="重置" /></p>
+        <input type="hidden" name="id" value="{$olddata.id}" />
+    </form>
+</present>
+
+<!-- 单条数据的详细信息 -->
+<present name="onefamilydata">
+    <p>家庭编号：{$onefamilydata.serial|default="调研家庭暂无编号"}</p>
+    <p>家庭代表名：{$onefamilydata.agent}</p>
+    <p>性别：{$onefamilydata.sex}</p>
+    <p>出生日期：{$onefamilydata.birthday}</p>
+    <p>证件号码：{$onefamilydata.idcard}</p>
+    <p>联系地址：{$onefamilydata.address}</p>
+    <p>联系电话：{$onefamilydata.phone}</p>
+    <p>健康状况：{$onefamilydata.health}</p>
+    <p>婚姻情况：{$onefamilydata.marry}</p>
+    <p>家庭成员情况：{$onefamilydata.member}</p>
+    <p>职业：{$onefamilydata.work}</p>
+    <p>家庭收入：{$onefamilydata.income}</p>
+    <p>家庭保障情况：{$onefamilydata.ensure}</p>
+    <p>家庭主要问题：{$onefamilydata.problem}</p>
+    <p>备注：{$onefamilydata.comment}</p>
+    <p>调研人员：{$onefamilydata.survery}</p>
+    <p>帮扶建议：{$onefamilydata.advice}</p>
+    <p>数据操作者：{$onefamilydata.handman|get_truename_by_id}</p>
+    <p>数据添加时间：{$onefamilydata.addtime|date="Y-m-d,H:i:s",###}</p>
+    <p>数据修改时间：{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</p>
+</present>
