@@ -4,9 +4,11 @@
     当前模块用css 类 current标注
     通过thinkphp的模块变量来判断，如果是当前模块就在导航添加current类
 -->
-
-<ul>
-    <li {$Think.MODULE_NAME|echo_current="Donater"}>
+<div class="letop">
+    <span class="letit">我的操作台</span>
+</div>
+<ul class="button">
+    <li {$Think.MODULE_NAME|echo_current="Donater"} class="ft">
         <a href="__APP__/Donater/index">捐赠人</a>
     </li>
     <li {$Think.MODULE_NAME|echo_current="Family"}>
@@ -26,5 +28,3 @@
     </li>
 </ul>
 
-<!--用户登陆信息框 -->
-{:W('Information')}
