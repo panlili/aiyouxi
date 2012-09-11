@@ -37,20 +37,11 @@ function right_select($selected = "") {
     return $str;
 }
 
-function sex_select($selected = "") {
-    $str = "";
-    if ("" == $selected) {
-        $str = '<select name="sex"><option value="男">男</option>
-            <option value="女">女</option></select>';
-    } else {
-        $str = '<select name="sex">
-                <option value=' . $selected . '>' . $selected . '</option>
-                <option value=' . $selected . '>--修改请重选--</option>
-               <option value="男">男</option>
-                <option value="女">女</option>
-            </select>';
-    }
-    return $str;
+function reverseIt($arg) {
+    if ($arg === "男")
+        return "女";
+    if ($arg === "女")
+        return "男";
 }
 
 ?>

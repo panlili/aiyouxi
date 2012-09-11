@@ -27,8 +27,7 @@
         <p><label>*用户名:</label><input type="text" name="username" value="{$olddata.username}"/></p>
         <p><label>*姓名:</label><input type="text" name="truename" value="{$olddata.truename}"/></p>
         <p><label>权限级别:</label>{$olddata.right|right_select}</p>
-        <p><label>备注：</label><textarea name="comment" rows="4" cols="20">{$olddata.comment}
-            </textarea></p>
+        <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}</textarea></p>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Admin/edit',$('#tabs-3 .common_form').serialize(),callback_edit_user);"/>

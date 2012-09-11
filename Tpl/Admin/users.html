@@ -41,8 +41,7 @@
             <p><label>*密码:</label><input type="text" name="password"/></p>
             <p><label>*姓名:</label><input type="text" name="truename"/></p>
             <p><label>权限级别:</label><php>echo right_select();</php></p>
-            <p><label>备注：</label><textarea name="comment" rows="4" cols="20">
-                </textarea></p>
+            <p><label>备注：</label><textarea name="comment" rows="4" cols="30" wrap="virtual"></textarea></p>
             <p><label>&nbsp;</label>
                 <input type="button" value="添加用户"
                        onclick="add_data('__APP__/Admin/add',$('#tabs-2 .common_form').serialize(),callback_add_user);"/>
@@ -62,7 +61,7 @@
         //数据的id和禁用链接的数据提示
         $("a.status").qtip({
             content: {text:function(){return $.trim($(this).text())=="启用中"?"点击禁用用户":"点击启用用户";}},
-            position: {my: 'top left',at: 'bottom right'}
+            position: {my: 'right center',at: 'left center'}
         });
 
         $("a.change").qtip({

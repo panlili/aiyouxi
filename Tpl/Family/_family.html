@@ -31,7 +31,10 @@
 <present name="olddata">
     <form class="common_form">
         <p><label>*家庭代表名：</label><input type="text" name="agent" value="{$olddata.agent}"/></p>
-        <p><label>性别：</label>{$olddata.sex|sex_select}</p>
+        <p><label>性别：</label>
+            <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked"/>{$olddata.sex}
+            <input type ="radio" name="sex" value="{$olddata.sex|reverseIt}" />{$olddata.sex|reverseIt}
+        </p>
         <p><label>出生日期：</label><input type="text" name="birthday" value="{$olddata.birthday}"/></p>
         <p><label>证件号码：</label><input type="text" name="idcard" value="{$olddata.idcard}"/></p>
         <p><label>联系地址：</label><input type="text" name="address" value="{$olddata.address}"/></p>
@@ -42,10 +45,10 @@
         <p><label>职业：</label><input type="text" name="work" value="{$olddata.work}"/></p>
         <p><label>家庭收入：</label><input type="text" name="income" value="{$olddata.income}"/></p>
         <p><label>家庭保障情况：</label><input type="text" name="ensure" value="{$olddata.ensure}"/></p>
-        <p><label>家庭主要问题：</label><textarea name="problem" cols="20" rows="5" wrap="virtual">{$olddata.problem}</textarea></p>
-        <p><label>备注：</label><textarea name="comment" cols="20" rows="5" wrap="virtual">{$olddata.comment}</textarea></p>
+        <p><label>家庭主要问题：</label><textarea name="problem" cols="30" rows="5" wrap="virtual">{$olddata.problem}</textarea></p>
+        <p><label>备注：</label><textarea name="comment" cols="30" rows="5" wrap="virtual">{$olddata.comment}</textarea></p>
         <p><label>调研人员：</label><input type="text" name="survery" value="{$olddata.survery}"/></p>
-        <p><label>帮扶建议：</label><textarea name="advice" cols="20" rows="5" wrap="virtual">{$olddata.advice}</textarea></p>
+        <p><label>帮扶建议：</label><textarea name="advice" cols="30" rows="5" wrap="virtual">{$olddata.advice}</textarea></p>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Family/edit',$('#tabs-3 .common_form').serialize(),callback_edit_family);"/>
