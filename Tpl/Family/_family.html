@@ -56,24 +56,24 @@
 
 <!-- 单条数据的详细信息 -->
 <present name="onefamilydata">
-    <p>家庭编号：{$onefamilydata.serial|default="调研家庭暂无编号"}</p>
-    <p>家庭代表名：{$onefamilydata.agent}</p>
-    <p>性别：{$onefamilydata.sex}</p>
-    <p>出生日期：{$onefamilydata.birthday}</p>
-    <p>证件号码：{$onefamilydata.idcard}</p>
-    <p>联系地址：{$onefamilydata.address}</p>
-    <p>联系电话：{$onefamilydata.phone}</p>
-    <p>健康状况：{$onefamilydata.health}</p>
-    <p>婚姻情况：{$onefamilydata.marry}</p>
-    <p>家庭成员情况：{$onefamilydata.member}</p>
-    <p>职业：{$onefamilydata.work}</p>
-    <p>家庭收入：{$onefamilydata.income}</p>
-    <p>家庭保障情况：{$onefamilydata.ensure}</p>
-    <p>家庭主要问题：{$onefamilydata.problem}</p>
-    <p>备注：{$onefamilydata.comment}</p>
-    <p>调研人员：{$onefamilydata.survery}</p>
-    <p>帮扶建议：{$onefamilydata.advice}</p>
-    <p>数据操作者：{$onefamilydata.handman|get_truename_by_id}</p>
-    <p>数据添加时间：{$onefamilydata.addtime|date="Y-m-d,H:i:s",###}</p>
-    <p>数据修改时间：{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</p>
+    <p><label>家庭编号：</label>{$onefamilydata.serial|default="调研家庭暂无编号"}</p>
+    <p><label>家庭代表名：</label>{$onefamilydata.agent|default="&nbsp;"}</p>
+    <p><label>性别：</label>{$onefamilydata.sex|default="&nbsp;"}</p>
+    <p><label>出生日期：</label>{$onefamilydata.birthday|default="&nbsp;"}</p>
+    <p><label>证件号码：</label>{$onefamilydata.idcard|default="&nbsp;"}</p>
+    <p><label>联系地址：</label>{$onefamilydata.address|default="&nbsp;"}</p>
+    <p><label>联系电话：</label>{$onefamilydata.phone|default="&nbsp;"}</p>
+    <p><label>健康状况：</label>{$onefamilydata.health|default="&nbsp;"}</p>
+    <p><label>婚姻情况：</label>{$onefamilydata.marry|default="&nbsp;"}</p>
+    <p><label>家庭成员情况：</label>{$onefamilydata.member|default="&nbsp;"}</p>
+    <p><label>职业：</label>{$onefamilydata.work|default="&nbsp;"}</p>
+    <p><label>家庭收入：</label>{$onefamilydata.income|default="&nbsp;"}</p>
+    <p><label>家庭保障情况：</label>{$onefamilydata.ensure|default="&nbsp;"}</p>
+    <p><label>家庭主要问题：</label>{$onefamilydata.problem|default="&nbsp;"}</p>
+    <p><label>备注：</label>{$onefamilydata.comment|default="&nbsp;"}</p>
+    <p><label>调研人员：</label>{$onefamilydata.survery|default="&nbsp;"}</p>
+    <p><label>帮扶建议：</label>{$onefamilydata.advice|default="&nbsp;"}</p>
+    <p><label>数据操作者：</label>{$onefamilydata.handman|get_truename_by_id}</p>
+    <p><label>数据添加时间：</label>{$onefamilydata.addtime|date="Y-m-d,H:i:s",###}</p>
+    <p><label>数据修改时间：</label>{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</p>
 </present>

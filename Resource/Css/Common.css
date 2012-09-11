@@ -45,19 +45,20 @@ body{text-align:center;
 #search .inputbutton {  width:74px; height:31px; display:block; background:url(../images/search-but.gif) no-repeat; float:left;}
 
 /* 后台 */
-#main-wrap {width:958px; height:651px; margin:0 auto;   margin-top:25px; border:2px solid #b2b2b2;}
-
-
-
-#topContent .logo{background:url(../image/logo.png) no-repeat; width:85px; height:85px; margin:5px 0 0 62px; float:left;  }
-
-#topContent .search {background:url(../image/search.png); float:right; margin-right:12px; width:295px; height:35px; margin-top:25px;}
 
 
 
 
 
 
+
+
+
+.kkk{
+    /*height: 100%;width: 960px;*/
+    background:url(../image/leftback-1.png);
+    background-repeat: repeat-y;
+}
 
 
 #message{
@@ -75,6 +76,8 @@ body{text-align:center;
 .common_form p{
     margin-bottom: 10px;
     margin-top: 10px;
+    text-align: left;
+    clear: left;
 }
 
 .common_form label{
@@ -91,6 +94,9 @@ body{text-align:center;
     width: 100%;
     border-bottom: 1px solid #bd3f09;
 }
+#topContent .logo{background:url(../image/logo.png) no-repeat; width:85px; height:85px; margin:5px 0 0 62px; float:left;  }
+
+#topContent .search {background:url(../image/search.png); float:right; margin-right:12px; width:295px; height:35px; margin-top:25px;}
 
 /* 左边菜单的 */
 #leftContent{
@@ -105,7 +111,7 @@ body{text-align:center;
     /*height:1000px;*/
 /*    overflow-y: hidden;*/
 padding-bottom: 10px;
-border-bottom: solid #b2b2b2;
+/*border-bottom: solid #b2b2b2;*/
 }
 #leftContent .letop{ background:url(../image/seting.png) no-repeat; margin:10px 0 0 5px; height:38px; }
 

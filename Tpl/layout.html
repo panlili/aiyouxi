@@ -19,20 +19,23 @@
         <div id="topContent">
             <include file="Public:top" />
         </div>
-        <div id="leftContent">
-            <include file="Public:left" />
-        </div>
-        <div id="rightContent">
-            <div id="rightTop">
-                <include file="Public:righttop" />
+        <div class="kkk">
+            <div id="leftContent">
+                <include file="Public:left" />
             </div>
-            <div id="rightBottom">
-                {__CONTENT__}
+            <div id="rightContent">
+                <div id="rightTop">
+                    <include file="Public:righttop" />
+                </div>
+                <div id="rightBottom">
+                    {__CONTENT__}
+                </div>
             </div>
+            <div id="message"></div>
+            <div style="clear: both;width: 960;"></div>
         </div>
-        <div id="message"></div>
         <div style="clear: both;width: 960px;border-top: solid 1px #b2b2b2;height: 50px;line-height: 50px;"><!--用户登陆信息框 -->
-            {:W('Information')}</div>
+                {:W('Information')}</div>
     </div>
 </body>
 </html>
