@@ -23,13 +23,19 @@
                     <td>{$each.idcard}</td>
                     <td>{$each.phone}</td>
                     <td><a href="#" id="{$each.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
-                    <td><a href="#" class="update">升级</a></td>
-                    <!-- 数据删除不真删除，而是将其status转换为0 -->
                     <td>
-                        <a class="delete" href="#"
-                           onclick="toggle_status('__APP__/Family/changeStatus','{$each.id}',callback_toggle_family_status);return false;">
-                            删除</a>
-                    </td>
+                <empty name="each.serial">
+                    <a href="#" class="update" id="{$each.id}">升级</a>
+                    <else/>
+                    <img src="__IMAGE__/heart.ico" title="已经是受捐家庭"/>
+                </empty>
+                </td>
+                <!-- 数据删除不真删除，而是将其status转换为0 -->
+                <td>
+                    <a class="delete" href="#"
+                       onclick="toggle_status('__APP__/Family/changeStatus','{$each.id}',callback_toggle_family_status);return false;">
+                        删除</a>
+                </td>
                 </tr>
             </volist>
             </tbody>
@@ -69,6 +75,11 @@
     </div>
 </div>
 
+<!-- 设置家庭serial的对话框-->
+<div id="setSerial" style="display: none">
+    <label>分配受捐家庭编号</label><input name="serial" type="text" />
+</div>
+
 <script type="text/javascript">
     $(function(){
         $("#tabs").tabs();
@@ -82,6 +93,33 @@
         $("a.update").qtip({
             content: {text:"点击升级此家庭为受捐家庭"},
             position: {my:  'right center',at: 'left center'}
+        });
+
+        $("a.update").click(function(){
+            var toupdateid=$(this).attr("id");
+            $("#setSerial").dialog({
+                autoOpen: false,
+                modal: true,
+                resizable: false,
+                buttons:{
+                    "分配序号":function(){
+                        var serialText=$.trim($("input[name=serial]").val());
+                        if(""==serialText){
+                            alert("请填写数据");
+                            return false;
+                        }
+                        set_family_serial("__APP__/Family/setSerial",toupdateid,serialText,callback_set_family_serial);
+                    },
+                    "取消": function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+                    $("input[name=serial]").val("")
+                }
+            });
+
+            $("#setSerial").dialog("open");
         });
 
         $("input[name='birthday']").datepicker({

@@ -17,7 +17,7 @@
         <td>{$newdata.idcard}</td>
         <td>{$newdata.phone}</td>
         <td><a href="#" id="{$newdata.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
-        <td><a href="#" class="update">升级</a></td>
+        <td><a href="#" class="update" id="{$each.id}">升级</a></td>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>
             <a class="delete" href="#"
@@ -30,6 +30,9 @@
 <!-- 修改单条数据的表单 -->
 <present name="olddata">
     <form class="common_form">
+        <notempty name="olddata.serial">
+            <p><label>受捐编号：</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
+        </notempty>
         <p><label>*家庭代表名：</label><input type="text" name="agent" value="{$olddata.agent}"/></p>
         <p><label>性别：</label>
             <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked"/>{$olddata.sex}

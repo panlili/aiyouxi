@@ -146,3 +146,18 @@ function showFamilyDetail(path,id){
     },"JSON");
 
 }
+
+function set_family_serial(path,id,text,callback){
+    $.post(path, {
+        id:id,
+        text:text
+    }, callback, "JSON");
+}
+
+function callback_set_family_serial(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        window.location.reload();
+    }
+}

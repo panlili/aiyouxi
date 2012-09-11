@@ -6,6 +6,7 @@ class AdminAction extends BaseAction {
         "index" => "系统管理首页",
         "users" => "用户管理",
         "analyse" => "统计分析",
+        "recyle" => "数据回收站",
     );
 
     //这一页做什么用?
@@ -17,6 +18,10 @@ class AdminAction extends BaseAction {
         $m_user = D("User");
         $userList = $m_user->order("id asc")->select();
         $this->assign("users", $userList);
+        $this->display();
+    }
+
+    public function recyle() {
         $this->display();
     }
 
