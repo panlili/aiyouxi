@@ -83,6 +83,12 @@
             content: {text:"点击升级此家庭为受捐家庭"},
             position: {my:  'right center',at: 'left center'}
         });
+        
+        $("input[name='birthday']").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
 
     });
 </script>
