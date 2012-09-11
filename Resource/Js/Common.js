@@ -2,7 +2,7 @@
 
 //在页面初始化和窗口尺寸变化的时候设置rightcontent的宽度。自适应。
 function resetwindow(){
-    var ss=$(".kkk").width()-$("#leftContent").width();
+    var ss=$(".kkk").width()-$("#leftContent").width()-20;
     $("#rightContent").width(ss);
 }
 
