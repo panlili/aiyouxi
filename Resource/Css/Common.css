@@ -109,7 +109,7 @@ body{text-align:center;
     float: left;
     /*width: 213px;*/
     min-width: 213px;
-    width:15%;
+    /*width:15%;*/
     /*border-right: 1px solid yellow;*/
     /*text-align: center;*/
     /*height:1000px;*/
@@ -151,17 +151,18 @@ padding-bottom: 10px;
 /* 右边内容 */
 
 #rightContent{
-
+    width: 500px;
 float:left;	overflow:hidden; z-index:1; 
 }
 /*右上子菜单*/
 #rightTop{
 /*    height: 50px;*/
+   width: 100%;
    padding-top: 8px;
    padding-left: 20px;
     /*width:746px;*/ 
     height:46px; overflow:hidden;
-    background:url(../image/rightcontent-top.png); 
+    background:url(../image/r-top-1.png); 
     background-repeat: repeat-x;
 }
 
@@ -184,14 +185,16 @@ float:left;	overflow:hidden; z-index:1;
     font-size: 12pt;
     font-weight: bold;
     text-decoration: none;
-    display: table;
+    /*display: table;*/
+    display: block;
     border: 1px solid rgb(0, 84, 163);
     background-color: rgb(61, 136, 204);
     float: none;
     font-style: normal;
 }
 .basic-button span {
-    display: table-cell;
+    /*display: table-cell;*/
+    line-height: 38px;
     vertical-align: middle;
     text-align: center;
     text-shadow: none;
@@ -201,7 +204,8 @@ float:left;	overflow:hidden; z-index:1;
 #rightBottom{
     height:100%;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 /*表格样式,需重新设计 */
