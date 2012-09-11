@@ -2,22 +2,22 @@
 
 html,body,#container{height: 100%;}
 /* CSS Document */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p{ padding: 0; margin: 0; } 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p{ padding: 0; margin: 0; }
 
-h1,h2,h3,h4,h5,h6 { font-weight: normal; font-size: 100%; } 
+h1,h2,h3,h4,h5,h6 { font-weight: normal; font-size: 100%; }
 body{text-align:center;
      margin-left: auto;
-    margin-right: auto;
-    margin-top: 0px;
+     margin-right: auto;
+     margin-top: 0px;
 }
 
 #container{
-    /*width: 960px;*/
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
     min-width: 960px;
 }
+
 /* 前台搜索面CSS*/
 #wrap{width:955px;  margin:0px auto; overflow:hidden;}
 
@@ -32,9 +32,9 @@ body{text-align:center;
 #title{ font-family:微软雅黑; font-size:34px; color:#00619c;line-height:85px; padding-left:25px;}
 
 #search {
-	width:800px;
-	height:50px;
-	margin:45px 0 0 205px;
+    width:800px;
+    height:50px;
+    margin:45px 0 0 205px;
 }
 
 #search .title  { font-size:16px; font-family:微软雅黑; line-height:50px; width:165px; float:left; }
@@ -46,22 +46,11 @@ body{text-align:center;
 #search .inputbutton {  width:74px; height:31px; display:block; background:url(../images/search-but.gif) no-repeat; float:left;}
 
 /* 后台 */
-
-
-
-
-
-
-
-
-
 .kkk{
-    /*height: 100%;width: 960px;*/
     min-width: 960px;
     background:url(../image/leftback-1.png);
     background-repeat: repeat-y;
 }
-
 
 #message{
     background-color: #FFF0A5;
@@ -91,79 +80,84 @@ body{text-align:center;
 
 /*header*/
 #topContent{
-    /*height:80px;*/
-    height:96px; position:relative; overflow:hidden; z-index:10px;
+    height:96px;
+    position:relative;
+    overflow:hidden;
+    z-index:10;
     width: 100%;
     border-bottom: 1px solid #bd3f09;
 }
-#topContent .logo{background:url(../image/logo.png) no-repeat; width:85px; height:85px; margin:5px 0 0 62px; float:left;  }
+#topContent .logo{
+    background:url(../image/logo.png) no-repeat;
+    width:85px;
+    height:85px;
+    margin:5px 0 0 62px;
+    float:left;  }
 
-#topContent .search {background:url(../image/search.png); float:right; margin-right:12px; width:295px; height:35px; margin-top:25px;}
+#topContent .search {
+    background:url(../image/search.png);
+    float:right; margin-right:12px;
+    width:295px;
+    height:35px;
+    margin-top:25px;
+}
 
 /* 左边菜单的 */
 #leftContent{
-    /*background:url(../image/leftcontent.png) no-repeat;*/
-    /*background-repeat: repeat-y;*/
     background:url(../image/leftback-1.png);
     background-repeat: repeat-y;
     float: left;
-    /*width: 213px;*/
     min-width: 213px;
     width:15%;
-    /*border-right: 1px solid yellow;*/
-    /*text-align: center;*/
-    /*height:1000px;*/
-/*    overflow-y: hidden;*/
-padding-bottom: 10px;
-/*border-bottom: solid #b2b2b2;*/
+    padding-bottom: 10px;
 }
-#leftContent .letop{ background:url(../image/seting.png) no-repeat; margin:10px 0 0 5px; height:38px; }
+#leftContent .letop{
+    background:url(../image/seting.png) no-repeat;
+    margin:10px 0 0 5px;
+    height:38px;
+}
 
-#leftContent .letop .letit{overflow:hidden; line-height:38px; margin-left:30px; color:black; font-size:16px; font-weight:bold;}
+#leftContent .letop .letit{
+    overflow:hidden;
+    line-height:38px;
+    margin-left:30px;
+    color:black;
+    font-size:16px;
+    font-weight:bold;}
 
 #leftContent ul{
     list-style:none;
     line-height:25px;
 }
 #leftContent ul li{
-    /*background:url(../image/bluebackground.png) no-repeat; margin:15px 0 0 15px; height:47px; width:175px;*/
 }
 #leftContent a{
     display: block;
     background:url(../image/bluebackground.png) no-repeat;
-    height:47px; 
-    /*width:175px;*/
-    /*width: 85%;*/
+    height:47px;
     color:#f7f6f0;
-    /*padding:15px 0 0 15px;*/
     margin:15px 0 0 15px;
     line-height: 47px;
     text-decoration: none;
     font-weight: bold;
-    /*margin:15px 0 0 15px;*/
-    /*background:#bd3f09;*/
+    padding-right: 18px;
 }
 
 #leftContent .current a{
     color:  #fc3305;
-    /*background: white;*/
 }
 
 /* 右边内容 */
-
 #rightContent{
-  
-float:left;	overflow:hidden; z-index:1; 
+    float:left;	overflow:hidden; z-index:1;
 }
 /*右上子菜单*/
 #rightTop{
-/*    height: 50px;*/
-   width: 100%;
-   padding-top: 12px;
-   padding-left: 20px;
-    /*width:746px;*/ 
+    width: 100%;
+    padding-top: 12px;
+    padding-left: 20px;
     height:46px; overflow:hidden;
-    background:url(../image/r-top-1.png); 
+    background:url(../image/r-top-1.png);
     background-repeat: repeat-x;
 }
 
@@ -184,9 +178,7 @@ float:left;	overflow:hidden; z-index:1;
     color: rgb(0, 0, 0);
     font-family: arial;
     font-size: 12pt;
-    
     text-decoration: none;
-    /*display: table;*/
     display: block;
     border: 1px solid rgb(0, 84, 163);
     background-color: #c6d6f6;
@@ -194,7 +186,6 @@ float:left;	overflow:hidden; z-index:1;
     font-style: normal;
 }
 .basic-button span {
-    /*display: table-cell;*/
     line-height: 30px;
     vertical-align: middle;
     text-align: center;
@@ -205,11 +196,11 @@ float:left;	overflow:hidden; z-index:1;
 #rightBottom{
     height:100%;
     margin-top: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
 }
 
-/*表格样式,需重新设计 */
+/*表格样式 */
 .common_table
 {
     margin-bottom: 10px;
@@ -229,10 +220,9 @@ float:left;	overflow:hidden; z-index:1;
     padding-top:5px;
     padding-bottom:4px;
     background-color:#b2b2b2;
-    color:#ffffff;    
+    color:#ffffff;
 }
 .common_table tr td{
-    /*background-color: #fff;*/
     height: 15px;
     font-size:13px;
     border:1px solid #b2b2b2;
