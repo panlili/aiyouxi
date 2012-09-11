@@ -12,10 +12,11 @@ body{text-align:center;
 }
 
 #container{
-    width: 960px;
+    /*width: 960px;*/
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
+    min-width: 960px;
 }
 /* 前台搜索面CSS*/
 #wrap{width:955px;  margin:0px auto; overflow:hidden;}
@@ -56,6 +57,7 @@ body{text-align:center;
 
 .kkk{
     /*height: 100%;width: 960px;*/
+    min-width: 960px;
     background:url(../image/leftback-1.png);
     background-repeat: repeat-y;
 }
@@ -105,7 +107,9 @@ body{text-align:center;
     background:url(../image/leftback-1.png);
     background-repeat: repeat-y;
     float: left;
-    width: 213px;
+    /*width: 213px;*/
+    min-width: 213px;
+    width:15%;
     /*border-right: 1px solid yellow;*/
     /*text-align: center;*/
     /*height:1000px;*/
@@ -115,7 +119,7 @@ padding-bottom: 10px;
 }
 #leftContent .letop{ background:url(../image/seting.png) no-repeat; margin:10px 0 0 5px; height:38px; }
 
-#leftContent .letop .letit{overflow:hidden; line-height:38px; margin-left:85px; color:black; font-size:16px; font-weight:bold;}
+#leftContent .letop .letit{overflow:hidden; line-height:38px; margin-left:30px; color:black; font-size:16px; font-weight:bold;}
 
 #leftContent ul{
     list-style:none;
@@ -127,7 +131,9 @@ padding-bottom: 10px;
 #leftContent a{
     display: block;
     background:url(../image/bluebackground.png) no-repeat;
-    height:47px; width:175px;
+    height:47px; 
+    /*width:175px;*/
+    /*width: 85%;*/
     color:#f7f6f0;
     /*padding:15px 0 0 15px;*/
     margin:15px 0 0 15px;
@@ -145,10 +151,7 @@ padding-bottom: 10px;
 /* 右边内容 */
 
 #rightContent{
-/*    float:left;
-    height: 100%;*/
-    width: 745px;
-/*width:745px;*/ 
+
 float:left;	overflow:hidden; z-index:1; 
 }
 /*右上子菜单*/

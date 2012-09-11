@@ -1,5 +1,11 @@
 /*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
 
+//在页面初始化和窗口尺寸变化的时候设置rightcontent的宽度。自适应。
+function resetwindow(){
+    var ss=$(".kkk").width()-$("#leftContent").width();
+    $("#rightContent").width(ss);
+}
+
 //交替变换status的值
 function toggle_status(path,id,callback){
     $.get(path, {

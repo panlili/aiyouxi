@@ -12,9 +12,9 @@
     <js href="__JS__/plugin/jquery.qtip.js" />
     <!-- jquery plugin's css -->
     <css href="__CSS__/jquery.qtip.css" />
-
+    
 </head>
-<body>
+<body onResize="resetwindow()" onLoad="resetwindow()">
     <div id="container">
         <div id="topContent">
             <include file="Public:top" />
@@ -32,9 +32,9 @@
                 </div>
             </div>
             <div id="message"></div>
-            <div style="clear: both;width: 960;"></div>
+            <div style="clear: both;width: 100%;"></div>
         </div>
-        <div style="clear: both;width: 960px;border-top: solid 1px #b2b2b2;height: 50px;line-height: 50px;"><!--用户登陆信息框 -->
+        <div style="clear: both;width: 100%;border-top: solid 1px #b2b2b2;height: 50px;line-height: 50px;"><!--用户登陆信息框 -->
                 {:W('Information')}</div>
     </div>
 </body>
