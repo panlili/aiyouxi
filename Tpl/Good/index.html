@@ -1,1 +1,37 @@
-{$Think.MODULE_NAME}_{$Think.ACTION_NAME}
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>编号</th><th>物资名</th><th>数量</th>
+            <th>单位</th><th>计量</th>
+            <th>捐赠日期</th><th>捐赠人</th>
+            <th>库存状态</th><th>经手人</th>
+            <th>审核人</th> 
+        </tr>
+    </thead>
+    <tbody>
+    <volist name="goods" id="each">
+        <tr>
+            <td><a>{$each.serial}</a></td>
+            <td><a class="getgood" href="#" id="{$each.id}" onclick="showFamilyDetail('__APP__/good/getOneDetail',$.trim($(this).attr('id')));return false;">{$each.name}</a></td>
+            <td>{$each.number}</td>
+            <td>{$each.unit}</td>
+            <td>{$each.measure}</td>
+            <td>{$each.donatetime}</td>
+            <td>{$each.donater_id}</td>
+            <td>{$each.step}</td>
+            <td>{$each.handman}</td>
+            <td>{$each.checkoutman}</td>
+            
+        </tr>
+    </volist>
+</tbody>
+</table>
+{$page}
+<script type="text/javascript">
+    $(function(){        
+        $("a.getgood").qtip({
+            content: {text:"点击查看物资数据"},
+            position: {my:  'left center',at: 'right center'}
+        });
+    });
+</script>
