@@ -23,6 +23,16 @@ class DonaterAction extends BaseAction {
         $this->display();
     }
 
+    public function getDonaterList() {
+        if ($this->isAjax()) {
+            $m_donater = M("Donater");
+            $list = $m_donater->field("id")->select();
+            $this->ajaxReturn($list);
+        }else{
+            $this->redirect("Search/index");
+        }
+    }
+
 }
 
 ?>

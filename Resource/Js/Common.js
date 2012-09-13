@@ -130,7 +130,7 @@ function callback_edit_family(json){
     callback_edit_user(json);
 }
 
-function showFamilyDetail(path,id){
+function show_family_detail(path,id){
     $.get(path,{
         id:id
     },function(json){
@@ -162,13 +162,12 @@ function callback_set_family_serial(json){
     }
 }
 
+//物资相关
 function callback_add_good(json){
-    if(1==json.status){
+    if(0==json.status){
         alert(json.info);
     }else{
-        //window.location.reload();
-        //$("div#info_addgood").append("<p>-->添加完成<p>");
-        alert("shit");
+        $("input:reset").click();
+        $("#message").html(json.info).show().slideUp(1500);
     }
-    
 }

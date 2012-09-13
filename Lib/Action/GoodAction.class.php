@@ -3,7 +3,6 @@
 class GoodAction extends BaseAction {
 
     public static $method_array = array(
-        
         "checkin" => "入库登记",
         "checkout" => "出库登记",
         "endgood" => "领用登记",
@@ -22,6 +21,24 @@ class GoodAction extends BaseAction {
         $this->display();
     }
 
+    //因为不用返回新添加数据ajax更新，故需重写此方法
+    public function add() {
+        if ($this->isAjax()) {
+            $model = D("Good");
+            if ($model->create()) {
+                if ($model->add()) {
+                    $this->success("数据添加成功");
+                } else {
+                    $this->error("写入数据库错误");
+                }
+            } else {
+                $this->error($model->getError());
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
     public function checkin() {
         $this->display();
     }
@@ -33,12 +50,12 @@ class GoodAction extends BaseAction {
     public function endgood() {
         $this->display();
     }
-    
-    public function suggest_d(){
+
+    public function suggest_d() {
         if ($this->isAjax()) {
             echo 'name';
         }
-         echo 'name';
+        echo 'name';
     }
 
 }

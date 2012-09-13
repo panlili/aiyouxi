@@ -1,9 +1,4 @@
 <?php
-//为所有模型data字段自动插入数据提供函数支持
-function getOnlyDate() {
-    return date("Y-m-d");
-}
-
 /**
  * @author libiun
  * @param type $module 当前页面所在模块的名称
@@ -49,4 +44,8 @@ function get_truename_by_id($id) {
     return M("User")->where("id=$id")->getField("truename");
 }
 
+//根据捐赠者id获取姓名
+function get_donater_name_by_id($id){
+     return M("Donater")->where("id=$id")->getField("name");
+}
 ?>

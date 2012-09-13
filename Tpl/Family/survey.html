@@ -22,7 +22,7 @@
                     <td>{$each.address}</td>
                     <td>{$each.idcard}</td>
                     <td>{$each.phone}</td>
-                    <td><a href="#" id="{$each.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+                    <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
                     <td>
                 <empty name="each.serial">
                     <a href="#" class="update" id="{$each.id}">升级</a>
