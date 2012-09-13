@@ -163,10 +163,12 @@ function callback_set_family_serial(json){
 }
 
 function callback_add_good(json){
-    if(0==json.status){
+    if(1==json.status){
         alert(json.info);
     }else{
-        window.location.reload();
+        //window.location.reload();
+        //$("div#info_addgood").append("<p>-->添加完成<p>");
+        alert("shit");
     }
     
 }
