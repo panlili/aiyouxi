@@ -161,3 +161,12 @@ function callback_set_family_serial(json){
         window.location.reload();
     }
 }
+
+function callback_add_good(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        window.location.reload();
+    }
+    
+}

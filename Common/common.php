@@ -1,4 +1,8 @@
 <?php
+//为所有模型data字段自动插入数据提供函数支持
+function getOnlyDate() {
+    return date("Y-m-d");
+}
 
 /**
  * @author libiun

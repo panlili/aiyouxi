@@ -1,35 +1,43 @@
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">添加物资</a></li>
-        <li><a href="#tabs-2">为物资分配条码</a></li>
-        
+        <li><a href="#tabs-1">入库登记</a></li>
+
+
     </ul>
-    
+
     <div id="tabs-1">
         <form class="common_form">
-            <p><label>物资名：</label><input type="text" name="name"/></p>
-            <p><label>编号：</label><input type="text" name="serial"/></p>
+            <p><label>条码号：</label><input type="text" name="serial"/></p>
+            <p><label>物资名：</label><input type="text" name="name"/></p>            
             <p><label>数量：</label><input type="text" name="number"/></p>
             <p><label>单位：</label><input type="text" name="unit"/></p>
             <p><label>计量：</label><input type="text" name="measure"/></p>
-            <p><label>捐赠人：</label><input type="text" name="donater_id"/></p>
-            <p><label>收据号：</label><input type="text" name="receipt"/></p>
-            <p><label>流程状态：</label>捐赠</p>
-            <p><label>经手人：</label><input type="text" name="handman"/></p>
-            <p><label>审核人：</label>系统</p>
+            <p><label>捐赠人：</label><input type="text" name="donater_id" onkeyup="get_data('__APP__/Good/suggest_d',this.value,callback_suggest_d);"/></p>
+            <p><label>收据号：</label><input type="text" name="receipt"/></p>         
             <p>
                 <label>&nbsp;</label>
-                <input type="button" value="添加物资" onclick="add_data('__APP__/Good/add',$('#tabs-1 .common_form').serialize(),callback_add_donater);"/>
+                <input type="button" value="添加物资" onclick="add_data('__APP__/Good/add',$('#tabs-1 .common_form').serialize(),callback_add_good);"/>
                 <input type="reset" value="重置" />
             </p>
         </form>
     </div>
-    <div id="tabs-2">
-        请从列表选择数据!
-    </div>
+
 </div>
 
 <script type="text/javascript">
+    function suggest_donater(txt){
+        get_data('__APP__/Good/suggest_d',txt,callback_suggest_d);
+        
+    }
+    function callback_suggest_d(json){
+        if(0==json.status){
+            alert(json.info);
+            
+        }else{
+            //window.location.reload();
+            alert("fuck");
+        }
+    }
     $(function(){
         $("#tabs").tabs();
         $("input:button,input:reset").button();

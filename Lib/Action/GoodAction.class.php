@@ -33,6 +33,13 @@ class GoodAction extends BaseAction {
     public function endgood() {
         $this->display();
     }
+    
+    public function suggest_d(){
+        if ($this->isAjax()) {
+            echo 'name';
+        }
+         echo 'name';
+    }
 
 }
 
