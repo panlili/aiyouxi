@@ -1,10 +1,8 @@
 {__NOLAYOUT__}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>系统登陆</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <css href="__CSS__/Common.css" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>用户登录</TITLE><LINK 
+            <LINK href="__CSS__/User_Login.css" type=text/css rel=stylesheet>
+        <META http-equiv=Content-Type content="text/html; charset=utf-8">
     <js href="__JS__/jquery172.js"/>
     <script type="text/javascript">
         function fleshVerify(){
@@ -12,14 +10,45 @@
             $('img#Verify').attr("src","__APP__/Search/verify/"+timenow);
         };
     </script>
-</head>
-<body>
+</HEAD>
+<BODY id=userlogin_body>
+    <DIV></DIV>
     <form name="loginform" class="common_form" method="post" action="__URL__/checkUser">
-        <p><label>用户名：</label><input type="text" name="username"/></p>
-        <p><label>密码：</label><input type="password" name="password"/></p>
-        <p><label>验证码：</label><input type="text" name="verify" /></p>
-        <p><label>&nbsp;</label><img id="Verify" src="__APP__/Search/verify" onclick="fleshVerify()" title="刷新页面或点击图片更换验证码" style="cursor:pointer"/></p>
-        <p><label>&nbsp;</label><input type="submit" value="登录" class="submit" /></p>
-    </form>
-</body>
-</html>
+        <DIV id=user_login>
+            <DL>
+                <DD id=user_top>
+                    <UL>
+                        <LI class=user_top_l></LI>
+                        <LI class=user_top_c></LI>
+                        <LI class=user_top_r></LI></UL>
+                <DD id=user_main>
+                    <UL>
+                        <LI class=user_main_l></LI>
+                        <LI class=user_main_c>
+                            <DIV class=user_main_box>
+                                <UL>
+                                    <LI class=user_main_text>用户名： </LI>
+                                    <LI class=user_main_input><INPUT class=TxtUserNameCssClass id=TxtUserName maxLength=20 name=username> </LI></UL>
+                                <UL>
+                                    <LI class=user_main_text>密 码： </LI>
+                                    <LI class=user_main_input><INPUT class=TxtPasswordCssClass id=TxtPassword type=password name=password> </LI></UL>
+                                <UL>
+                                    <LI class=user_main_text>验证码：</LI>
+                                    <LI class=user_main_input><INPUT class=TxtValidateCodeCssClass type="text" name="verify" maxLength=10><img id="Verify" style="float: left;cursor:pointer;height: 30px;" src="__APP__/Search/verify" onclick="fleshVerify()" title="刷新页面或点击图片更换验证码" /></LI></UL></DIV></LI>
+                        <LI class=user_main_r><INPUT class=IbtnEnterCssClass id=IbtnEnter 
+                                                     style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px;background: url(__IMAGE__/user_login/user_botton.gif);" type="submit"
+                                                     name=IbtnEnter> </LI></UL>
+                <DD id=user_bottom>
+                    <UL>
+                        <LI class=user_bottom_l></LI>
+                        <LI class=user_bottom_c></LI>
+                        <LI class=user_bottom_r></LI></UL></DD></DL></DIV><SPAN id=ValrUserName 
+                                                                style="DISPLAY: none; COLOR: red"></SPAN><SPAN id=ValrPassword 
+                                                                style="DISPLAY: none; COLOR: red"></SPAN><SPAN id=ValrValidateCode 
+                                                                style="DISPLAY: none; COLOR: red"></SPAN>
+
+
+        <DIV></DIV>
+
+    </FORM></BODY></HTML>
+

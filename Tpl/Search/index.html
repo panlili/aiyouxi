@@ -1,15 +1,59 @@
 {__NOLAYOUT__}
 <!-- 查询页面不使用布局模版-->
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>爱有戏：义仓捐赠查询系统</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <div>{$Think.MODULE_NAME}_{$Think.ACTION_NAME}</div>
-        <a href="__APP__/Search/login" target="_blank">登录</a>
-        <br/>
-        <img src="__IMAGE__/义仓.jpg" alt="义仓"/>
-    </body>
+    <css href="__CSS__/Common.css" />
+    <css href="__CSS__/flick/jquery-ui-1.8.20.custom.css" />
+    <js href="__JS__/jquery172.js,__JS__/Common.js" />
+    <js href="__JS__/plugin/jquery-ui-1.8.20.custom.min.js,__JS__/plugin/jquery-ui-i18n.js" />
+
+    <!-- jquery plugins -->
+    <js href="__JS__/plugin/jquery.qtip.js" />
+    <!-- jquery plugin's css -->
+    <css href="__CSS__/jquery.qtip.css" />
+    <style type="text/css">
+        body{
+            background-color:  #ccc;
+        }
+        #searchcontainer{
+            width: 955px;height: 620px;margin-left: auto;margin-right: auto;background:url(__IMAGE__/background.png) no-repeat;text-align: left;display: inline-block;
+            
+        }
+        #wuzisearch{
+            float: left;
+            margin-left: 20px;margin-top: 140px;
+            width: 300px;height: 39px;border:1px #ccc solid;background-color: #fff;line-height: 39px;            
+        }        
+        #searchkey{
+            float:left;width: 260px;height: 39px;border:none;font-size: 12pt;margin: 0px;padding: 0px;line-height: 39px;
+        }
+        #wuzisearch button{
+            float: left;width: 35px;height: 35px;background:url(__IMAGE__/searchbutton.png) no-repeat;border:none;margin-top: 2px;
+        }
+        #searchlogo{
+        margin-left: 100px;margin-top: 100px;  float: left;          
+        }
+        #copyright{
+            height: 20px;width: 955px;background-color:  #092247;color: #fff;font-size: 10pt;margin-left: auto;margin-right: auto;text-align: right;  
+            display: inline-block;line-height: 20px;
+        }
+        #indexheader{
+            height:35px; width: 955px;background-color:  #092247;color: #fff;font-size: 11pt;
+            margin-left: auto;margin-right: auto;line-height: 35px;display: inline-block;text-align: left;
+        }
+         #indexheader a{color: #fff;text-decoration: none;float:right;margin-right: 15px;}
+         #indexheader pre{float: left;}
+    </style>
+</head>
+<body>
+    <div id="indexheader"><pre>“义仓”慈善捐赠流程管理系统&nbsp;&nbsp;&nbsp; </pre> <a href="__APP__/Search/login">管理登录</a></div>
+    <div id="searchcontainer">      
+        <div id="searchlogo"><img src="__IMAGE__/logo.png"></img></div>
+        <div id="wuzisearch"><pre><input id="searchkey" type="text" value="请输入查询的物资编号" onfocus="this.value='';" onblur="this.value='请输入查询的物资编号';" /><button onclick="" title="点击搜索"></button></pre></div>
+    </div>
+    <div id="copyright">版权所有：爱有戏 &nbsp;&nbsp;&nbsp;  网站制作与程序设计：锦江区与孩子一起成长校外教育中心·科学营数网工作室 &nbsp;&nbsp;&nbsp;</div>
+</body>
 </html>
