@@ -27,10 +27,10 @@ class DonaterAction extends BaseAction {
         if ($this->isAjax()) {
             $text = $this->_param("serial");
             $m_donater = M("Donater");
-            $map["serial"] = array('like', $text . "%");
+            $map["serial"] = array('like', "%" . $text . "%");
             $list = $m_donater->field("serial,id,name")->where($map)->select();
             if (is_null($list)) {
-                $this->error("无此捐赠者,请先添加捐赠者,程序将会自动跳转到相关页面！");
+                $this->error("无此捐赠者,请先添加捐赠者,跳转到相关页面？");
             } else {
                 $this->ajaxReturn($list);
             }

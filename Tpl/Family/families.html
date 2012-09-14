@@ -1,0 +1,23 @@
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>编号</th><th>家庭代表</th><th>性别</th>
+            <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th><th>详情</th>
+        </tr>
+    </thead>
+    <tbody>
+    <volist name="families" id="each">
+        <tr>
+            <td><a>{$each.serial}</a></td>
+            <td>{$each.agent}</td>
+            <td>{$each.sex}</td>
+            <td>{$each.birthday}</td>
+            <td>{$each.address}</td>
+            <td>{$each.idcard}</td>
+            <td>{$each.phone}</td>
+            <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+        </tr>
+    </volist>
+</tbody>
+</table>
+{$page}

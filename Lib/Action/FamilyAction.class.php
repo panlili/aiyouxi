@@ -3,11 +3,15 @@
 class FamilyAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "受捐家庭管理",
-        "survey" => "困难家庭调研",
-    );
+        "index" => "家庭首页",
+        "families" =>"受捐家庭",
+		"survey" => "困难家庭调研",
+	);
 
-    public function index() {
+	public function index(){
+		$this->display();
+	}
+    public function families() {
         $m_family = M("Family");
         import("ORG.Util.Page");
         $count = $m_family->where("status=1 AND serial is not null")->count();
