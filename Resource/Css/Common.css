@@ -175,7 +175,6 @@ body{text-align:center;
 .basic-button {
     width: 158px;
     height: 30px;
-    border-radius: 5px;
     color: rgb(0, 0, 0);
     font-family: arial;
     font-size: 12pt;
@@ -235,4 +234,8 @@ body{text-align:center;
 {
     color:#000000;
     background-color:#EAF2D3;
+}
+
+.ui-autocomplete-loading {
+    background: white url('../Image/ui-anim_basic_16x16.gif') right center no-repeat; 
 }

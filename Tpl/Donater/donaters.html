@@ -23,7 +23,7 @@
                     <td>{$each.comment}</td>
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
                     <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.handman|get_truename_by_id}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
                     <!-- 数据删除不真删除，而是将其status转换为0 -->
                     <td>
                         <a class="delete" href="#"
@@ -39,7 +39,7 @@
     <div id="tabs-2">
         <form class="common_form">
             <p><label>*姓名：</label><input type="text" name="name"/></p>
-            <p><label>编号：</label><input type="text" name="serial"/></p>
+            <p><label>*编号：</label><input type="text" name="serial"/></p>
             <p><label>联系电话：</label><input type="text" name="phone"/></p>
             <p><label>性别：</label>
                 <input type ="radio" name="sex" value="男" checked="checked"/>男

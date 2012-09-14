@@ -4,7 +4,7 @@
     <p><label>数量：</label><input type="text" name="number"/></p>
     <p><label>单位：</label><input type="text" name="unit"/></p>
     <p><label>计量：</label><input type="text" name="measure"/></p>
-    <p><label>捐赠人：</label><input type="text" name="donater_id"/></p>
+    <p><label>捐赠人编号：</label><input type="text" name="donater_id"/></p>
     <p><label>收据号：</label><input type="text" name="receipt"/></p>
     <p>
         <label>&nbsp;</label>
@@ -18,7 +18,25 @@
         $("input:button,input:reset").button();
 
         $( "input[name=donater_id]" ).autocomplete({
-
+            source:function(request, response){
+                $.get("__APP__/Donater/getDonaterList",{serial:request.term},function(data){
+                    if(0==data.status)
+                    {
+                        alert(data.info);
+                        window.location="__APP__/Donater/donaters";
+                    }
+                    else
+                    {	//response的参数是$.map函数返回的json对象
+                        //可以先var objects=$.map(), 后response(objects)
+                        response($.map(data,function(data){
+                            return {
+                                label:"姓名："+data.name+"，编号："+data.serial,
+                                value:data.id
+                            }
+                        }));
+                    }
+                },"JSON");
+            }				
         });
 
         $("a.change").qtip({

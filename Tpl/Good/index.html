@@ -18,7 +18,7 @@
             <td>{$each.addtime|date="Y-m-d",###}</td>
             <td>{$each.donater_id|get_donater_name_by_id}</td>
             <td>{$each.step}</td>
-            <td>{$each.handman|get_truename_by_id}</td>
+            <td>{$each.handman|get_user_truename_by_id}</td>
 
         </tr>
     </volist>

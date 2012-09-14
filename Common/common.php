@@ -26,7 +26,7 @@ function get_second_menu($module, $action) {
     $str = "<ul>";
     foreach ($tmp as $k => $v) {
         if ($k == $action)
-            $str.="<li><a class='basic-button' href='__APP__/$module/$k'><span style='color:white;'>$v</span></a></li>";
+            $str.="<li><a class='basic-button' href='__APP__/$module/$k'><span style='color:blue;'>$v</span></a></li>";
         else
             $str.="<li><a class='basic-button' href='__APP__/$module/$k'><span>$v</span></a></li>";
     }
@@ -40,7 +40,7 @@ function get_session_user_id() {
 }
 
 //根据用户id获取姓名
-function get_truename_by_id($id) {
+function get_user_truename_by_id($id) {
     return M("User")->where("id=$id")->getField("truename");
 }
 

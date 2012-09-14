@@ -15,7 +15,7 @@
         <td>{$newdata.comment}</td>
         <td>{$newdata.addtime|date="Y-m-d,H:i:s",###}</td>
         <td>{$newdata.uptime|date="Y-m-d,H:i:s",###}</td>
-        <td>{$newdata.handman|get_truename_by_id}</td>
+        <td>{$newdata.handman|get_user_truename_by_id}</td>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>
             <a class="delete" href="#"
@@ -29,14 +29,13 @@
 <present name="olddata">
     <form class="common_form">
         <p><label>*姓名:</label><input type="text" name="name" value="{$olddata.name}"/></p>
-        <p><label>编号:</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
+        <p><label>*编号:</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
         <p><label>联系电话:</label><input type="text" name="phone" value="{$olddata.phone}"/></p>
         <p><label>性别:</label>
             <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked"/>{$olddata.sex}
             <input type ="radio" name="sex" value="{$olddata.sex|reverseIt}" />{$olddata.sex|reverseIt}
         </p>
-        <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}
-            </textarea></p>
+        <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}</textarea></p>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Donater/edit',$('#tabs-3 .common_form').serialize(),callback_edit_donater);"/>
