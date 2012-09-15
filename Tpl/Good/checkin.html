@@ -1,8 +1,38 @@
 <form class="common_form">
     <p><label>*条码号：</label><input type="text" name="serial"/></p>
-    <p><label>*物资名：</label><input type="text" name="name"/></p>
-    <p><label>数量：</label><input type="text" name="number"/></p>
-    <p><label>单位：</label><input type="text" name="unit"/></p>
+    <p><label>*物资：</label>
+        <input type="radio" name="name" value="大米"/>大米
+        <input type="radio" name="name" value="盐"/>盐
+        <input type="radio" name="name" value="酱油"/>酱油
+        <input type="radio" name="name" value="牙膏"/>牙膏
+        <input type="radio" name="name" value="香皂"/>香皂
+        <input type="radio" name="name" value="洗衣粉"/>洗衣粉
+        <input type="radio" name="name" value="毛巾"/>毛巾
+        <input type="radio" name="name" value="面"/>面
+        <input type="radio" name="name" value="味精"/>味精
+        <input type="radio" name="name" value="衣裤"/>衣裤
+        <input type="radio" name="name" value="时间"/>时间,
+        自定义：<input type="text" name="name" style="width: 48px;" />
+    </p>
+    <p>
+        <label>数量：</label><input type="text" name="number" value="1" style="width:40px"/>
+        <input type="button" value="+" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>
+        <input type="button" value="-" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>
+    </p>
+    <p><label>单位：</label>
+        <input type="radio" name="unit" value="个"/>个
+        <input type="radio" name="unit" value="桶"/>桶
+        <input type="radio" name="unit" value="瓶"/>瓶
+        <input type="radio" name="unit" value="块"/>块
+        <input type="radio" name="unit" value="支"/>支
+        <input type="radio" name="unit" value="条"/>条
+        <input type="radio" name="unit" value="袋"/>袋
+        <input type="radio" name="unit" value="箱"/>箱
+        <input type="radio" name="unit" value="把"/>把
+        <input type="radio" name="unit" value="件"/>件
+        <input type="radio" name="unit" value="小时"/>小时,
+        自定义：<input type="text" name="unit" style="width: 48px;" />
+    </p>
     <p><label>计量：</label><input type="text" name="measure"/></p>
     <p><label>捐赠人编号：</label><input type="text" name="donater_id"/></p>
     <p><label>收据号：</label><input type="text" name="receipt"/></p>
@@ -17,16 +47,35 @@
     $(function(){
 
         $("input:button,input:reset").button();
-		
+
+        $(":radio[name=unit]").click(function(){
+            $(":text[name=unit]").val($(this).val());
+        });
+
+        $(":radio[name=name]").click(function(){
+            $(":text[name=name]").val($(this).val());
+        });
+
+        $("input.changeNumber").click(function(){
+            var value=$(this).val();
+            var number=parseInt($("input[name=number]").val());
+            if("+"==value){
+                $("input[name=number]").val(number+1);
+            }
+            if("-"==value){
+                $("input[name=number]").val(number-1);
+            }
+        });
+
         $( "input[name=donater_id]" ).autocomplete({
             source:function(request, response){
                 $.get("__APP__/Donater/getDonaterList",{serial: request.term },function(data){
                     if(0==data.status)
                     {
                         if(window.confirm(data.info))
-							window.location="__APP__/Donater/donaters";
-						else
-							$("input[name=donater_id]").val("");
+                            window.location="__APP__/Donater/donaters";
+                        else
+                            $("input[name=donater_id]").val("");
                     }
                     else
                     {	//response的参数是$.map函数返回的json对象
@@ -39,8 +88,8 @@
                         }));
                     }
                 },"JSON");
-            },
-		});
+            }
+        });
 
         $("a.change").qtip({
             content: {text:"点击修改捐赠者数据"},

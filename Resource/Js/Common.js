@@ -1,10 +1,10 @@
-/*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
-
 //在页面初始化和窗口尺寸变化的时候设置rightcontent的宽度。自适应。
 function resetwindow(){
     var ss=$(".kkk").width()-$("#leftContent").width()-17;
     $("#rightContent").width(ss);
 }
+
+/*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
 
 //交替变换status的值
 function toggle_status(path,id,callback){
@@ -28,6 +28,22 @@ function get_data(path,id,callback){
 //修改数据
 function edit_data(path,formdata,callback){
     $.post(path, formdata, callback, "JSON");
+}
+
+//恢复数据
+function recyle_data(path,model,id,callback){
+    $.post(path,{
+        model:model,
+        id:id
+    },callback,"JSON");
+}
+
+//永久数据
+function delete_data(path,model,id,callback){
+    $.post(path,{
+        model:model,
+        id:id
+    },callback,"JSON");
 }
 
 /* ajax操作的回调函数 */
@@ -73,8 +89,6 @@ function callback_edit_user(json){
         alert(json.info);
     }else{
         $("#message").html(json.info).show().slideUp(1500);
-        //修改一次后，如果不做任何修改在点按钮，会显示save数据时出错(error("数据写入错误"))
-        //没搞懂哪里的问题
         $("#tabs-3").html("数据修改成功，刷新页面后进入数据列表能看到修改后的数据。");
     }
 }
@@ -105,6 +119,19 @@ function callback_get_donater_edit_form(json) {
 
 function callback_edit_donater(json){
     callback_edit_user(json);
+}
+
+function callback_recyle_donater(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#tabs-1 tr#"+json.data).fadeOut("fast");
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}
+
+function callback_delete_donater(json){
+    callback_recyle_donater(json);
 }
 
 //family相关
@@ -162,6 +189,19 @@ function callback_set_family_serial(json){
     }
 }
 
+function callback_recyle_family(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#tabs-2 tr#"+json.data).fadeOut("fast");
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}
+
+function callback_delete_family(json){
+    callback_recyle_family(json);
+}
+
 //物资相关
 function callback_add_good(json){
     if(0==json.status){
@@ -170,4 +210,40 @@ function callback_add_good(json){
         $("input:reset").click();
         $("#message").html(json.info).show().slideUp(1500);
     }
+}
+
+function callback_get_good_edit_form(json) {
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#tabs-2").html(json.data);
+        $("input:button,input:reset").button();
+        $("#tabs").tabs().tabs('select',1);
+    }
+}
+
+function callback_edit_good(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#message").html(json.info).show().slideUp(1500);
+        $("#tabs-2").html("数据修改成功，刷新页面后进入数据列表能看到修改后的数据。");
+    }
+}
+
+function callback_toggle_good_status(json){
+    callback_toggle_donater_status(json);
+}
+
+function callback_recyle_good(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#tabs-3 tr#"+json.data).fadeOut("fast");
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}
+
+function callback_delete_good(json){
+    callback_recyle_good(json);
 }

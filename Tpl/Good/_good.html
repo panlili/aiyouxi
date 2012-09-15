@@ -1,0 +1,46 @@
+{__NOLAYOUT__}
+
+<present name="olddata">
+    <form class="common_form">
+        <p><label>*条码号:</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
+        <p><label>*物资:</label><input type="text" name="name" value="{$olddata.name}"/></p>
+        <p><label>数量</label><input type="text" name="number" value="{$olddata.number}"/></p>
+        <p><label>单位:</label><input type="text" name="unit" value="{$olddata.unit}"/></p>
+        <p><label>计量：</label><input type="text" name="measure" value="{$olddata.measure}"/></p>
+        <p><label>捐赠者编号：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/></p>
+        <p><label>收据号：</label><input type="text" name="receipt" value="{$olddata.receipt}"/></p>
+        <p><label>&nbsp;</label>
+            <input type="button" value="修改数据"
+                   onclick="edit_data('__APP__/Good/edit',$('#tabs-2 .common_form').serialize(),callback_edit_good);"/>
+            <input type="reset" value="重置" /></p>
+        <input type="hidden" name="id" value="{$olddata.id}" />
+    </form>
+
+    <script type="text/javascript">
+        var olddonaterid=$("input[name=donater_id]").val();
+        $( "input[name=donater_id]" ).autocomplete({
+            source:function(request, response){
+                $.get("__APP__/Donater/getDonaterList",{serial: request.term },function(data){
+                    if(0==data.status)
+                    {
+                        if(window.confirm(data.info))
+                            window.location="__APP__/Donater/donaters";
+                        else
+                            $("input[name=donater_id]").val(olddonaterid);
+                    }
+                    else
+                    {	//response的参数是$.map函数返回的json对象
+                        //可以先var objects=$.map(), 后response(objects)
+                        response($.map(data,function(data){
+                            return {
+                                label:"姓名："+data.name+" 编号："+data.serial,
+                                value:data.id
+                            }
+                        }));
+                    }
+                },"JSON");
+            }
+        });
+    </script>
+</present>
+

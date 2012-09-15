@@ -1,1 +1,119 @@
-处理status被设为0的数据，即删除的数据
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">已删捐赠者数据</a></li>
+        <li><a href="#tabs-2">已删受捐家庭数据</a></li>
+        <li><a href="#tabs-3">已删物资数据</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
+                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
+                    <th>恢复</th><th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="donaters" id="each">
+                <tr id="{$each.id}">
+                    <td>{$each.id}</td>
+                    <td>{$each.serial}</td>
+                    <td>{$each.name}</td>
+                    <td>{$each.phone}</td>
+                    <td>{$each.sex}</td>
+                    <td>{$each.comment}</td>
+                    <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
+                    <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="recyle_data('__APP__/Admin/recyleData','Donater',$.trim($(this).attr('class')),callback_recyle_donater);return false;">
+                            恢复</a>
+                    </td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="delete_data('__APP__/Admin/deleteData','Donater',$.trim($(this).attr('class')),callback_recyle_donater);return false;">
+                            永久删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>编号</th><th>家庭代表</th><th>性别</th>
+                    <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th>
+                    <th>恢复</th><th>永久删除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="families" id="each">
+                <tr id="{$each.id}">
+                    <td>{$each.id}</td>
+                    <td>{$each.serial}</td>
+                    <td>{$each.agent}</td>
+                    <td>{$each.sex}</td>
+                    <td>{$each.birthday}</td>
+                    <td>{$each.address}</td>
+                    <td>{$each.idcard}</td>
+                    <td>{$each.phone}</td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="recyle_data('__APP__/Admin/recyleData','Family',$.trim($(this).attr('class')),callback_recyle_family);return false;">
+                            恢复</a>
+                    </td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="delete_data('__APP__/Admin/deleteData','Family',$.trim($(this).attr('class')),callback_recyle_family);return false;">
+                            永久删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div id="tabs-3">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>条码号</th><th>物资名</th>
+                    <th>数量</th><th>计量</th>
+                    <th>捐赠日期</th><th>捐赠人</th>
+                    <th>库存状态</th><th>收据号</th>
+                    <th>经手人</th><th>恢复</th><th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="goods" id="each">
+                <tr id="{$each.id}">
+                    <td>{$each.id}</td>
+                    <td>{$each.serial}</td>
+                    <td>{$each.name}</td>
+                    <td>{$each.number}{$each.unit}</td>
+                    <td>{$each.measure}</td>
+                    <td>{$each.addtime|date="Y-m-d",###}</td>
+                    <td>{$each.donater_id|get_donater_name_by_id}</td>
+                    <td>{$each.step}</td>
+                    <td>{$each.receipt}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="recyle_data('__APP__/Admin/recyleData','Good',$.trim($(this).attr('class')),callback_recyle_good);return false;">
+                            恢复</a>
+                    </td>
+                    <td><a href="#" class="{$each.id}"
+                           onclick="delete_data('__APP__/Admin/deleteData','Good',$.trim($(this).attr('class')),callback_delete_good);return false;">
+                            永久删除</a></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("#tabs").tabs();
+
+    });
+</script>

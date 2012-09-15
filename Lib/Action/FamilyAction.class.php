@@ -4,13 +4,14 @@ class FamilyAction extends BaseAction {
 
     public static $method_array = array(
         "index" => "家庭首页",
-        "families" =>"受捐家庭",
-		"survey" => "困难家庭调研",
-	);
+        "families" => "受捐家庭",
+        "survey" => "困难家庭调研",
+    );
 
-	public function index(){
-		$this->display();
-	}
+    public function index() {
+        $this->display();
+    }
+
     public function families() {
         $m_family = M("Family");
         import("ORG.Util.Page");
