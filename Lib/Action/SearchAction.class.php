@@ -13,7 +13,7 @@ class SearchAction extends Action {
     //下面action都是跟登陆相关,省去再造一个module
     public function login() {
         if (session("?truename")) {
-            $this->redirect("Admin/index");
+            $this->redirect("Good/index");
         }
         $this->display();
     }
@@ -52,7 +52,7 @@ class SearchAction extends Action {
             $data['lastloginip'] = get_client_ip();
             $m_user->save($data);
 
-            $this->redirect("Admin/index");
+            $this->redirect("Good/index");
         } else {
             $this->error("验证失败或帐号已禁用！");
         }

@@ -2,15 +2,16 @@
     <span class="letit">我的操作台</span>
 </div>
 <ul class="button">
+    <li {$Think.MODULE_NAME|echo_current="Good"}>
+        <a href="__APP__/Good/index">物资管理</a>
+    </li>
     <li {$Think.MODULE_NAME|echo_current="Donater"} class="ft">
         <a href="__APP__/Donater/index">捐赠人</a>
     </li>
     <li {$Think.MODULE_NAME|echo_current="Family"}>
         <a href="__APP__/Family/index">受捐家庭</a>
     </li>
-    <li {$Think.MODULE_NAME|echo_current="Good"}>
-        <a href="__APP__/Good/index">物资管理</a>
-    </li>
+
     <li {$Think.MODULE_NAME|echo_current="Admin"}>
         <a href="__APP__/Admin/index">系统管理</a>
     </li>

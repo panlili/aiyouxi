@@ -56,7 +56,6 @@ body{text-align:center;
 #message{
     background-color: #FFF0A5;
     width: auto;
-    height: 25px;
     position: fixed;
     top: 0;
     left: 45%;

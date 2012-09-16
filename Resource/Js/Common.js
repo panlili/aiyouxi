@@ -205,10 +205,10 @@ function callback_delete_family(json){
 //物资相关
 function callback_add_good(json){
     if(0==json.status){
-        alert(json.info);
+        $("#message").html(json.info).show();
     }else{
+        $("#message").html(json.info).show().fadeOut(4000);
         $("input:reset").click();
-        $("#message").html(json.info).show().slideUp(1500);
     }
 }
 

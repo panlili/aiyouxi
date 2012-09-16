@@ -15,10 +15,12 @@ class FamilyAction extends BaseAction {
     public function families() {
         $m_family = M("Family");
         import("ORG.Util.Page");
-        $count = $m_family->where("status=1 AND serial is not null")->count();
+        $map["status"] = 1;
+        $map["serial"] = array("neq", "");
+        $count = $m_family->where($map)->count();
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
-        $familyList = $m_family->order("id desc")->where("status=1 AND serial is not null")->limit($p->firstRow . ',' . $p->listRows)->select();
+        $familyList = $m_family->order("id desc")->where($map)->limit($p->firstRow . ',' . $p->listRows)->select();
         $this->assign("families", $familyList);
         $this->assign("page", $page);
         $this->display();

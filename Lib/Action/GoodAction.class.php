@@ -22,14 +22,28 @@ class GoodAction extends BaseAction {
     public function add() {
         if ($this->isAjax()) {
             $model = D("Good");
-            if ($model->create()) {
-                if ($model->add()) {
-                    $this->success("数据添加成功");
+            $serial = strtoupper(trim($_POST["serial"]));
+            $serial_array = preg_split('/[\s]+/', $serial);
+            $errors = array();
+            $success = array();
+            //支持同一类物品同时输入多个条码号，统一添加数据
+            foreach ($serial_array as $s) {
+                $_POST["serial"] = $s;
+                if (!$model->create()) {
+                    $errors[] = "编号为" . $s . "的数据出错：" . $model->getError() . "<br/>";
+                    break;
                 } else {
-                    $this->error("写入数据库错误");
+                    $model->add();
+                    $success[] = "编号为" . $s . "的数据添加成功</br>";
                 }
+            }
+
+            if (0 === count($errors)) {
+                $message = implode("", $success);
+                $this->success($message);
             } else {
-                $this->error($model->getError());
+                $message = implode("", $success) . implode("", $errors);
+                $this->error($message);
             }
         } else {
             $this->redirect("Search/index");
