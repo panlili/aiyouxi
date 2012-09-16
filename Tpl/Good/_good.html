@@ -1,6 +1,7 @@
 {__NOLAYOUT__}
 
 <present name="olddata">
+    <!-- 点击物资id，修改数据的表单 -->
     <form class="common_form">
         <p><label>*条码号:</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
         <p><label>*物资:</label><input type="text" name="name" value="{$olddata.name}"/></p>
@@ -44,3 +45,18 @@
     </script>
 </present>
 
+<present name="good">
+    <!-- checkout 时， 扫描条码，右边出现的数据tr -->
+    <tr id="fordelete">
+        <td><input type="checkbox" id="{$good.id}" checked="checked" /></td>
+        <td>{$good.id}</td>
+        <td>{$good.serial}</td>
+        <td>{$good.name}</td>
+        <td>{$good.number}{$good.unit}</td>
+        <td>{$good.measure}</td>
+        <td>{$good.addtime|date="Y-m-d",###}</td>
+        <td>{$good.donater_id|get_donater_name_by_id}</td>
+        <td>{$good.step}</td>
+        <td>{$good.handman|get_user_truename_by_id}</td>
+    </tr>
+</present>

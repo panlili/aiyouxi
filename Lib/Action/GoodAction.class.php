@@ -54,6 +54,63 @@ class GoodAction extends BaseAction {
         $this->display();
     }
 
+    public function getCheckoutGood() {
+        if ($this->isAjax()) {
+            $serial = $this->_param("serial");
+            $m_good = M("Good");
+            //与扫描条码一致，且step=1(库存中状态)
+            $good = $m_good->where("serial='$serial' AND step=1")->find();
+            if (false != $good) {
+                $this->assign("good", $good);
+                $content = $this->fetch("_good");
+                $this->ajaxReturn($content, "", 1);
+            } else {
+                $this->ajaxReturn("", "物资非库存状态或条码数据不存在！", 0);
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
+    public function doCheckout() {
+        if ($this->isAjax()) {
+            //同一物资多次扫描去重复id
+            $ids = array_unique($this->_param("ids"));
+            $checkoutman = $this->_param("checkoutman");
+            $m_good = D("Good");
+            $error = 0;
+            foreach ($ids as $id) {
+                $data = array("id" => $id, "checkouttime" => time(), "checkoutman" => $checkoutman, "step" => 2);
+                if (fales == $m_good->where("id='$id'")->setField($data)) {
+                    $error++;
+                }
+            }
+            if ($error !== 0) {
+                $this->error("写入数据库错误");
+            } else {
+                $this->success(count($ids) . "件物资出库成功！");
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
+    public function rollback() {
+        //一次只能撤销一条
+        if ($this->isAjax()) {
+            $serial = $this->_param("serial");
+            $m_good = D("Good");
+            $data = array("checkoutman" => null, "checkouttime" => null, "step" => 1);
+            if ($m_good->where("serial='$serial'")->setField($data)) {
+                $this->success("条码为：" . $serial . " 的物资撤销出货成功");
+            } else {
+                $this->error("无此条码物品");
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
     public function endgood() {
         $this->display();
     }
