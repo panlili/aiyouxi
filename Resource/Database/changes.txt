@@ -16,3 +16,5 @@
 	1.修改了数据库good，添加checkouttime
 	2.修改了record的关联字段全为id关联
 	
+0918.zip
+	1.record修改
