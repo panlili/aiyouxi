@@ -127,6 +127,43 @@ class GoodAction extends BaseAction {
         $this->display();
     }
 
+    public function getGoodList() {
+        if ($this->isAjax()) {
+            $text = $this->_param("serial");
+            $m_good = M("Good");
+            $map["serial"] = array('like', "%" . $text . "%");
+            $map["step"] = 2;
+            $list = $m_good->field("serial,id,name,number,unit")->where($map)->select();
+            if (is_null($list)) {
+                $this->error("无此物资或物资非出库状态,请先确认物资,跳转到相关页面？");
+            } else {
+                $this->ajaxReturn($list);
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
+    //领物回来添加record数据
+    public function addRecord() {
+        if ($this->isAjax()) {
+            $m_record = D("Record");
+            $goodids = array_unique(array_filter(preg_split("/,/", $this->_param("good_id"))));
+            foreach ($goodids as $goodid) {
+                $good_id = trim($goodid);
+                $_POST["good_id"]=$good_id;
+                if($newdata=$m_record->create()){
+                     $m_record->add();
+                }else{
+                    $this->error($m_record->getError());
+                }
+
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
 }
 
 ?>

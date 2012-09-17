@@ -44,10 +44,10 @@ function reverseIt($arg) {
         return "男";
 }
 
-function user_select() {
+function user_select($name) {
     $m_user = M("User");
     $users = $m_user->where("status=1")->select();
-    $html = '<select name=checkoutman>';
+    $html = '<select name=' . $name . '>';
     foreach ($users as $user) {
         $html.='<option value=' . $user["id"] . '>' . $user["truename"] . '</option>';
     }

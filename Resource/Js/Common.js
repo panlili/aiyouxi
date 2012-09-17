@@ -247,3 +247,7 @@ function callback_recyle_good(json){
 function callback_delete_good(json){
     callback_recyle_good(json);
 }
+
+function callback_add_record(json){
+    alert(json.info);
+}

@@ -1,1 +1,106 @@
-分配完毕回来登记
+<form class="common_form">
+    <p>
+        <label>出仓日期：</label>
+        <input type="text" name="distributeday" />
+    </p>
+    <p>
+        <label>领物编号：</label>
+        <input type="text" name="serial" />
+    </p>
+    <p>
+        <label>领用家庭编号：</label>
+        <input type="text" name="family_id" />
+    </p>
+    <p>
+        <label>领物编号：</label>
+        <textarea name="good_id" rows="4" cols="40"></textarea>
+    </p>
+    <p>
+        <label>审核人：</label>
+    <php>echo user_select("verifier");</php>
+</p>
+<p>
+    <label>&nbsp;</label>
+    <input type="button" value="提交数据" onclick="add_data('__APP__/Good/addRecord',$('form').serialize(),callback_add_record);"/>
+    <input type="reset" value="重置" />
+</p>
+</form>
+
+<script type="text/javascript">
+    $(function(){
+        $("input[name=distributeday]").datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function(dateText, inst) {
+                var reg=/-/g;
+                $("input[name=serial]").val(dateText.replace(reg,""));
+            }
+        });
+        $("input:button,input:reset").button();
+
+        //领物家庭的autocomplete
+        $( "input[name=family_id]" ).autocomplete({
+            source:function(request, response){
+                $.get("__APP__/Family/getFamilyList",{serial: request.term },function(data){
+                    if(0==data.status)
+                    {
+                        if(window.confirm(data.info))
+                            window.location="__APP__/Family/survey";
+                        else
+                            $("input[name=family_id]").val("");
+                    }
+                    else
+                    {
+                        response($.map(data,function(data){
+                            return {
+                                label:"序号："+data.id+"，家庭代表姓名："+data.agent+"，编号："+data.serial,
+                                value:data.id
+                            }
+                        }));
+                    }
+                },"JSON");
+            }
+        });
+
+        //物资的autocomplete,先定义两个函数
+        function split( val ) {
+            return val.split( /,\s*/ );
+        }
+        function extractLast( term ) {
+            return split( term ).pop();
+        }
+
+        $( "textarea[name=good_id]" ).autocomplete({
+            source:function(request, response){
+                $.get("__APP__/Good/getGoodList",{serial: extractLast(request.term) },function(data){
+                    if(0==data.status)
+                    {
+                        if(window.confirm(data.info))
+                            window.location="__APP__/Good/checkin";
+                    }
+                    else
+                    {
+                        response($.map(data,function(data){
+                            return {
+                                label:"序号："+data.id+"，物资："+data.name+data.number+data.unit+"，编号："+data.serial,
+                                value:data.id
+                            }
+                        }));
+                    }
+                },"JSON");
+            },
+            select: function( event, ui ) {
+                var terms = split( this.value );
+                terms.pop();
+                terms.push( ui.item.value );
+                terms.push( "" );
+                this.value = terms.join( ", " );
+                return false;
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            }
+        });
+
+    });
+</script>

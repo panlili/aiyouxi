@@ -82,7 +82,7 @@
                         //可以先var objects=$.map(), 后response(objects)
                         response($.map(data,function(data){
                             return {
-                                label:"姓名："+data.name+" 编号："+data.serial,
+                                label:"序号："+data.id+"，姓名："+data.name+"，编号："+data.serial,
                                 value:data.id
                             }
                         }));

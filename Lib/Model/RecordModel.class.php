@@ -4,14 +4,13 @@ class RecordModel extends RelationModel {
 
     protected $_validate = array(
         //领用记录每个物资只能分配一次
-        array("good_serial", "", "货物编号已存在", Model::EXISTS_VALIDATE, "unique", Model:: MODEL_BOTH),
+        array("good_id", "", "货物编号已存在,物资已被领用登记", Model::EXISTS_VALIDATE, "unique", Model:: MODEL_BOTH),
+        array("good_id", "require", "物资必须", Model::EXISTS_VALIDATE, "", Model:: MODEL_BOTH),
+        array("family_id", "require", "领用家庭必须", Model::EXISTS_VALIDATE, "", Model:: MODEL_BOTH),
+        array("serial", "require", "编号必须", Model::EXISTS_VALIDATE, "", Model:: MODEL_BOTH),
     );
     protected $_auto = array(
-        array("status", "1", Model::MODEL_INSERT),
-        //物资入库第一次填数据，及入库人为handman
-        //在出库时更新数据，及出库中后出库确认人为verifier
         array('handman', 'get_session_user_id', Model::MODEL_INSERT, 'function'),
-        array('verifier', 'get_session_user_id', Model::MODEL_UPDATE, 'function'),
         array('addtime', 'time', Model::MODEL_INSERT, 'function'),
         array('uptime', 'time', Model::MODEL_UPDATE, 'function'),
     );

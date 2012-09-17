@@ -77,6 +77,23 @@ class FamilyAction extends BaseAction {
         }
     }
 
+    //获取家庭列表，endgood页面调用
+    public function getFamilyList() {
+        if ($this->isAjax()) {
+            $text = $this->_param("serial");
+            $m_family = M("Family");
+            $map["serial"] = array('like', "%" . $text . "%");
+            $list = $m_family->field("serial,id,agent")->where($map)->select();
+            if (is_null($list)) {
+                $this->error("无此家庭或为分配家庭编号,请确认家庭信息,跳转到相关页面？");
+            } else {
+                $this->ajaxReturn($list);
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
 }
 
 ?>

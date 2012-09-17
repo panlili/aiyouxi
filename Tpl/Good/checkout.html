@@ -13,7 +13,7 @@
                     </td>
                     <td style="vertical-align: top;">
                         <p style="text-align: left;margin-bottom:5px;">
-                            出库领取人:<php>echo user_select();</php>
+                            出库领取人:<php>echo user_select("checkoutman");</php>
             <input type="button" value="出库所选" id="checkout"/>
             </p>
             <table id="checkoutlist" class="common_table">
@@ -45,7 +45,7 @@
     $(function(){
         $("#tabs").tabs();
         $("input:button").button();
-        
+
         //textarea接受扫描条码，获取数据展示在右侧列表中
         $("textarea").keydown(function(event) {
             if (event.keyCode == 13) {

@@ -11,7 +11,7 @@
                     <th>条码号</th><th>物资名</th>
                     <th>数量</th><th>计量</th>
                     <th>捐赠日期</th><th>捐赠人</th>
-                    <th>库存状态</th><th>收据号</th>
+                    <th>库存状态</th><th>出库日期</th><th>收据号</th>
                     <th>经手人</th><th>删除</th>
                 </tr>
             </thead>
@@ -26,13 +26,18 @@
                     <td>{$each.addtime|date="Y-m-d",###}</td>
                     <td>{$each.donater_id|get_donater_name_by_id}</td>
                     <td>{$each.step}</td>
-                    <td>{$each.receipt}</td>
-                    <td>{$each.handman|get_user_truename_by_id}</td>
                     <td>
-                        <a class="delete" href="#"
-                           onclick="toggle_status('__APP__/Good/changeStatus','{$each.id}',callback_toggle_good_status);return false;">
-                            删除</a>
-                    </td>
+                <notempty name="each.checkouttime">
+                    {$each.checkouttime|date="Y-m-d",###}
+                </notempty>
+                </td>
+                <td>{$each.receipt}</td>
+                <td>{$each.handman|get_user_truename_by_id}</td>
+                <td>
+                    <a class="delete" href="#"
+                       onclick="toggle_status('__APP__/Good/changeStatus','{$each.id}',callback_toggle_good_status);return false;">
+                        删除</a>
+                </td>
                 </tr>
             </volist>
             </tbody>
