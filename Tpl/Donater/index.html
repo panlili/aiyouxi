@@ -1,1 +1,11 @@
-可以放查询框
+
+<fieldset class="search_ayx">
+<legend>捐赠人信息查询：</legend>
+<form action="__APP__/Donater/search" id="search_form">
+    <p><label><select name="search_field"><option value="serial">编号</option><option value="name">姓名</option><option value="phone">联系电话</option></select></label></p>
+    <p><label><input type="text" name="search_key" class="search_key"/></label></p>
+    <p><label><input type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Donater/unitsearch',$('#search_form').serialize(),callback_search_donater);"/></label></p>
+</form>
+</fieldset>
+
+<div id="search_result"></div>

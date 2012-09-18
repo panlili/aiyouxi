@@ -38,6 +38,8 @@ class DonaterAction extends BaseAction {
             $this->redirect("Search/index");
         }
     }
+    
+    
 
 }
 

@@ -133,6 +133,18 @@ function callback_recyle_donater(json){
 function callback_delete_donater(json){
     callback_recyle_donater(json);
 }
+function callback_search_donater(json){
+    //alert(json);
+    
+    if(0==json.status){
+        
+        
+        
+    }else{        
+        $("#message").html(json.info).show().slideUp(1500);
+        $("#search_result").empty().append(json.data).show();
+    }
+}
 
 //family相关
 function callback_toggle_family_status(json){

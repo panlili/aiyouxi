@@ -2,7 +2,7 @@
 
 class BaseAction extends Action {
 
-    const RECORDS_ONE_PAGE = 25;
+    const RECORDS_ONE_PAGE = 5;
 
     public function _initialize() {
         if (!session("?truename") || !session("?uid"))
@@ -77,6 +77,7 @@ class BaseAction extends Action {
     //删除数据，不直接删除，通过status字段隐藏数据，delete
     public function changeStatus() {
         if ($this->isAjax()) {
+            $action_name = $this->getActionName() != "Admin" ? $this->getActionName() : "User";
             $id = $this->_param("id");
             $model = D($this->getActionName());
             if (FALSE !== $model->where("id=$id")->setField("status", 0)) {
@@ -87,6 +88,42 @@ class BaseAction extends Action {
         } else {
             $this->redirect("Search/index");
         }
+    }
+
+//各个模型中的搜索方法
+    public function unitsearch() {
+
+//        if ($this->isAjax()) {
+            $action_name = $this->getActionName() != "Admin" ? $this->getActionName() : "User";
+            $searchfield = $this->_param("search_field");
+            $search_key = $this->_param("search_key");
+            $model = D($this->getActionName());
+            $tmp = $searchfield . " like '%" . $search_key . "%'";
+            if ($searchfield != "") {
+                $_SESSION['sKey'] = $tmp;
+            }
+            $tmp = $_SESSION['sKey'];
+            $count = $model->where($tmp)->count();
+            //$data = $model->where($tmp)->select();
+
+            import("@.ORG.Pagea");
+            $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=2', 'search_result', 'pages');
+            $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();
+            $p->setConfig('header', '条记录');
+            $p->setConfig('prev', "<");
+            $p->setConfig('next', '>');
+            $p->setConfig('first', '<<');
+            $p->setConfig('last', '>>');
+            $page = $p->show();
+
+            $this->assign("page", $page);
+            $this->assign("datalist", $data);
+            
+            $content = $this->fetch("_" . strtolower($action_name));
+            $this->ajaxReturn($content, "数据获取成功", 1);
+//        } else {
+//            $this->redirect($this->getActionName() . "/index");
+//        }
     }
 
 }
