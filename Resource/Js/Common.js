@@ -249,5 +249,10 @@ function callback_delete_good(json){
 }
 
 function callback_add_record(json){
-    alert(json.info);
+   if(0==json.status){
+        $("#message").html(json.info).show();
+    }else{
+        $("#message").html(json.info).show().fadeOut(4000);
+        $("input:reset").click();
+    }
 }

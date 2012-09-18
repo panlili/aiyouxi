@@ -148,16 +148,39 @@ class GoodAction extends BaseAction {
     public function addRecord() {
         if ($this->isAjax()) {
             $m_record = D("Record");
-            $goodids = array_unique(array_filter(preg_split("/,/", $this->_param("good_id"))));
-            foreach ($goodids as $goodid) {
-                $good_id = trim($goodid);
-                $_POST["good_id"]=$good_id;
-                if($newdata=$m_record->create()){
-                     $m_record->add();
-                }else{
-                    $this->error($m_record->getError());
-                }
+            $m_good = D("Good");
+            $goodids = preg_split("/,/", trim($this->_param("good_id")));
+            foreach ($goodids as &$value) {
+                //强制去除元素前后的空格
+                $value = (int) ($value);
+            }
+            $wellids = array_filter(array_unique($goodids));
 
+            //至此，good_id表单的数据处理完毕，全是数字id
+            if (0 == count($wellids)) {
+                $this->error("请填写物资");
+            }
+
+            $errors = array();
+            $success = array();
+            foreach ($wellids as $goodid) {
+                $_POST["good_id"] = $goodid;
+                if (!$m_record->create()) {
+                    $errors[] = "物资ID为" . $goodid . "的数据出错：" . $m_record->getError() . "<br/>";
+                    break;
+                } else {
+                    $m_record->add();
+                    $m_good->where("id='$goodid'")->setField("step", 3);
+                    $success[] = "物资ID为" . $goodid . "的数据领用登记成功<br/>";
+                }
+            }
+
+            if (0 === count($errors)) {
+                $message = implode("", $success);
+                $this->success($message);
+            } else {
+                $message = implode("", $success) . implode("", $errors);
+                $this->error($message);
             }
         } else {
             $this->redirect("Search/index");

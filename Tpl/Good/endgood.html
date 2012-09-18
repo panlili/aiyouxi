@@ -12,7 +12,7 @@
         <input type="text" name="family_id" />
     </p>
     <p>
-        <label>领物编号：</label>
+        <label>物资编号：</label>
         <textarea name="good_id" rows="4" cols="40"></textarea>
     </p>
     <p>
@@ -93,7 +93,7 @@
                 terms.pop();
                 terms.push( ui.item.value );
                 terms.push( "" );
-                this.value = terms.join( ", " );
+                this.value = terms.join( "," );
                 return false;
             },
             focus: function() {
