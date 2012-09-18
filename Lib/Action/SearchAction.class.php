@@ -9,6 +9,21 @@ class SearchAction extends Action {
     public function index() {
         $this->display();
     }
+    //公共查询
+    public function search(){
+
+        if ($this->isAjax()){
+            $search_key = $this->_param("searchkey");
+            $map['serial']=array('EQ',$search_key);
+            $model=D("Good");
+            $result=$model->where($map)->select();
+            $this->assign("index_result", $result);
+            $content = $this->fetch("_result");
+            $this->ajaxReturn($content, "数据获取成功", 1);
+        }else{
+            $this->redirect($this->getActionName() . "/index");
+        }
+    }
 
     //下面action都是跟登陆相关,省去再造一个module
     public function login() {
