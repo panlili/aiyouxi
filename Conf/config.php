@@ -11,7 +11,8 @@ return array(
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'ayx',
     'DB_USER' => 'root',
-    'DB_PWD' => '57419',
+    //'DB_PWD' => '57419',
+    'DB_PWD' => 'cuitcuit',
     'DB_PORT' => '3306',
     'DB_PREFIX' => 'ayx_',
     "TMPL_PARSE_STRING" => array(
