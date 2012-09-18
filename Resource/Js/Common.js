@@ -261,10 +261,24 @@ function callback_delete_good(json){
 }
 
 function callback_add_record(json){
-   if(0==json.status){
+    if(0==json.status){
         $("#message").html(json.info).show();
     }else{
         $("#message").html(json.info).show().fadeOut(4000);
         $("input:reset").click();
     }
+}
+
+/**
+ * Comment
+ */
+function callback_search(json){
+    if(0==json.status){       
+        $("#message").html(json.info).show();
+        
+    }else{        
+        $("#message").html(json.info).show().slideUp(1500);
+        $("#search_result").empty().append(json.data).show();
+    }
+
 }

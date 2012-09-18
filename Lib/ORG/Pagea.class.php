@@ -149,11 +149,11 @@ class Pagea {
             $('#{$this->pagesId} a').click(function(){
                 $.ajax({
                     url: $(this).attr('href'),
-                    dataType: "html",
+                    dataType: "json",
                     type: "POST",
                     cache: false,
-                    success: function(html){
-                        $("#{$this->target}").html(html);
+                    success: function(json){
+                        $("#{$this->target}").html(json.data);
                     }
                 });
                 return false;

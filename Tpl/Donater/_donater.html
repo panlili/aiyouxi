@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
-                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th>删除</th>
+                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,15 +21,13 @@
                     <td>{$each.handman|get_user_truename_by_id}</td>
                     <!-- 数据删除不真删除，而是将其status转换为0 -->
                     <td>
-                        <a class="delete" href="#"
-                           onclick="toggle_status('__APP__/Donater/changeStatus','{$each.id}',callback_toggle_donater_status);return false;">
-                            删除</a>
+                        
                     </td>
                 </tr>
             </volist>
             </tbody>
         </table>
-    <div class="green-black" id="pages">
+    <div class="green-black" id="pages1">
         {$page}</div>
 </present>
 

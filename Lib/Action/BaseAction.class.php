@@ -93,7 +93,7 @@ class BaseAction extends Action {
 //各个模型中的搜索方法
     public function unitsearch() {
 
-//        if ($this->isAjax()) {
+        if ($this->isAjax()) {
             $action_name = $this->getActionName() != "Admin" ? $this->getActionName() : "User";
             $searchfield = $this->_param("search_field");
             $search_key = $this->_param("search_key");
@@ -104,26 +104,30 @@ class BaseAction extends Action {
             }
             $tmp = $_SESSION['sKey'];
             $count = $model->where($tmp)->count();
-            //$data = $model->where($tmp)->select();
 
             import("@.ORG.Pagea");
-            $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=2', 'search_result', 'pages');
+            $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=1', 'search_result', 'pages1');
             $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();
             $p->setConfig('header', '条记录');
             $p->setConfig('prev', "<");
             $p->setConfig('next', '>');
             $p->setConfig('first', '<<');
             $p->setConfig('last', '>>');
+//        import("ORG.Util.Page");
+//        $p = new Page($count, self::RECORDS_ONE_PAGE);
+//        $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();
             $page = $p->show();
 
+
             $this->assign("page", $page);
-            $this->assign("datalist", $data);
-            
+            $this->assign("datalist", $data);            
+
             $content = $this->fetch("_" . strtolower($action_name));
             $this->ajaxReturn($content, "数据获取成功", 1);
-//        } else {
-//            $this->redirect($this->getActionName() . "/index");
-//        }
+            
+        } else {
+            $this->redirect($this->getActionName() . "/index");
+        }
     }
 
 }

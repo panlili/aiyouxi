@@ -1,1 +1,10 @@
-查询页面
+<fieldset class="search_ayx">
+<legend>捐赠人信息查询：</legend>
+<form id="search_form">
+    <p><label><select name="search_field"><option value="serial">编号</option><option value="name">物资名</option><option value="step">捐赠状态</option><option value="handman">经手人</option></select></label></p>
+    <p><label><input type="text" name="search_key" class="search_key"/></label></p>
+    <p><label><input type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Good/unitsearch',$('#search_form').serialize(),callback_search);"/></label></p>
+</form>
+</fieldset>
+
+<div id="search_result"></div>
