@@ -91,6 +91,7 @@
                     <th>序号</th>
                     <th>物资条码号</th><th>物资名</th>
                     <th>数量</th><th>计量</th>
+                    <th>捐赠日期</th>
                     <th>领捐日期</th>
                     <th>领用编号</th>
                     <th>受捐家庭编号</th>
@@ -105,6 +106,7 @@
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
+                    <td>{$each.addtime|date="Y-m-d",###}</td>
                     <td>{$each.record.distributeday}</td>
                     <td>{$each.record.serial}</td>
                     <td>{$each.record.family_id|get_family_serial_by_id}</td>

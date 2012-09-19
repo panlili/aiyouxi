@@ -14,6 +14,8 @@ function echo_current($module, $name) {
 //对页面右侧的子菜单进行标识
 function get_second_menu($module, $action) {
     switch ($module) {
+        case "Retrieval":$tmp = RetrievalAction::$method_array;
+            break;
         case "Donater":$tmp = DonaterAction::$method_array;
             break;
         case "Admin":$tmp = AdminAction::$method_array;
