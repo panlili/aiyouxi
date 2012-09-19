@@ -89,27 +89,27 @@
             <thead>
                 <tr>
                     <th>序号</th>
-                    <th>条码号</th><th>物资名</th>
+                    <th>物资条码号</th><th>物资名</th>
                     <th>数量</th><th>计量</th>
-                    <th>领捐日期</th><th>受捐家庭编号</th>
-                    <th>出库时间</th>
-                    <th>出库领取人</th>
-                    <th>经手人</th>
+                    <th>领捐日期</th>
+                    <th>领用编号</th>
+                    <th>受捐家庭编号</th>
+                    <th>经手人</th><th>审核人</th>
                 </tr>
             </thead>
             <tbody>
             <volist name="goods3" id="each">
                 <tr id="{$each.id}">
                     <td>{$each.id}</td>
-                    <td><a>{$each.serial}</a></td>
+                    <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
                     <td>{$each.record.distributeday}</td>
+                    <td>{$each.record.serial}</td>
                     <td>{$each.record.family_id|get_family_serial_by_id}</td>
-                    <td>{$each.checkouttime|date="Y-m-d,H:i",###}</td>
-                    <td>{$each.checkoutman|get_user_truename_by_id}</td>
-                    <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td>{$each.record.handman|get_user_truename_by_id}</td>
+                    <td>{$each.record.verifier|get_user_truename_by_id}</td>
                 </tr>
             </volist>
             </tbody>

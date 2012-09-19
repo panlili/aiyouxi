@@ -1,28 +1,28 @@
 {__NOLAYOUT__}
 <present name="datalist">
     <table class="common_table">
-            <thead>
-                <tr>
-                    <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
-                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
-                </tr>
-            </thead>
-            <tbody>
-            <volist name="datalist" id="each">
-                <tr class="donaterlist" id="{$each.id}">
-                    <td>{$each.id}</td>
-                    <td>{$each.serial}</td>
-                    <td>{$each.name}</td>
-                    <td>{$each.phone}</td>
-                    <td>{$each.sex}</td>
-                    <td>{$each.comment}</td>
-                    <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.handman|get_user_truename_by_id}</td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
+        <thead>
+            <tr>
+                <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
+                <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
+            </tr>
+        </thead>
+        <tbody>
+        <volist name="datalist" id="each">
+            <tr class="donaterlist" id="{$each.id}">
+                <td>{$each.id}</td>
+                <td>{$each.serial}</td>
+                <td>{$each.name}</td>
+                <td>{$each.phone}</td>
+                <td>{$each.sex}</td>
+                <td>{$each.comment}</td>
+                <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
+                <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
+                <td>{$each.handman|get_user_truename_by_id}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
     <div class="green-black" id="pages1">
         {$page}</div>
 </present>
@@ -37,11 +37,12 @@
         </td>
         <td>{$newdata.serial}</td>
         <td>{$newdata.name}</td>
+        <td>0</td>
         <td>{$newdata.phone}</td>
         <td>{$newdata.sex}</td>
         <td>{$newdata.comment}</td>
-        <td>{$newdata.addtime|date="Y-m-d,H:i:s",###}</td>
-        <td>{$newdata.uptime|date="Y-m-d,H:i:s",###}</td>
+        <td>{$newdata.addtime|date="Y-m-d,H:i",###}</td>
+        <td>{$newdata.uptime|date="Y-m-d,H:i",###}</td>
         <td>{$newdata.handman|get_user_truename_by_id}</td>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>

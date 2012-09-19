@@ -8,7 +8,7 @@
         <table class="common_table">
             <thead>
                 <tr>
-                    <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
+                    <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>已捐物资</th><th>联系电话</th>
                     <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th>删除</th>
                 </tr>
             </thead>
@@ -18,13 +18,14 @@
                     <td><a class="change" href="#" onclick='get_data("__APP__/Donater/getEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.serial}</td>
                     <td>{$each.name}</td>
+                    <td>{$each.goodNumber}</td>
                     <td>{$each.phone}</td>
                     <td>{$each.sex}</td>
                     <td>{$each.comment}</td>
-                    <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
-                    <td> 
+                    <td>{$each.addtime|date="Y-m-d,H:i",###}</td>
+                    <td>
                 <notempty name="each.uptime">
-                    {$each.uptime|date="Y-m-d,H:i:s",###}
+                    {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
                 <td>{$each.handman|get_user_truename_by_id}</td>

@@ -14,6 +14,7 @@ class FamilyAction extends BaseAction {
 
     public function families() {
         $m_family = M("Family");
+        $m_record=M("Record");
         import("ORG.Util.Page");
         $map["status"] = 1;
         $map["serial"] = array("neq", "");
@@ -21,6 +22,11 @@ class FamilyAction extends BaseAction {
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
         $familyList = $m_family->order("id desc")->where($map)->limit($p->firstRow . ',' . $p->listRows)->select();
+        foreach($familyList as &$family){
+            $familyId=$family["id"];
+            $goodNumber=$m_record->where("family_id='$familyId'")->count();
+            $family["goodNumber"]=$goodNumber;
+        }
         $this->assign("families", $familyList);
         $this->assign("page", $page);
         $this->display();

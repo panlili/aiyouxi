@@ -140,8 +140,6 @@ class GoodAction extends BaseAction {
         $this->assign("goods3", $goodList3);
         $this->assign("page3", $page3);
 
-
-
         $this->display();
     }
 
@@ -165,8 +163,6 @@ class GoodAction extends BaseAction {
     //领物回来添加record数据
     public function addRecord() {
         if ($this->isAjax()) {
-            $m_record = D("Record");
-            $m_good = D("Good");
             $goodids = preg_split("/,/", trim($this->_param("good_id")));
             foreach ($goodids as &$value) {
                 //强制去除元素前后的空格
@@ -179,6 +175,8 @@ class GoodAction extends BaseAction {
                 $this->error("请填写物资");
             }
 
+            $m_record = D("Record");
+            $m_good = D("Good");
             $errors = array();
             $success = array();
             foreach ($wellids as $goodid) {
