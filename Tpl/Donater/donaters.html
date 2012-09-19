@@ -22,14 +22,18 @@
                     <td>{$each.sex}</td>
                     <td>{$each.comment}</td>
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.handman|get_user_truename_by_id}</td>
-                    <!-- 数据删除不真删除，而是将其status转换为0 -->
-                    <td>
-                        <a class="delete" href="#"
-                           onclick="toggle_status('__APP__/Donater/changeStatus','{$each.id}',callback_toggle_donater_status);return false;">
-                            删除</a>
-                    </td>
+                    <td> 
+                <notempty name="each.uptime">
+                    {$each.uptime|date="Y-m-d,H:i:s",###}
+                </notempty>
+                </td>
+                <td>{$each.handman|get_user_truename_by_id}</td>
+                <!-- 数据删除不真删除，而是将其status转换为0 -->
+                <td>
+                    <a class="delete" href="#"
+                       onclick="toggle_status('__APP__/Donater/changeStatus','{$each.id}',callback_toggle_donater_status);return false;">
+                        删除</a>
+                </td>
                 </tr>
             </volist>
             </tbody>

@@ -1,7 +1,9 @@
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">物资列表</a></li>
+        <li><a href="#tabs-1">在库物资</a></li>
         <li><a href="#tabs-2">修改数据</a></li>
+        <li><a href="#tabs-3">出库物资</a></li>
+        <li><a href="#tabs-4">已捐物资</a></li>
     </ul>
     <div id="tabs-1">
         <table class="common_table">
@@ -11,28 +13,31 @@
                     <th>条码号</th><th>物资名</th>
                     <th>数量</th><th>计量</th>
                     <th>捐赠日期</th><th>捐赠人</th>
-                    <th>库存状态</th><th>出库日期</th><th>收据号</th>
-                    <th>经手人</th><th>删除</th>
+                    <th>收据号</th>
+                    <th>经手人</th>
+                    <th>录入</th>
+                    <th>修改</th>
+                    <th>删除</th>
                 </tr>
             </thead>
             <tbody>
-            <volist name="goods" id="each">
+            <volist name="goods1" id="each">
                 <tr id="{$each.id}">
                     <td><a class="change" href="#" onclick='get_data("__APP__/Good/getEditForm",$(this).text(),callback_get_good_edit_form);return false;'>{$each.id}</a></td>
-                    <td><a>{$each.serial}</a></td>
+                    <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
                     <td>{$each.addtime|date="Y-m-d",###}</td>
                     <td>{$each.donater_id|get_donater_name_by_id}</td>
-                    <td>{$each.step}</td>
+                    <td>{$each.receipt}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td>{$each.addtime|date="Y-m-d,H:i",###}</td>
                     <td>
-                <notempty name="each.checkouttime">
-                    {$each.checkouttime|date="Y-m-d",###}
+                <notempty name="each.uptime">
+                    {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
-                <td>{$each.receipt}</td>
-                <td>{$each.handman|get_user_truename_by_id}</td>
                 <td>
                     <a class="delete" href="#"
                        onclick="toggle_status('__APP__/Good/changeStatus','{$each.id}',callback_toggle_good_status);return false;">
@@ -42,10 +47,74 @@
             </volist>
             </tbody>
         </table>
-        {$page}
+        {$page1}
     </div>
     <div id="tabs-2">
         请从列表选择数据!
+    </div>
+    <div id="tabs-3">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>条码号</th><th>物资名</th>
+                    <th>数量</th><th>计量</th>
+                    <th>捐赠日期</th><th>捐赠人</th>
+                    <th>出库时间</th>
+                    <th>出库领取人</th>
+                    <th>经手人</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="goods2" id="each">
+                <tr id="{$each.id}">
+                    <td>{$each.id}</td>
+                    <td>{$each.serial}</td>
+                    <td>{$each.name}</td>
+                    <td>{$each.number}{$each.unit}</td>
+                    <td>{$each.measure}</td>
+                    <td>{$each.addtime|date="Y-m-d",###}</td>
+                    <td>{$each.donater_id|get_donater_name_by_id}</td>
+                    <td>{$each.checkouttime|date="Y-m-d,H:i",###}</td>
+                    <td>{$each.checkoutman|get_user_truename_by_id}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        {$page2}
+    </div>
+    <div id="tabs-4">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>条码号</th><th>物资名</th>
+                    <th>数量</th><th>计量</th>
+                    <th>领捐日期</th><th>受捐家庭编号</th>
+                    <th>出库时间</th>
+                    <th>出库领取人</th>
+                    <th>经手人</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="goods3" id="each">
+                <tr id="{$each.id}">
+                    <td>{$each.id}</td>
+                    <td><a>{$each.serial}</a></td>
+                    <td>{$each.name}</td>
+                    <td>{$each.number}{$each.unit}</td>
+                    <td>{$each.measure}</td>
+                    <td>{$each.record.distributeday}</td>
+                    <td>{$each.record.family_id|get_family_serial_by_id}</td>
+                    <td>{$each.checkouttime|date="Y-m-d,H:i",###}</td>
+                    <td>{$each.checkoutman|get_user_truename_by_id}</td>
+                    <td>{$each.handman|get_user_truename_by_id}</td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        {$page3}
     </div>
 </div>
 

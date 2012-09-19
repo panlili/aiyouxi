@@ -4,13 +4,13 @@
             <thead>
                 <tr>
                     <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
-                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th></th>
+                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
                 </tr>
             </thead>
             <tbody>
             <volist name="datalist" id="each">
                 <tr class="donaterlist" id="{$each.id}">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Donater/getEditForm",$(this).text(),callback_get_donater_edit_form);return false;'>{$each.id}</a></td>
+                    <td>{$each.id}</td>
                     <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.phone}</td>
@@ -19,10 +19,6 @@
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
                     <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
-                    <!-- 数据删除不真删除，而是将其status转换为0 -->
-                    <td>
-                        
-                    </td>
                 </tr>
             </volist>
             </tbody>

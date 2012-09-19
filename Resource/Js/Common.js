@@ -17,6 +17,7 @@ function toggle_status(path,id,callback){
 function add_data(path,formdata,callback){    
     $.post(path,formdata,callback,"JSON");
 }
+
 function post_data(path,formdata,callback){    
     $.post(path,formdata,callback,"JSON");
 }
@@ -136,12 +137,10 @@ function callback_recyle_donater(json){
 function callback_delete_donater(json){
     callback_recyle_donater(json);
 }
+
 function callback_search_donater(json){
-    //alert(json);
-    
+   
     if(0==json.status){
-        
-        
         
     }else{        
         $("#message").html(json.info).show().slideUp(1500);
@@ -272,26 +271,20 @@ function callback_add_record(json){
     }
 }
 
-/**
- * Comment
- */
+//search相关
 function callback_search(json){
     if(0==json.status){       
         $("#message").html(json.info).show();
-        
     }else{        
         $("#message").html(json.info).show().slideUp(1500);
         $("#search_result").empty().append(json.data).show();
     }
 
 }
-/**
- * Comment
- */
+
 function callback_index_search(json) {    
-     if(0==json.status){       
+    if(0==json.status){       
         $("#message").html(json.info).show();
-        
     }else{       
         $("#message").html(json.info).show().slideUp(1500);
         $("#index_result").empty().append(json.data).show();

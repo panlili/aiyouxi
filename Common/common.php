@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author libiun
  * @param type $module 当前页面所在模块的名称
@@ -45,7 +46,13 @@ function get_user_truename_by_id($id) {
 }
 
 //根据捐赠者id获取姓名
-function get_donater_name_by_id($id){
-     return M("Donater")->where("id=$id")->getField("name");
+function get_donater_name_by_id($id) {
+    return M("Donater")->where("id=$id")->getField("name");
 }
+
+//根据家庭id获取编号
+function get_family_serial_by_id($id) {
+    return M("Family")->where("id=$id")->getField("serial");
+}
+
 ?>

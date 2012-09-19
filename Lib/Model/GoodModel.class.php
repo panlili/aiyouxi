@@ -26,6 +26,16 @@ class GoodModel extends RelationModel {
         $data["handman"] = get_session_user_id();
     }
 
+    public $_link = array(
+        //has one record 
+        "Record" => array(
+            "class_name" => "Record",
+            "mapping_name" => "record",
+            "foreign_key" => "good_id",
+            "mapping_type" => HAS_ONE,
+        ),
+    );
+
 }
 
 ?>

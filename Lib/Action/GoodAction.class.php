@@ -116,14 +116,32 @@ class GoodAction extends BaseAction {
     }
 
     public function goods() {
-        $m_good = M("Good");
+        $m_good = D("Good");
         import("ORG.Util.Page");
-        $count = $m_good->where("status=1")->count();
-        $p = new Page($count, self::RECORDS_ONE_PAGE);
-        $page = $p->show();
-        $goodList = $m_good->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
-        $this->assign("goods", $goodList);
-        $this->assign("page", $page);
+        //在库物资,step=1
+        $count1 = $m_good->where("status=1 AND step=1")->count();
+        $p1 = new Page($count1, self::RECORDS_ONE_PAGE);
+        $page1 = $p1->show();
+        $goodList1 = $m_good->order("id desc")->where("status=1 AND step=1")->limit($p1->firstRow . ',' . $p1->listRows)->select();
+        $this->assign("goods1", $goodList1);
+        $this->assign("page1", $page1);
+        //出库物资,step=2
+        $count2 = $m_good->where("status=1 AND step=2")->count();
+        $p2 = new Page($count2, self::RECORDS_ONE_PAGE);
+        $page2 = $p2->show();
+        $goodList2 = $m_good->order("checkouttime desc")->where("status=1 AND step=2")->limit($p2->firstRow . ',' . $p2->listRows)->select();
+        $this->assign("goods2", $goodList2);
+        $this->assign("page2", $page2);
+        //已捐物资,step=3
+        $count3 = $m_good->where("status=1 AND step=3")->count();
+        $p3 = new Page($count3, self::RECORDS_ONE_PAGE);
+        $page3 = $p3->show();
+        $goodList3 = $m_good->relation("record")->order("uptime desc")->where("status=1 AND step=3")->limit($p3->firstRow . ',' . $p3->listRows)->select();
+        $this->assign("goods3", $goodList3);
+        $this->assign("page3", $page3);
+
+
+
         $this->display();
     }
 
