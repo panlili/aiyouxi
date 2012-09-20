@@ -44,17 +44,17 @@ function get_session_user_id() {
 
 //根据用户id获取姓名
 function get_user_truename_by_id($id) {
-    return M("User")->where("id=$id")->getField("truename");
+    return !empty($id) ? M("User")->where("id=$id")->getField("truename") : "";
 }
 
 //根据捐赠者id获取姓名
 function get_donater_name_by_id($id) {
-    return M("Donater")->where("id=$id")->getField("name");
+    return !empty($id) ? M("Donater")->where("id=$id")->getField("name") : "";
 }
 
 //根据家庭id获取编号
 function get_family_serial_by_id($id) {
-    return M("Family")->where("id=$id")->getField("serial");
+    return !empty($id) ? M("Family")->where("id=$id")->getField("serial") : "";
 }
 
 ?>

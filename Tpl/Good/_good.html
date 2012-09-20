@@ -1,42 +1,39 @@
 {__NOLAYOUT__}
 <present name="datalist">
     <table class="common_table">
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>条码号</th><th>物资名</th>
-                    <th>数量</th><th>计量</th>
-                    <th>捐赠日期</th><th>捐赠人</th>
-                    <th>库存状态</th><th>出库日期</th><th>收据号</th>
-                    <th>经手人</th><th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <volist name="datalist" id="each">
-                <tr id="{$each.id}">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Good/getEditForm",$(this).text(),callback_get_good_edit_form);return false;'>{$each.id}</a></td>
-                    <td><a>{$each.serial}</a></td>
-                    <td>{$each.name}</td>
-                    <td>{$each.number}{$each.unit}</td>
-                    <td>{$each.measure}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
-                    <td>{$each.donater_id|get_donater_name_by_id}</td>
-                    <td>{$each.step}</td>
-                    <td>
-                <notempty name="each.checkouttime">
-                    {$each.checkouttime|date="Y-m-d",###}
-                </notempty>
-                </td>
-                <td>{$each.receipt}</td>
-                <td>{$each.handman|get_user_truename_by_id}</td>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>条码号</th><th>物资名</th>
+                <th>数量</th><th>计量</th>
+                <th>捐赠日期</th><th>捐赠人</th>
+                <th>库存状态</th><th>出库日期</th><th>收据号</th>
+                <th>经手人</th>
+            </tr>
+        </thead>
+        <tbody>
+        <volist name="datalist" id="each">
+            <tr id="{$each.id}">
+                <td>{$each.id}</td>
+                <td>{$each.serial}</td>
+                <td>{$each.name}</td>
+                <td>{$each.number}{$each.unit}</td>
+                <td>{$each.measure}</td>
+                <td>{$each.addtime|date="Y-m-d",###}</td>
+                <td>{$each.donater_id|get_donater_name_by_id}</td>
+                <td>{$each.step}</td>
                 <td>
-                    
-                </td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
-        <div class="green-black" id="pages1">
+            <notempty name="each.checkouttime">
+                {$each.checkouttime|date="Y-m-d",###}
+            </notempty>
+            </td>
+            <td>{$each.receipt}</td>
+            <td>{$each.handman|get_user_truename_by_id}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="green-black" id="pages1">
         {$page}</div>
 </present>
 

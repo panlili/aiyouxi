@@ -1,13 +1,64 @@
-<table>
-    <volist name="result" id="each">
-        <tr>
-            <td>{$each.goodserial}</td>
-            <td>{$each.goodname},{$each.number}{$each.unit}</td>
-            <td>{$each.goodname},{$each.number}{$each.measure}</td>
-            <td>{$each.receipt}</td>
-            <td>{$each.donatetime|date="Y-m-d",###}</td>
-            <td>{$each.donatername}</td>
-            <td>{$each.donaterserial}</td>
-        </tr>
-    </volist>
-</table>
+<present name="noresult">
+    <div style="float: left;margin:30px auto auto 50px;text-align: left;font-size: 1.2em;">
+    <p>没有相关结果！可能原因有：</p><br/>
+    <ol style="margin-left: 60px">
+        <li>捐赠者还有没捐赠过物资！</li>
+        <li>受捐家庭还有没领用过物资！</li>
+        <li>没有满足所有条件的物资数据！</li>
+    </ol>
+    </div>
+</present>
+
+<notpresent name="noresult">
+    <table class="common_table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>物资编号</th>
+                <th>物资</th>
+                <th>物资状态</th>
+                <th>捐赠日期</th>
+                <th>捐赠人</th>
+                <th>捐赠人编号</th>
+                <th>收据编号</th>
+                <th>受捐家庭</th>
+                <th>家庭代表</th>
+                <th>地址</th>
+                <th>领物编号</th>
+                <th>领物日期</th>
+                <th>经手人</th>
+                <th>审核人</th>
+            </tr>
+        </thead>
+        <tbody>
+        <volist name="result" id="each">
+            <tr>
+                <td class="number"></td>
+                <td>{$each.goodserial}</td>
+                <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
+                <td>{$each.step}</td>
+                <td>{$each.donatetime|date="Y-m-d",###}</td>
+                <td>{$each.donatername}</td>
+                <td>{$each.donaterserial}</td>
+                <td>{$each.receipt}</td>
+                <td>{$each.familyserial}</td>
+                <td>{$each.agent}</td>
+                <td>{$each.address}</td>
+                <td>{$each.recordserial}</td>
+                <td>{$each.distributeday}</td>
+                <td>{$each.handman|get_user_truename_by_id}</td>
+                <td>{$each.verifier|get_user_truename_by_id}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+     <a href="__URL__/toexcel" id="toexcel" style="float:right;">导出Excel</a>
+</notpresent>
+
+<script type="text/javascript">
+    $(function(){
+        setNumber();
+        $("#toexcel").button();
+    });
+</script>
+
