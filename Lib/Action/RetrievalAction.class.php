@@ -19,9 +19,9 @@ class RetrievalAction extends BaseAction {
             unset($queryArray[0]);
             unset($queryArray[1]);
             if (!empty($queryArray["donatetimestart"]))
-                $queryArray["donatetimestart"] = strtotime($queryArray["donatetimestart"]);
+                $queryArray["donatetimestart"] = strtotime($queryArray["donatetimestart"]." 00:00:00");
             if (!empty($queryArray["donatetimeend"]))
-                $queryArray["donatetimeend"] = strtotime($queryArray["donatetimeend"]);
+                $queryArray["donatetimeend"] = strtotime($queryArray["donatetimeend"]." 23:59:59");
 
             //检索条件的构建
             $map = array();
