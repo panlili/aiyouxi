@@ -4,7 +4,7 @@
 <form id="search_form">
     <p><label><select name="search_field"><option value="serial">编号</option><option value="name">姓名</option><option value="phone">联系电话</option></select></label></p>
     <p><label><input type="text" name="search_key" class="search_key"/></label></p>
-    <p><label><input type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Donater/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
+    <p><label><input id="btnsearch" type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Donater/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
 </form>
 </fieldset>
 
