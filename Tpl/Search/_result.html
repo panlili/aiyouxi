@@ -1,35 +1,37 @@
 {__NOLAYOUT__}
- <table class="common_table">
-            <thead>
-                <tr>
-                    
-                    <th>条码号</th><th>物资名</th>
-                    <th>数量</th><th>计量</th>
-                    <th>捐赠日期</th><th>捐赠人</th>
-                    <th>库存状态</th><th>出库日期</th><th>收据号</th>
-                    <th>经手人</th><th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <volist name="index_result" id="each">                
-                    <td><a>{$each.serial}</a></td>
-                    <td>{$each.name}</td>
-                    <td>{$each.number}{$each.unit}</td>
-                    <td>{$each.measure}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
-                    <td>{$each.donater_id|get_donater_name_by_id}</td>
-                    <td>{$each.step}</td>
-                    <td>
-                <notempty name="each.checkouttime">
-                    {$each.checkouttime|date="Y-m-d",###}
-                </notempty>
-                </td>
-                <td>{$each.receipt}</td>
-                <td>{$each.handman|get_user_truename_by_id}</td>
-                <td>
-                    
-                </td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
+
+<volist name="index_result" id="each">
+<table>
+    <tr class="firsttr">
+        <td>
+            <h2>捐赠物资编号：<i>{$each.goodserial}</i></h2><h2>状态：<i>{$each.step}</i></h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h3>捐赠信息</h3>
+            <p><b>捐赠人：</b>{$each.donatername}</p>
+            <p><b>所捐物资名：</b>{$each.goodname}</p>
+            <p><b>捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}</p>
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h3>流程信息</h3>
+            <p><b>出库时间：</b>{$each.checkouttime|date="Y-m-d",###}</p>
+            <p><b>出库负责人：</b>{$each.checkoutman|get_user_truename_by_id}</p>
+            <p><b>确认捐赠时间：</b>{$each.distributeday}</p>
+            <p><b>确认人：</b>{$each.handman|get_user_truename_by_id}</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h3>受捐信息</h3>
+            <p><b>受捐家庭编号：</b>{$each.familyserial}</p>
+            <p><b>受捐家庭代表：</b>{$each.agent}</p>
+            <p><b>受捐家庭地址：</b>{$each.address}</p>
+        </td>
+    </tr>
+</table>
+</volist>

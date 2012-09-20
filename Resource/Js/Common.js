@@ -3,6 +3,23 @@ function resetwindow(){
     var ss=$(".kkk").width()-$("#leftContent").width()-17;
     $("#rightContent").width(ss);
 }
+//用户查询的时候在表单输入判断是否输入了回车，如果回车执行响应的函数
+function checkenter(){
+    var keyinput=window.event.keyCode;
+    alert(keyinput);
+    var li;
+    if(keyinput != 13){
+        li+=keyinput;
+        alert(keyinput);
+    }else
+    {
+        //doajaxget;
+    }
+}
+$(document).ready(function(){
+  // 在这里写你的代码...
+  $("#search_key").keydown(function(){alert("kick");});//不起作用？为什么呢
+});
 
 /*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
 
@@ -285,9 +302,17 @@ function callback_search(json){
 function callback_index_search(json) {    
     if(0==json.status){       
         $("#message").html(json.info).show();
-    }else{       
-        $("#message").html(json.info).show().slideUp(1500);
-        $("#index_result").empty().append(json.data).show();
+        $("#index_result").empty().append("ajax回调发生错误").show();
+    }else{  
+        if(json.data==""){
+            $("#index_result").empty().append("没有命中记录，请检查物资编号输入是否正确，或者重新输入。").show();
+            
+        }else{
+            $("#message").html(json.info).show().slideUp(1500);
+            $("#index_result").empty().append(json.data).show();
+        }
+    
+        
     }
 
 }

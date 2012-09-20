@@ -9,18 +9,23 @@ class SearchAction extends Action {
     public function index() {
         $this->display();
     }
-    //公共查询
-    public function search(){
 
-        if ($this->isAjax()){
-            $search_key = $this->_param("searchkey");
-            $map['serial']=array('EQ',$search_key);
-            $model=D("Good");
-            $result=$model->where($map)->select();
-            $this->assign("index_result", $result);
-            $content = $this->fetch("_result");
-            $this->ajaxReturn($content, "数据获取成功", 1);
-        }else{
+    //公共查询
+    public function search() {
+        if ($this->isAjax()) {
+            $search_key = trim($this->_param("searchkey"));
+            //$search_key="SF";
+            $map['goodserial'] = array('EQ', $search_key);
+            $model = M("Fullgood");
+            $result = $model->where($map)->select();
+            if ($result == null) {
+                $this->ajaxReturn("","没有命中记录",1);
+            } else {
+                $this->assign("index_result", $result);
+                $content = $this->fetch("_result");
+                $this->ajaxReturn($content, "数据获取成功", 1);
+            }
+        } else {
             $this->redirect($this->getActionName() . "/index");
         }
     }

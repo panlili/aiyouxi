@@ -43,20 +43,32 @@
         #indexheader pre{float: left;}
         #index_result{
             clear: both;
-            width: 755px;
+            width: 500px;
+            padding: 10px;
             margin-left: 100px;margin-top: 20px;
             border:dotted 1px #092247;
             background-color:  #f8f2c2;
             display: none;
         }
+        #index_result table{background-color:  #fff;width: 100%;border:1px dotted #123456;padding-bottom: 10px;}
+        #index_result table .firsttr{background-color:  #cccccc;height: 30px;line-height: 30px;}
+        #index_result table tr td h2{font-size: 14px;color:#005916;float:left;margin-left: 20px;font-weight: bold;}
+        #index_result table tr td h3{font-size: 12px;margin-left: 30px;margin-top: 10px;color:  #ff6633;font-weight: bold;}
+        #index_result table tr td p{font-size: 12px;margin-left: 40px;margin-top: 8px;}
+        
     </style>
+    <script type="text/javascript">
+        function cleanresult(){
+            $("#index_result").empty().hide();
+        }
+    </script>
 </head>
 <body>
     <div id="indexheader"><pre>“义仓”慈善捐赠流程管理系统&nbsp;&nbsp;&nbsp; </pre> <a href="__APP__/Search/login">管理登录</a></div>
     <div id="searchcontainer">      
         <div id="searchlogo"><img src="__IMAGE__/logo.png"></img></div>
 
-        <div id="wuzisearch"><pre><form id="s_form"><input id="searchkey" name="searchkey" type="text" value="请输入查询的物资编号" onfocus="this.value='';" /></form><button onclick="post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);" title="点击搜索"></button></pre></div>
+        <div id="wuzisearch"><pre><form id="s_form"><input id="searchkey" name="searchkey" type="text" value="请输入查询的物资编号" onfocus="this.value='';cleanresult()" /></form><button onclick="post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);" title="点击搜索"></button></pre></div>
 
         <div id="index_result"></div>
     </div>

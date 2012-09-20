@@ -95,7 +95,7 @@ class BaseAction extends Action {
         if ($this->isAjax()) {
             $action_name = $this->getActionName();
             $searchfield = $this->_param("search_field");
-            $search_key = $this->_param("search_key");
+            $search_key = trim($this->_param("search_key"));
             $model = D($action_name);
             $tmp = $searchfield . " like '%" . $search_key . "%'";
             if ($searchfield != "") {
