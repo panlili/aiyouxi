@@ -13,6 +13,7 @@ class SearchAction extends Action {
     //公共查询
     public function search() {
         if ($this->isAjax()) {
+            load('extend');
             $search_key = trim($this->_param("searchkey"));
             //$search_key="SF";
             $map['goodserial'] = array('EQ', $search_key);
