@@ -4,6 +4,21 @@ function resetwindow(){
     $("#rightContent").width(ss);
 }
 
+function setNumber(parent) {
+    var i=1;
+    if(!parent){
+        $(".number").each(function(){
+            $(this).text(i);
+            i++;
+        });
+    }else{
+        $(parent+" .number").each(function(){
+            $(this).text(i);
+            i++;
+        });
+    }
+}
+
 /*各模块通用的ajax函数，具体操作交由具体的回调函数做*/
 
 //交替变换status的值
@@ -14,11 +29,11 @@ function toggle_status(path,id,callback){
 }
 
 //通过表单数据添加数据
-function add_data(path,formdata,callback){    
+function add_data(path,formdata,callback){
     $.post(path,formdata,callback,"JSON");
 }
 
-function post_data(path,formdata,callback){    
+function post_data(path,formdata,callback){
     $.post(path,formdata,callback,"JSON");
 }
 
@@ -139,10 +154,10 @@ function callback_delete_donater(json){
 }
 
 function callback_search_donater(json){
-   
+
     if(0==json.status){
-        
-    }else{        
+
+    }else{
         $("#message").html(json.info).show().slideUp(1500);
         $("#search_result").empty().append(json.data).show();
     }
@@ -273,19 +288,19 @@ function callback_add_record(json){
 
 //search相关
 function callback_search(json){
-    if(0==json.status){       
+    if(0==json.status){
         $("#message").html(json.info).show();
-    }else{        
+    }else{
         $("#message").html(json.info).show().slideUp(1500);
         $("#search_result").empty().append(json.data).show();
     }
 
 }
 
-function callback_index_search(json) {    
-    if(0==json.status){       
+function callback_index_search(json) {
+    if(0==json.status){
         $("#message").html(json.info).show();
-    }else{       
+    }else{
         $("#message").html(json.info).show().slideUp(1500);
         $("#index_result").empty().append(json.data).show();
     }

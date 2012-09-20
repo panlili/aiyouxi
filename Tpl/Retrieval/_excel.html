@@ -1,0 +1,60 @@
+{__NOLAYOUT__}
+<meta charset="utf-8" />
+<style type="text/css">
+    table{border:1px solid black;}
+    th,td{border:1px solid black;}
+</style>
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>物资编号</th>
+            <th>物资</th>
+            <th>物资状态</th>
+            <th>捐赠日期</th>
+            <th>捐赠人</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>捐赠人编号</th>
+            <th>收据编号</th>
+            <th>出库日期</th>
+            <th>出库领取人</th>
+            <th>受捐家庭</th>
+            <th>家庭代表</th>
+            <th>家庭代表证件</th>
+            <th>家庭代表性别</th>
+            <th>家庭代表电话</th>
+            <th>地址</th>
+            <th>领物编号</th>
+            <th>领物日期</th>
+            <th>经手人</th>
+            <th>审核人</th>
+        </tr>
+    </thead>
+    <tbody>
+    <volist name="list" id="each">
+        <tr>
+            <td>{$each.goodserial}</td>
+            <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
+            <td>{$each.step}</td>
+            <td>{$each.donatetime|date="Y-m-d",###}</td>
+            <td>{$each.donatername}</td>
+            <td>{$each.donatersex}</td>
+            <td>{$each.donaterphone}</td>
+            <td>{$each.donaterserial}</td>
+            <td>{$each.receipt}</td>
+            <td>{$each.checkouttime|date="Y-m-d",###}</td>
+            <td>{$each.checkoutman|get_user_truename_by_id}</td>
+            <td>{$each.familyserial}</td>
+            <td>{$each.agent}</td>
+            <td>{$each.idcard}</td>
+            <td>{$each.agentsex}</td>
+            <td>{$each.familyphone}</td>
+            <td>{$each.address}</td>
+            <td>{$each.recordserial}</td>
+            <td>{$each.distributeday}</td>
+            <td>{$each.handman|get_user_truename_by_id}</td>
+            <td>{$each.verifier|get_user_truename_by_id}</td>
+        </tr>
+    </volist>
+</tbody>
+</table>

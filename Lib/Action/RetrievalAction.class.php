@@ -30,7 +30,7 @@ class RetrievalAction extends BaseAction {
             foreach ($queryArray as $key => $value) {
                 if ($key != "donatetimestart" && $key != "donatetimeend") {
                     if (!empty($value)) {
-                        $map[$key] = array("like", "%" . $value . "%");
+                        $map[$key] = array("like", "%" . trim($value) . "%");
                     }
                 }
 
@@ -40,14 +40,29 @@ class RetrievalAction extends BaseAction {
                     $end = $value;
             }
             $map["donatetime"] = array('between', array($start, $end));
-
+            session("querytext", $map);
             //检索结果的处理
             $result = $m_fullgood->where($map)->select();
+            if (count($result) == 0) {
+                $this->assign("noresult");
+            }
             $this->assign("result", $result);
             $this->display();
-        }else {
+        } else {
             $this->redirect("Retrieval/index");
         }
+    }
+
+    public function toexcel() {
+        if (!isset($_SESSION["querytext"]))
+            $this->redirect("Retrieval/index");
+
+        $query = session("querytext");
+        $list = M("Fullgood")->where($query)->select();
+        header("Content-type:application/vnd.ms-excel");
+        header("Content-Disposition:attachment;filename=goods.xls");
+        $this->assign("list", $list);
+        echo $this->fetch("_excel");
     }
 
 }
