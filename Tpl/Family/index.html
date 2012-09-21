@@ -1,8 +1,8 @@
 <fieldset class="search_ayx">
 <legend>受捐家庭信息查询：</legend>
-<form id="search_form">
+<form id="search_form" onkeypress="if(event.keyCode=='13')return false;">
     <p><label><select name="search_field"><option value="serial">编号</option><option value="agent">家庭代表</option><option value="phone">联系电话</option><option value="address">地址</option><option value="handman">经手人</option></select></label></p>
-    <p><label><input type="text" name="search_key" class="search_key"/></label></p>
+    <p><label><input type="text" name="search_key" class="search_key" onkeydown="if(event.keyCode=='13')add_data('__APP__/Family/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
     <p><label><input type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Family/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
 </form>
 </fieldset>

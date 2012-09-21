@@ -5,17 +5,17 @@ function resetwindow(){
 }
 //用户查询的时候在表单输入判断是否输入了回车，如果回车执行响应的函数
 
-$(document).ready(function(){
-    // 在这里写你的代码...
-    $("body").keydown(function(){
-        //alert("kick");
-        var keyinput=window.event.keyCode;
-        if(keyinput == 13){
-//        alert("go");
-        $("input#btnsearch").click();        
-        }
-    });//不起作用？为什么呢
-});
+//$(document).ready(function(){
+//    // 在这里写你的代码...
+//    $("body").keydown(function(){
+//        //alert("kick");
+//        var keyinput=window.event.keyCode;
+//        if(keyinput == 13){
+//        //alert("go");
+//        //$("#btnsearch").click();        
+//        }
+//    });//不起作用？为什么呢
+//});
 
 function setNumber(parent) {
     var i=1;

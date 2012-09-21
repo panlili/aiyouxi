@@ -1,8 +1,8 @@
 <fieldset class="search_ayx">
     <legend>物资信息查询：</legend>
-    <form id="search_form">
+    <form id="search_form" onkeypress="if(event.keyCode=='13')return false;">
         <p><label><select name="search_field"><option value="serial">编号</option><option value="name">物资名</option><option value="step">捐赠状态</option><option value="handman">经手人</option></select></label></p>
-        <p><label><input type="text" name="search_key" class="search_key" onkeypress="checkenter();"/></label></p>
+        <p><label><input type="text" name="search_key" class="search_key" onkeydown="if(event.keyCode=='13')add_data('__APP__/Good/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
         <p><label><input type="button" title="点击搜索" value="" class="subbutton" onclick="add_data('__APP__/Good/unitSearch',$('#search_form').serialize(),callback_search);"/></label></p>
     </form>
 </fieldset>
