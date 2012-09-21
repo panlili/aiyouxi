@@ -304,7 +304,7 @@ function callback_index_search(json) {
     if(0==json.status){
         $("#message").html(json.info).show();
         $("#index_result").empty().append("ajax回调发生错误").show();
-    }else{  
+    }else{
         if(json.data==""){
             $("#index_result").empty().append("没有命中记录，请检查编号输入是否正确，并重新输入。").show();
         }else{

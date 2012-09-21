@@ -18,8 +18,7 @@
                 <p><label>&nbsp;</label>终与<input type="text" name="donatetimeend"  style="width: 118px;"/></p>
             </td>
             <td>
-                <p><label>领用日期：</label>始与<input type="text" name="distributedaystart" style="width:118px;" /></p>
-                <p><label>&nbsp;</label>终与<input type="text" name="distributedayend"  style="width: 118px;"/></p>
+                <p><label>领用日期：</label><input type="text" name="distributeday" /></p>
                 <p><label>领用批号：</label><input type="text" name="recordserial"/></p>
                 <p><label>领用家庭编号：</label><input type="text" name="familyserial"/></p>
                 <p><label>家庭代表：</label><input type="text" name="agent"/></p>
@@ -39,7 +38,7 @@
     $(function(){
         $("input:submit,input:reset").button();
 
-        $("input[name=donatetimestart],input[name=donatetimeend],input[name=distributedaystart],input[name=distributedayend]").datepicker({
+        $("input[name=donatetimestart],input[name=donatetimeend],input[name=distributeday]").datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "yy-mm-dd"

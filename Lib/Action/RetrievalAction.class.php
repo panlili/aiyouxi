@@ -28,8 +28,6 @@ class RetrievalAction extends BaseAction {
             $map = array();
             $donatetimestart = strtotime("2004-01-01");
             $donatetimeend = strtotime("2030-01-01");
-            $distributedaystart = "2004-01-01";
-            $distributedayend = "2030-01-01";
             foreach ($queryArray as $key => $value) {
                 if ($key != "donatetimestart" && $key != "donatetimeend" && $key != "distributedaystart" && $key != "distributedayend") {
                     if (!empty($value)) {
@@ -41,15 +39,9 @@ class RetrievalAction extends BaseAction {
                     $donatetimestart = $value;
                 if ($key == "donatetimeend" && !empty($value))
                     $donatetimeend = $value;
-
-                if ($key == "distributedaystart" && !empty($value))
-                    $distributedaystart = $value;
-                if ($key == "distributedayend" && !empty($value))
-                    $distributedayend = $value;
             }
 
             $map["donatetime"] = array('between', array($donatetimestart, $donatetimeend));
-            $map["distributeday"] = array('between', array($distributedaystart, $distributedayend));
             session("querytext", $map);
             //检索结果的处理
             $result = $m_fullgood->where($map)->select();
