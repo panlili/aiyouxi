@@ -185,11 +185,10 @@ body{text-align:center;
 .common_table th{
     height: 25px;
     border:1px solid #b2b2b2;
-    padding:3px 7px 2px 7px;
     font-size:13px;
     padding-top:5px;
     padding-bottom:4px;
-    background-color:#b2b2b2;
+    background-color:#176ECE;
     color:#ffffff;
 }
 .common_table tr td{

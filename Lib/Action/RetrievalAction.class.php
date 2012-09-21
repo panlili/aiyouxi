@@ -18,28 +18,38 @@ class RetrievalAction extends BaseAction {
             //这两个key的值是模块名和方法名
             unset($queryArray[0]);
             unset($queryArray[1]);
+            //捐赠日期在数据库中是time形式
             if (!empty($queryArray["donatetimestart"]))
-                $queryArray["donatetimestart"] = strtotime($queryArray["donatetimestart"]." 00:00:00");
+                $queryArray["donatetimestart"] = strtotime($queryArray["donatetimestart"] . " 00:00:00");
             if (!empty($queryArray["donatetimeend"]))
-                $queryArray["donatetimeend"] = strtotime($queryArray["donatetimeend"]." 23:59:59");
+                $queryArray["donatetimeend"] = strtotime($queryArray["donatetimeend"] . " 23:59:59");
 
             //检索条件的构建
             $map = array();
-            $start = strtotime("2004-01-01");
-            $end = strtotime("2030-01-01");
+            $donatetimestart = strtotime("2004-01-01");
+            $donatetimeend = strtotime("2030-01-01");
+            $distributedaystart = "2004-01-01";
+            $distributedayend = "2030-01-01";
             foreach ($queryArray as $key => $value) {
-                if ($key != "donatetimestart" && $key != "donatetimeend") {
+                if ($key != "donatetimestart" && $key != "donatetimeend" && $key != "distributedaystart" && $key != "distributedayend") {
                     if (!empty($value)) {
                         $map[$key] = array("like", "%" . trim($value) . "%");
                     }
                 }
 
                 if ($key == "donatetimestart" && !empty($value))
-                    $start = $value;
+                    $donatetimestart = $value;
                 if ($key == "donatetimeend" && !empty($value))
-                    $end = $value;
+                    $donatetimeend = $value;
+
+                if ($key == "distributedaystart" && !empty($value))
+                    $distributedaystart = $value;
+                if ($key == "distributedayend" && !empty($value))
+                    $distributedayend = $value;
             }
-            $map["donatetime"] = array('between', array($start, $end));
+
+            $map["donatetime"] = array('between', array($donatetimestart, $donatetimeend));
+            $map["distributeday"] = array('between', array($distributedaystart, $distributedayend));
             session("querytext", $map);
             //检索结果的处理
             $result = $m_fullgood->where($map)->select();
