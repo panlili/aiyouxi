@@ -2,7 +2,7 @@
 
 class BaseAction extends Action {
 
-    const RECORDS_ONE_PAGE = 25;
+    const RECORDS_ONE_PAGE = 5;
 
     public function _initialize() {
         if (!session("?truename") || !session("?uid"))
@@ -103,22 +103,27 @@ class BaseAction extends Action {
             }
             $tmp = $_SESSION['sKey'];
             $count = $model->where($tmp)->count();
+            if ($count == 0) {
+                $this->ajaxReturn("", "数据获取成功", 1);
+            } else {
 
-            import("@.ORG.Pagea");
-            $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=1', 'search_result', 'pages1');
-            $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();
-            $p->setConfig('header', '条记录');
-            $p->setConfig('prev', "<");
-            $p->setConfig('next', '>');
-            $p->setConfig('first', '<<');
-            $p->setConfig('last', '>>');
-            $page = $p->show();
 
-            $this->assign("page", $page);
-            $this->assign("datalist", $data);
+                import("@.ORG.Pagea");
+                $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=1', 'search_result', 'pages1');
+                $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();
+                $p->setConfig('header', '条记录');
+                $p->setConfig('prev', "<");
+                $p->setConfig('next', '>');
+                $p->setConfig('first', '<<');
+                $p->setConfig('last', '>>');
+                $page = $p->show();
 
-            $content = $this->fetch("_" . strtolower($action_name));
-            $this->ajaxReturn($content, "数据获取成功", 1);
+                $this->assign("page", $page);
+                $this->assign("datalist", $data);
+
+                $content = $this->fetch("_" . strtolower($action_name));
+                $this->ajaxReturn($content, "数据获取成功", 1);
+            }
         } else {
             $this->redirect($this->getActionName() . "/index");
         }

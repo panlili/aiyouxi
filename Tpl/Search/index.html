@@ -11,9 +11,9 @@
 
     <style type="text/css">
         body{
-            background-color:  #ccc;
+            background-color:  #ccc;height: 100%;
         }
-        #searchcontainer{
+        #searchcontainer{            
             width: 955px;height: 620px;margin-left: auto;margin-right: auto;background:url(__IMAGE__/background.png) no-repeat;text-align: left;display: inline-block;
 
         }
@@ -35,7 +35,7 @@
             height: 20px;width: 955px;background-color:  #092247;color: #fff;font-size: 10pt;margin-left: auto;margin-right: auto;text-align: right;  
             display: inline-block;line-height: 20px;
         }
-        #indexheader{
+        #indexheader{           
             height:35px; width: 955px;background-color:  #092247;color: #fff;font-size: 11pt;
             margin-left: auto;margin-right: auto;line-height: 35px;display: inline-block;text-align: left;
         }
@@ -61,16 +61,20 @@
         function cleanresult(){
             $("#index_result").empty().hide();
         }
+        function pagecenter(){
+            var h=document.body.scrollHeight-675;//alert(h);
+            $("#indexheader").css("margin-top",h/2);
+        }
         
     </script>
 </head>
-<body>
+<body onload="pagecenter()" onresize="pagecenter()" >
     <div id="indexheader"><pre>“义仓”慈善捐赠流程管理系统&nbsp;&nbsp;&nbsp; </pre> <a href="__APP__/Search/login">管理登录</a></div>
     <div id="searchcontainer">      
         <div id="searchlogo"><img src="__IMAGE__/logo.png"></img></div>
 
         <div id="wuzisearch">
-            <pre><form id="s_form" onkeypress="if(event.keyCode=='13')return false;"><input id="searchkey" name="searchkey" type="text" value="请输入查询的物资编号" onfocus="this.value='';cleanresult()" onkeydown="if(event.keyCode=='13')post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);"/></form><button id="btnsearch" onclick="post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);" title="点击搜索" ></button></pre></div>
+            <pre><form id="s_form" onkeypress="if(event.keyCode=='13')return false;"><input id="searchkey" name="searchkey" type="text" value="请输入查询的编号" onfocus="this.value='';cleanresult()" onkeydown="if(event.keyCode=='13')post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);"/></form><button id="btnsearch" onclick="post_data('__APP__/Search/search',$('#s_form').serialize(),callback_index_search);" title="点击搜索" ></button></pre></div>
 
         <div id="index_result"></div>
     </div>

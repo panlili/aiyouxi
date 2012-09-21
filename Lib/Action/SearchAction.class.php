@@ -10,18 +10,49 @@ class SearchAction extends Action {
         $this->display();
     }
 
-    //公共查询
+    //公共查询,先查物资，如果没有命中则查捐赠人
     public function search() {
         if ($this->isAjax()) {
             load('extend');
-            $search_key = trim($this->_param("searchkey"));
+            
+            $search_key_tmp = trim($this->_param("searchkey"));
+            if ($search_key_tmp != "") {
+                $_SESSION['search_key'] = $search_key_tmp;
+            }
+            $search_key = $_SESSION['search_key'];
             //$search_key="SF";
             $map['goodserial'] = array('EQ', $search_key);
             $model = M("Fullgood");
             $result = $model->where($map)->select();
             if ($result == null) {
-                $this->ajaxReturn("","没有命中记录",1);
-            } else {
+                //查询物资结果没有命中，则查捐赠人
+                $condition['donaterserial'] = array('EQ', $search_key);
+                $count = $model->where($condition)->count();
+                if ($count == 0) {
+                    $this->ajaxReturn("", "没有命中记录", 1);
+                } else {//捐赠人命中，输出捐赠人相关信息
+                
+                    $donatername = $model->where($condition)->field("donatername,donatersex")->find();
+
+                    import("@.ORG.Pagea");
+                    $p = new Pagea($count,10, '', 'index_result', 'pages1');
+                    $result = $model->where($condition)->limit($p->firstRow . ',' . $p->listRows)->select();
+                    $p->setConfig('header', '条记录');
+                    $p->setConfig('prev', "<");
+                    $p->setConfig('next', '>');
+                    $p->setConfig('first', '<<');
+                    $p->setConfig('last', '>>');
+                    $page = $p->show();
+
+                    $this->assign("page", $page); //page code
+                    $this->assign("donaterserial", $search_key);
+                    $this->assign("donatersex", $donatername["donatersex"]);
+                    $this->assign("donatername", $donatername["donatername"]);
+                    $this->assign("index_result2", $result);
+                    $content = $this->fetch("_result");
+                    $this->ajaxReturn($content, "", 1);
+                }
+            } else {//物资编号命中，输出物资相关信息
                 $this->assign("index_result", $result);
                 $content = $this->fetch("_result");
                 $this->ajaxReturn($content, "数据获取成功", 1);

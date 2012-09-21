@@ -304,8 +304,14 @@ function callback_search(json){
     if(0==json.status){
         $("#message").html(json.info).show();
     }else{
-        $("#message").html(json.info).show().slideUp(1500);
-        $("#search_result").empty().append(json.data).show();
+        if(json.data==""){
+            $("#search_result").empty().append("没有命中记录，请重新搜索。").show();
+            
+        }else{
+            $("#message").html(json.info).show().slideUp(1500);
+            $("#search_result").empty().append(json.data).show();
+        }
+        
     }
 
 }
@@ -316,7 +322,7 @@ function callback_index_search(json) {
         $("#index_result").empty().append("ajax回调发生错误").show();
     }else{  
         if(json.data==""){
-            $("#index_result").empty().append("没有命中记录，请检查物资编号输入是否正确，或者重新输入。").show();
+            $("#index_result").empty().append("没有命中记录，请检查编号输入是否正确，并重新输入。").show();
             
         }else{
             $("#message").html(json.info).show().slideUp(1500);
