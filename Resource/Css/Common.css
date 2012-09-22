@@ -244,6 +244,14 @@ color: #000;
     border:solid 1px;
     cursor: pointer;
 }
+.search_ayx .subbutton1{
+    width: 62px;
+    height: 27px;
+    margin-left: 3px;
+    /*background-image: url(../Image/search-but-1.gif);*/
+    border:solid 1px;
+    cursor: pointer;
+}
 .search_ayx p select{
     height: 25px;
 }

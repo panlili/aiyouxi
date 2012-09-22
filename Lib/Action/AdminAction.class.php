@@ -38,7 +38,38 @@ class AdminAction extends BaseAction {
     }
 
     public function analyse() {
+
         $this->display();
+    }
+
+    public function tongji() {
+        if ($this->isAjax()) {
+            //统计特定时间段的工作量，捐赠次数等。
+            $analyse_time1 = $this->_param("analyse_time1");
+            $analyse_time2 = $this->_param("analyse_time2");
+            if (!empty($analyse_time1))
+                $analyse_time1 = strtotime($analyse_time1 . " 00:00:00");
+            if (!empty($analyse_time2))
+                $analyse_time2 = strtotime($analyse_time2 . " 23:59:59");
+            
+            $model=D("fullgood");
+            //接收物资数量
+            $map["donatetime"]=array("between",array($analyse_time1,$analyse_time2));
+            $get_wuzi=$model->where($map)->count();
+            $map=array();
+            //发放物资的数量
+            $map["checkouttime"]=array("between",array($analyse_time1,$analyse_time2));
+            $checkout_wuzi=$model->where($map)->count();
+            $map=array();
+
+            $this->assign("get_wuzi", $get_wuzi);   //接收物资的数量
+            $this->assign("checkout_wuzi", $checkout_wuzi);  //发放物资的数量
+
+            $content = $this->fetch("_result");
+            $this->ajaxReturn($content, "数据获取成功", 1);
+        }else {
+            
+        }
     }
 
     /**
