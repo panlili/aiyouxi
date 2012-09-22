@@ -47,7 +47,7 @@
             </volist>
             </tbody>
         </table>
-        {$page1}
+        <div id="page">{$page1}</div>
     </div>
     <div id="tabs-2">
         请从列表选择数据!
@@ -82,7 +82,7 @@
             </volist>
             </tbody>
         </table>
-        {$page2}
+        <div id="page">{$page2}</div>
     </div>
     <div id="tabs-4">
         <table class="common_table">
@@ -118,13 +118,18 @@
             </volist>
             </tbody>
         </table>
-        {$page3}
+        <div id="page">{$page3}</div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function(){
         $("#tabs").tabs();
+        $("#page a").button().css({
+            "margin-right": "0",
+            "font-size": "13px",
+            "padding": 0
+        });
 
         $("a.change").qtip({
             content: {text:"点击修改物资数据"},

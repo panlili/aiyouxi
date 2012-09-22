@@ -21,4 +21,14 @@
     </volist>
 </tbody>
 </table>
-{$page}
+<div id="page">{$page}</div>
+
+<script typ="text/javascript">
+    $(function(){
+        $("#page a").button().css({
+            "margin-right": "0",
+            "font-size": "13px",
+            "padding": 0
+        });
+    });
+</script>

@@ -50,16 +50,15 @@
         </tr>
         <volist name="index_result2" id="each">
             <tr>
-                <td>                   
+                <td>
                     <p><b style="color:orangered;">所捐物资名：</b>{$each.goodname}&nbsp;&nbsp;<b style="color:orangered;">捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}&nbsp;&nbsp;<b style="color:orangered;">状态：</b>{$each.step}</p>
             <p></p>
 
             </td>
             </tr>
-            
+
         </volist>
 
     </table>
-    <div class="green-black" id="pages1">
-        {$page}</div>
+    <div class="green-black" id="pages1">{$page}</div>
 </present>

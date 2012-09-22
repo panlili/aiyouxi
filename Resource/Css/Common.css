@@ -144,11 +144,11 @@ body{text-align:center;
 
 #rightTop li{
     float:left;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .basic-button {
-    width: 158px;
+    width: 145px;
     height: 30px;
     color: rgb(0, 0, 0);
     font-family: arial;
