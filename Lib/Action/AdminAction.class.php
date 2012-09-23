@@ -38,7 +38,6 @@ class AdminAction extends BaseAction {
     }
 
     public function analyse() {
-
         $this->display();
     }
 
@@ -51,16 +50,16 @@ class AdminAction extends BaseAction {
                 $analyse_time1 = strtotime($analyse_time1 . " 00:00:00");
             if (!empty($analyse_time2))
                 $analyse_time2 = strtotime($analyse_time2 . " 23:59:59");
-            
-            $model=D("fullgood");
+
+            $model = D("fullgood");
             //接收物资数量
-            $map["donatetime"]=array("between",array($analyse_time1,$analyse_time2));
-            $get_wuzi=$model->where($map)->count();
-            $map=array();
+            $map["donatetime"] = array("between", array($analyse_time1, $analyse_time2));
+            $get_wuzi = $model->where($map)->count();
+            $map = array();
             //发放物资的数量
-            $map["checkouttime"]=array("between",array($analyse_time1,$analyse_time2));
-            $checkout_wuzi=$model->where($map)->count();
-            $map=array();
+            $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));
+            $checkout_wuzi = $model->where($map)->count();
+            $map = array();
 
             $this->assign("get_wuzi", $get_wuzi);   //接收物资的数量
             $this->assign("checkout_wuzi", $checkout_wuzi);  //发放物资的数量
@@ -68,7 +67,7 @@ class AdminAction extends BaseAction {
             $content = $this->fetch("_result");
             $this->ajaxReturn($content, "数据获取成功", 1);
         }else {
-            
+
         }
     }
 
@@ -87,6 +86,28 @@ class AdminAction extends BaseAction {
                 $this->ajaxReturn($user_id, "数据修改成功", 1);
             } else {
                 $this->error("数据修改失败");
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
+    //修改用户密码
+    public function changePassword() {
+        if ($this->isAjax()) {
+            $newps = md5($this->_param("newps"));
+            $oldps = md5($this->_param("oldps"));
+
+            //当前登陆用户的id
+            $userId = session("uid");
+            if (M("User")->where("id='$userId'")->getField("password") != $oldps) {
+                $this->error("原密码错误！");
+            } else {
+                if (D("User")->where("id='$userId'")->setField("password", $newps)) {
+                    $this->success("密码修改成功！");
+                } else {
+                    $this->error("修改失败，可能原因：(1)新旧密码相同,(2)写入数据库失败！");
+                }
             }
         } else {
             $this->redirect("Search/index");

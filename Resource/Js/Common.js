@@ -66,6 +66,14 @@ function delete_data(path,model,id,callback){
     },callback,"JSON");
 }
 
+//修改用户密码
+function change_password(path,oldps,newps,callback){
+    $.post(path,{
+        oldps:oldps,
+        newps:newps
+    },callback,"JSON");
+}
+
 /* ajax操作的回调函数 */
 
 //User相关
@@ -110,6 +118,15 @@ function callback_edit_user(json){
     }else{
         $("#message").html(json.info).show().slideUp(1500);
         $("#tabs-3").html("数据修改成功，刷新页面后进入数据列表能看到修改后的数据。");
+    }
+}
+
+function callback_change_password(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        alert(json.info);
+        window.location.reload();
     }
 }
 
