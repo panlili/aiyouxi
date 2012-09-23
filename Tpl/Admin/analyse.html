@@ -1,8 +1,8 @@
 <fieldset class="search_ayx" style="width: 450px;">
     <legend>信息统计分析：</legend>
     <form id="search_form" onkeypress="if(event.keyCode=='13')return false;">
-        <p><label>从<input type="text" name="analyse_time1" class="search_key"/></label></p>
-        <p><label>到<input type="text" name="analyse_time2" class="search_key" onkeydown="if(event.keyCode=='13')add_data('__APP__/Admin/tongji',$('#search_form').serialize(),callback_search);"/></label></p>
+        <p><label>从:</label><input type="text" name="analyse_time1" class="search_key"/></p>
+        <p><label>到:</label><input type="text" name="analyse_time2" class="search_key" onkeydown="if(event.keyCode=='13')add_data('__APP__/Admin/tongji',$('#search_form').serialize(),callback_search);"/></p>
         <p><label><input id="btnsearch" type="button" title="统计" value="统计" class="subbutton1" onclick="add_data('__APP__/Admin/tongji',$('#search_form').serialize(),callback_search);"/></label></p>
     </form>
 </fieldset>
