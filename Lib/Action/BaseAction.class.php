@@ -5,8 +5,66 @@ class BaseAction extends Action {
     const RECORDS_ONE_PAGE = 5;
 
     public function _initialize() {
-        if (!session("?truename") || !session("?uid"))
+        //echo MODULE_NAME;echo ACTION_NAME;
+        if (!session("?truename") || !session("?uid")) {
             $this->redirect("Search/index");
+        } else {
+            $user_hole = session("right");
+            $flag = $this->check_user_right($user_hole, MODULE_NAME, ACTION_NAME);
+            if($flag==0){
+                //echo $flag;
+                $this->error("没有执行操作的权限");                
+            }
+        }
+    }
+
+    //根据用户角色判断用户权限
+    public function check_user_right($user_hole, $modulename, $actionname) {
+        $user_hole = 0;
+        //注意，配置数组里面的方法名应该全部小写。因为ACTION_NAME获取的字符串是全部小写的。
+        $right_list = array(
+            "0" => array(
+                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+                "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
+                "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
+                "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
+                "Retrieval"=>array("index","query","toexcel","add","geteditform","edit","changestatus","unitsearch")
+                //"BaseAction"=>array("unitSearch"),
+            ),
+            "1" => array(
+               "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+                "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
+                "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
+                "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
+                "Retrieval"=>array("index","query","toexcel","add","geteditform","edit","changestatus","unitsearch")
+            ),
+            "2"=>array(
+                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+                "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
+                "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
+                "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
+                "Retrieval"=>array("index","query","toexcel","add","geteditform","edit","changestatus","unitsearch")
+            )
+        );
+        $flag = 0;
+//        echo $user_hole;        echo $modulename;        echo $actionname;
+
+        if (array_key_exists($user_hole, $right_list)) {
+            $right_list_module=$right_list[$user_hole];
+            if(array_key_exists($modulename,$right_list_module)){
+                $right_list_action=$right_list_module[$modulename];
+                if(in_array($actionname,$right_list_action)){
+                    $flag=1;
+                }  else {
+                    $flag=0;
+                }
+            }else{
+                $flag=0;
+            }
+        } else {
+            $flag = 0;
+        }
+        return $flag;  //返回结果，1表示合法，0表示非法
     }
 
     public function _empty() {
