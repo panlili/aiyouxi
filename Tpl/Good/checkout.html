@@ -9,15 +9,15 @@
                 <tr>
                     <td style="width:15%">
                         请扫描物资条码：
-                        <textarea name="" rows="25" cols="20" style="overflow: auto"></textarea>
+                        <textarea name="" rows="25" cols="20" style="overflow: auto" tabindex="0"></textarea>
                     </td>
                     <td style="vertical-align: top;">
                         <p style="text-align: left;margin-bottom:5px;">
                             出库领取人:<php>echo user_select("checkoutman");</php>
             <input type="button" value="出库所选" id="checkout"/>
             </p>
-            <table id="checkoutlist" class="common_table">
-                <!-- 根据左侧扫描的条码获取物资数据的tr -->
+            <table class="common_table">
+                
                 <thead>
                     <tr>
                         <th>操作</th><th>序号</th>
@@ -27,6 +27,7 @@
                         <th>库存状态</th><th>经手人</th>
                     </tr>
                 </thead>
+                <tbody id="checkoutlist"> </tbody>
             </table>
             </td>
             </tr>
