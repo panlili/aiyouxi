@@ -9,22 +9,21 @@ class BaseAction extends Action {
         if (!session("?truename") || !session("?uid")) {
             $this->redirect("Search/index");
         } else {
-            $user_hole = session("right");
-            $flag = $this->check_user_right($user_hole, MODULE_NAME, ACTION_NAME);
+            $user_hole = session("right");//echo $user_hole;
+            $flag = $this->check_user_right($user_hole, MODULE_NAME, ACTION_NAME);//echo $flag;
             if($flag==0){
-                //echo $flag;
+                
                 $this->error("没有执行操作的权限");                
             }
         }
     }
 
     //根据用户角色判断用户权限
-    public function check_user_right($user_hole, $modulename, $actionname) {
-        $user_hole = 0;
+    protected function check_user_right($user_hole, $modulename, $actionname) {        
         //注意，配置数组里面的方法名应该全部小写。因为ACTION_NAME获取的字符串是全部小写的。
         $right_list = array(
             "0" => array(
-                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
+                //"Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
                 "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
                 "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
                 "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
@@ -39,7 +38,7 @@ class BaseAction extends Action {
                 "Retrieval"=>array("index","query","toexcel","add","geteditform","edit","changestatus","unitsearch")
             ),
             "2"=>array(
-                //"Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
+                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
                 "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
                 "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
                 "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
