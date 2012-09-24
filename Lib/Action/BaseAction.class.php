@@ -4,15 +4,18 @@ class BaseAction extends Action {
 
     const RECORDS_ONE_PAGE = 25;
 
-    public function _initialize() {        
+    public function _initialize() {
         if (!session("?truename") || !session("?uid")) {
             $this->redirect("Search/index");
         } else {
-            $user_hole = session("right"); 
-            $flag = $this->check_user_right($user_hole, MODULE_NAME, ACTION_NAME); 
-            if ($flag == 0) {
-
-                $this->error("没有执行操作的权限");
+            if (session("?right")) {
+                $user_hole = session("right");
+                $flag = $this->check_user_right($user_hole, MODULE_NAME, ACTION_NAME);
+                if (0 == $flag) {
+                    $this->error("您没有执行此操作的权限！");
+                }
+            } else {
+                $this->redirect("Search/login");
             }
         }
     }
@@ -21,31 +24,41 @@ class BaseAction extends Action {
     protected function check_user_right($user_hole, $modulename, $actionname) {
         //注意，配置数组里面的方法名应该全部小写。因为ACTION_NAME获取的字符串是全部小写的。
         $right_list = array(
+            //普通工作人员
             "0" => array(
                 "Admin" => array("changepassword"),
-                "Donater" => array("index", "donaters", "getdonaterlist", "add",  "edit", "unitsearch"),
-                "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist", "add", "geteditform", "unitsearch"),
-                "Good" => array("index", "goods", "checkin", "checkout", "getcheckoutgood", "docheckout", "rollback", "endgood", "goods", "getgoodlist", "addrecord", "add", "geteditform", "edit", "unitsearch"),
-                "Retrieval" => array("index", "query", "add","unitsearch")            
+                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit", "unitsearch"),
+                "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist",
+                    "add", "geteditform", "edit", "unitsearch"),
+                "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
+                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "unitsearch"),
+                "Retrieval" => array("index", "query")
             ),
+            //管理员
             "1" => array(
-                "Admin" => array("index","analyse","edit","unitsearch","tongji","changepassword"),
-                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditForm", "edit", "changestatus", "unitsearch"),
-                "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
-                "Good" => array("index", "goods", "checkin", "checkout", "getcheckoutgood", "docheckout", "rollback", "endgood", "goods", "getgoodlist", "addrecord", "add", "geteditform", "edit", "changestatus", "unitsearch"),
-                "Retrieval" => array("index", "query", "toexcel", "add", "geteditform", "edit", "changestatus", "unitsearch")
+                "Admin" => array("index", "analyse", "tongji", "changepassword", "recyle", "recyledata",),
+                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform",
+                    "edit", "changestatus", "unitsearch"),
+                "Family" => array("index", "families", "survey", "getonedetail", "setserial",
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
+                "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
+                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
+                "Retrieval" => array("index", "query", "toexcel")
             ),
+            //超级管理员
             "2" => array(
-                "Admin" => array("index", "users", "recyle", "analyse", "recyledata", "deletedata", "add", "geteditform", "edit", "changestatus", "unitsearch", "tongji","changepassword"),
-                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditForm", "edit", "changestatus", "unitsearch"),
-                "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
-                "Good" => array("index", "goods", "checkin", "checkout", "getcheckoutgood", "docheckout", "rollback", "endgood", "goods", "getgoodlist", "addrecord", "add", "geteditform", "edit", "changestatus", "unitsearch"),
-                "Retrieval" => array("index", "query", "toexcel", "add", "geteditform", "edit", "changestatus", "unitsearch")
+                "Admin" => array("index", "users", "analyse", "tongji", "changestatus", "changepassword",
+                    "recyle", "recyledata", "deletedata", "add", "geteditform", "edit"),
+                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit",
+                    "changestatus", "unitsearch"),
+                "Family" => array("index", "families", "survey", "getonedetail", "setserial",
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
+                "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
+                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
+                "Retrieval" => array("index", "query", "toexcel")
             )
         );
         $flag = 0;
-//        echo $user_hole;        echo $modulename;        echo $actionname;
-
         if (array_key_exists($user_hole, $right_list)) {
             $right_list_module = $right_list[$user_hole];
             if (array_key_exists($modulename, $right_list_module)) {
@@ -61,7 +74,8 @@ class BaseAction extends Action {
         } else {
             $flag = 0;
         }
-        return $flag;  //返回结果，1表示合法，0表示非法
+        //返回结果，1表示合法，0表示非法
+        return $flag;
     }
 
     public function _empty() {

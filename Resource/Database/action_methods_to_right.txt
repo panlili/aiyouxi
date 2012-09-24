@@ -1,0 +1,36 @@
+BaseAction:
+	add, getEditForm, edit, changeStatus, unitSearch
+
+需要进行权限分配的模块和方法
+AdminAction: extends BaseAction
+	self:
+		index, users, analyse, tongji, changeStatus(Override), changePassword, 
+		recyle, recyleData, deleteData
+	extends:
+		add, getEditForm, edit
+	
+	
+DonaterAction: extends BaseAction
+	self:
+		index, donaters, getDonaterList
+	extends:
+		add, getEditForm, edit, changeStatus, unitSearch
+	
+FamilyAction: extends BaseAction
+	self:
+		index, families, survey, getOneDetail, setSerial, getFamilyList
+	extends:
+		add, getEditForm, edit, changeStatus, unitSearch
+	
+GoodAction: extends BaseAction
+	self:
+		index, checkin, add(Override), checkout, getCheckoutGood, doCheckout, 
+		rollback, endgood, goods, getGoodList, addRecord
+	extends:
+		getEditForm, edit, changeStatus, unitSearch
+	
+RetrievalAction: extends BaseAction
+	self:
+		index, query, toexcel
+	extends:
+		
