@@ -16,8 +16,7 @@
                             出库领取人:<php>echo user_select("checkoutman");</php>
             <input type="button" value="出库所选" id="checkout"/>
             </p>
-            <table class="common_table">
-                
+            <table class="common_table">              
                 <thead>
                     <tr>
                         <th>操作</th><th>序号</th>
@@ -27,7 +26,7 @@
                         <th>库存状态</th><th>经手人</th>
                     </tr>
                 </thead>
-                <tbody id="checkoutlist"> </tbody>
+                <tbody id="checkoutlist"></tbody>
             </table>
             </td>
             </tr>
@@ -79,7 +78,7 @@
             }
 
             $.post("__APP__/Good/doCheckout", {checkoutman:checkoutmanId,ids:goodids}, function(data){
-                $("tr#fordelete").fadeOut("fast");
+                $("tr.fordelete").fadeOut("fast");
                 $("#message").html(data.info).show();
             }, "JSON");
         });
