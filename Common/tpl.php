@@ -21,17 +21,17 @@ function right_select($selected = "") {
     $str = "";
     if ("" == $selected) {
         $str = '<select name="right">
-                <option value="0">0级</option>
-                <option value="1">1级</option>
-                <option value="2">2级</option>
+                <option value="0">普通工作人员</option>
+                <option value="1">管理员</option>
+                <option value="2">超级管理员</option>
             </select>';
     } else {
         $str = '<select name="right">
                 <option value=' . $selected . '>' . $selected . '级</option>
                 <option value=' . $selected . '>--修改请重选--</option>
-                <option value="0">0级</option>
-                <option value="1">1级</option>
-                <option value="2">2级</option>
+                <option value="0">普通工作人员</option>
+                <option value="1">管理员</option>
+                <option value="2">超级管理员</option>
             </select>';
     }
     return $str;
