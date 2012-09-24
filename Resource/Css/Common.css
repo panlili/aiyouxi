@@ -10,13 +10,15 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
     margin-top: 0px;
     min-width: 960px;
     max-width: 1440px;
+    
 }
 
 /* 后台 */
 .kkk{
     min-width: 960px;
-    background:url(../image/leftback-1.png);
-    background-repeat: repeat-y;
+    background:url(../image/leftback-1.png) repeat-y left;
+    /*background-repeat: ;*/
+    background:url(../image/content_back.gif) no-repeat right bottom;
 }
 
 #message{
@@ -52,6 +54,7 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
     z-index:10;
     width: 100%;
     border-bottom: 1px solid #bd3f09;
+    background:url(../image/sysname.gif) no-repeat right;
 }
 
 #topContent .logo{
@@ -117,7 +120,8 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
 
 /* 右边内容 */
 #rightContent{
-    float:left;	overflow:hidden; z-index:1;
+    float:left;	overflow:hidden; z-index:1;   
+    
 }
 
 #rightTop{
@@ -163,7 +167,7 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
 /*右下，具体操作的地方*/
 #rightBottom{
     height:100%;
-    margin-top: 10px;
+    margin-top: 10px;    
 }
 
 /*表格样式 */
