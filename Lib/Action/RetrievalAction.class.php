@@ -3,7 +3,7 @@
 class RetrievalAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "检索首页",
+        "index" => "捐赠信息检索",
         "query" => "检索结果"
     );
 

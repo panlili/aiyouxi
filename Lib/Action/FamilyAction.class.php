@@ -3,8 +3,8 @@
 class FamilyAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "家庭首页",
-        "families" => "受捐家庭",
+        "index" => "受捐家庭查询",
+        "families" => "受捐家庭列表",
         "survey" => "困难家庭调研",
     );
 

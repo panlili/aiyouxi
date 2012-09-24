@@ -3,8 +3,8 @@
 class DonaterAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "捐赠者首页",
-        "donaters" => "捐赠者管理"
+        "index" => "捐赠人查询",
+        "donaters" => "捐赠人管理"
     );
 
     public function index() {

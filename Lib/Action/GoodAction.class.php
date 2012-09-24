@@ -3,7 +3,7 @@
 class GoodAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "物资首页",
+        "index" => "物资信息查询",
         "checkin" => "入库登记",
         "checkout" => "出库登记",
         "endgood" => "领用登记",
