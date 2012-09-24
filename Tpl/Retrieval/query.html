@@ -1,11 +1,11 @@
 <present name="noresult">
     <div style="float: left;margin:30px auto auto 50px;text-align: left;font-size: 1.2em;">
-    <p>没有相关结果！可能原因有：</p><br/>
-    <ol style="margin-left: 60px">
-        <li>捐赠者还有没捐赠过物资！</li>
-        <li>受捐家庭还有没领用过物资！</li>
-        <li>没有满足所有条件的物资数据！</li>
-    </ol>
+        <p>没有相关结果！可能原因有：</p><br/>
+        <ol style="margin-left: 60px">
+            <li>捐赠者还有没捐赠过物资！</li>
+            <li>受捐家庭还有没领用过物资！</li>
+            <li>没有满足所有条件的物资数据！</li>
+        </ol>
     </div>
 </present>
 
@@ -23,7 +23,7 @@
                 <th>收据编号</th>
                 <th>受捐家庭</th>
                 <th>家庭代表</th>
-                <th>地址</th>
+                <!--<th>地址</th>-->
                 <th>领物编号</th>
                 <th>领物日期</th>
                 <th>经手人</th>
@@ -43,7 +43,7 @@
                 <td>{$each.receipt}</td>
                 <td>{$each.familyserial}</td>
                 <td>{$each.agent}</td>
-                <td>{$each.address}</td>
+                <!--<td>{$each.address}</td>-->
                 <td>{$each.recordserial}</td>
                 <td>{$each.distributeday}</td>
                 <td>{$each.handman|get_user_truename_by_id}</td>
@@ -52,13 +52,19 @@
         </volist>
         </tbody>
     </table>
-     <a href="__URL__/toexcel" id="toexcel" style="float:right;">导出Excel</a>
+    <div id="page" style="float: left;margin-left: 10px;">{$page}</div>
+    <a href="__URL__/toexcel" id="toexcel" style="float:right;">导出Excel</a>
 </notpresent>
 
 <script type="text/javascript">
     $(function(){
         setNumber();
         $("#toexcel").button();
+        $("#page a").button().css({
+            "margin-right": "0",
+            "font-size": "13px",
+            "padding": 0
+        });
     });
 </script>
 

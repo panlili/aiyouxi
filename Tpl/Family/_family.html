@@ -22,8 +22,12 @@
         </volist>
         </tbody>
     </table>
-    <div class="green-black" id="pages1">
-        {$page}</div>
+    <div class="green-black" id="pages1">{$page}</div>
+    <script type="text/javascript">
+        $(function(){
+            $("#pages1 a").button();
+        });
+    </script>
 </present>
 
 <!-- 新增的用户数据 -->

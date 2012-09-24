@@ -40,7 +40,7 @@
             </volist>
             </tbody>
         </table>
-        {$page}
+        <div id="page">{$page}</div>
     </div>
     <div id="tabs-2">
         <form class="common_form">
@@ -84,6 +84,11 @@
     $(function(){
         $("#tabs").tabs();
         $("input:button,input:reset").button();
+        $("#page a").button().css({
+            "margin-right": "0",
+            "font-size": "13px",
+            "padding": 0
+        });
 
         $("a.change").qtip({
             content: {text:"点击修改家庭数据"},

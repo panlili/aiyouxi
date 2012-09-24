@@ -2,7 +2,7 @@
 
 class BaseAction extends Action {
 
-    const RECORDS_ONE_PAGE = 5;
+    const RECORDS_ONE_PAGE = 25;
 
     public function _initialize() {
         //echo MODULE_NAME;echo ACTION_NAME;
@@ -164,8 +164,6 @@ class BaseAction extends Action {
             if ($count == 0) {
                 $this->ajaxReturn("", "数据获取成功", 1);
             } else {
-
-
                 import("@.ORG.Pagea");
                 $p = new Pagea($count, self::RECORDS_ONE_PAGE, 'type=1', 'search_result', 'pages1');
                 $data = $model->where($tmp)->limit($p->firstRow . ',' . $p->listRows)->select();

@@ -1,2 +1,42 @@
 {__NOLAYOUT__}
 欢迎您，{$truename}。共登陆{$logincount}次，上次登陆时间{$lastlogintime|date="Y-m-d,H:i:s",###}，登陆IP：{$lastloginip}
+[<a href="#" id="changelink">修改密码</a>]
+
+<!-- 修改密码的对话框 -->
+<div id="changeps" style="display: none">
+    <p><label>旧密码：</label><input name="oldpassword" type="password" /></p><br>
+    <p><label>新密码：</label><input name="password" type="text" /></p>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("a#changelink").click(function(event){
+            event.preventDefault();
+            $("#changeps").dialog({
+                autoOpen: false,
+                modal: true,
+                resizable: false,
+                buttons:{
+                    "确认修改":function(){
+                        var oldpassword=$.trim($("input[name=oldpassword]").val());
+                        var newpassword=$.trim($("input[name=password]").val());
+                        if(""==newpassword){
+                            alert("请输入新密码！");
+                            return false;
+                        }
+                        change_password("__APP__/Admin/changePassword",oldpassword,newpassword,callback_change_password);
+                    },
+                    "取消": function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+                    $("input[name=password]").val("")
+                    $("input[name=oldpassword]").val("")
+                }
+            });
+
+            $("#changeps").dialog("open");
+        });
+    });
+</script>

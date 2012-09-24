@@ -14,7 +14,7 @@ class SearchAction extends Action {
     public function search() {
         if ($this->isAjax()) {
             load('extend');
-            
+
             $search_key_tmp = trim($this->_param("searchkey"));
             if ($search_key_tmp != "") {
                 $_SESSION['search_key'] = $search_key_tmp;
@@ -31,11 +31,10 @@ class SearchAction extends Action {
                 if ($count == 0) {
                     $this->ajaxReturn("", "没有命中记录", 1);
                 } else {//捐赠人命中，输出捐赠人相关信息
-                
                     $donatername = $model->where($condition)->field("donatername,donatersex")->find();
 
                     import("@.ORG.Pagea");
-                    $p = new Pagea($count,10, '', 'index_result', 'pages1');
+                    $p = new Pagea($count, 10, '', 'index_result', 'pages1');
                     $result = $model->where($condition)->limit($p->firstRow . ',' . $p->listRows)->select();
                     $p->setConfig('header', '条记录');
                     $p->setConfig('prev', "<");
@@ -104,7 +103,7 @@ class SearchAction extends Action {
             $data['lastloginip'] = get_client_ip();
             $m_user->save($data);
 
-            $this->redirect("Good/index");
+            $this->redirect("Retrieval/index");
         } else {
             $this->error("验证失败或帐号已禁用！");
         }
@@ -114,6 +113,7 @@ class SearchAction extends Action {
         //清除用户信息缓存
         F("login_user" . $_SESSION["uid"], null);
         session(null);
+        session_destroy();
         $this->redirect("Search/index");
     }
 

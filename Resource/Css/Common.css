@@ -1,15 +1,8 @@
 *{margin: 0;padding: 0;}
-
 html,body,#container{height: 100%;}
-/* CSS Document */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p{ padding: 0; margin: 0; }
-
 h1,h2,h3,h4,h5,h6 { font-weight: normal; font-size: 100%; }
-body{text-align:center;
-     margin-left: auto;
-     margin-right: auto;
-     margin-top: 0px;
-}
+body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
 
 #container{
     margin-left: auto;
@@ -18,9 +11,6 @@ body{text-align:center;
     min-width: 960px;
     max-width: 1440px;
 }
-
-/* 前台搜索面CSS*/
-
 
 /* 后台 */
 .kkk{
@@ -63,12 +53,14 @@ body{text-align:center;
     width: 100%;
     border-bottom: 1px solid #bd3f09;
 }
+
 #topContent .logo{
     background:url(../image/logo.png) no-repeat;
     width:85px;
     height:85px;
     margin:5px 0 0 62px;
-    float:left;  }
+    float:left;
+}
 
 #topContent .search {
     background:url(../image/search.png);
@@ -87,6 +79,7 @@ body{text-align:center;
     width:15%;
     padding-bottom: 10px;
 }
+
 #leftContent .letop{
     background:url(../image/seting.png) no-repeat;
     margin:10px 0 0 5px;
@@ -105,8 +98,7 @@ body{text-align:center;
     list-style:none;
     line-height:25px;
 }
-#leftContent ul li{
-}
+
 #leftContent a{
     display: block;
     background:url(../image/bluebackground.png) no-repeat;
@@ -127,7 +119,7 @@ body{text-align:center;
 #rightContent{
     float:left;	overflow:hidden; z-index:1;
 }
-/*右上子菜单*/
+
 #rightTop{
     width: 100%;
     padding-top: 12px;
@@ -144,11 +136,11 @@ body{text-align:center;
 
 #rightTop li{
     float:left;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .basic-button {
-    width: 158px;
+    width: 145px;
     height: 30px;
     color: rgb(0, 0, 0);
     font-family: arial;
@@ -160,6 +152,7 @@ body{text-align:center;
     float: none;
     font-style: normal;
 }
+
 .basic-button span {
     line-height: 30px;
     vertical-align: middle;
@@ -174,8 +167,7 @@ body{text-align:center;
 }
 
 /*表格样式 */
-.common_table
-{
+.common_table{
     margin-bottom: 10px;
     width:100%;
     border-collapse:collapse;
@@ -185,13 +177,13 @@ body{text-align:center;
 .common_table th{
     height: 25px;
     border:1px solid #b2b2b2;
-    padding:3px 7px 2px 7px;
     font-size:13px;
     padding-top:5px;
     padding-bottom:4px;
-    background-color:#b2b2b2;
+    background-color:#176ECE;
     color:#ffffff;
 }
+
 .common_table tr td{
     height: 15px;
     font-size:13px;
@@ -199,12 +191,11 @@ body{text-align:center;
     padding:3px 7px 2px 7px;
 }
 
-
 .common_table tr{
     color:#000000;
 }
-.common_table tr:hover
-{
+
+.common_table tr:hover{
     color:#000000;
     background-color:#EAF2D3;
 }
@@ -212,9 +203,10 @@ body{text-align:center;
 .ui-autocomplete-loading {
     /* background: white url('../Image/ui-anim_basic_16x16.gif') right center no-repeat;  */
 }
+
 /*后台各个模块中的搜索框以及搜索结果标签定义*/
 .search_ayx{
-    width: 300px;
+    width: 330px;
     height: 50px;
     padding: 10px;
     border-color: #b2b2b2;
@@ -222,21 +214,24 @@ body{text-align:center;
     font-size: 11pt;
     margin-left: 20px;
 }
+
 .search_ayx legend{
-/*    border: 1px #b2b2b2;*/
-background-color: #c6d6f6;
-padding: 2px;
-color: #000;
+    padding: 2px;
+    color: #000;
 }
+
 .search_ayx p{
     height: 40px;
     float:left;
+    margin-left: 5px;
 }
+
 .search_ayx p .search_key{
     margin-left: 3px;
     height: 25px;
     border: solid 1px;
 }
+
 .search_ayx .subbutton{
     width: 62px;
     height: 27px;
@@ -245,17 +240,27 @@ color: #000;
     border:solid 1px;
     cursor: pointer;
 }
+
+.search_ayx .subbutton1{
+    width: 62px;
+    height: 27px;
+    margin-left: 3px;
+    border:solid 1px;
+    cursor: pointer;
+}
+
 .search_ayx p select{
     height: 25px;
 }
+
 #search_result{
     /*height: 100px;*/
     width: 95%;
     margin-left: 20px;
     margin-top: 20px;
-    /*background-color: red;*/
     display: none;
 }
+
 .green-black{
     font-size: 10pt;
 }

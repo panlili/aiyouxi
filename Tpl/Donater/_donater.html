@@ -23,8 +23,12 @@
         </volist>
         </tbody>
     </table>
-    <div class="green-black" id="pages1">
-        {$page}</div>
+    <div class="green-black" id="pages1">{$page}</div>
+    <script type="text/javascript">
+        $(function(){
+            $("#pages1 a").button();
+        });
+    </script>
 </present>
 
 <!-- 新增的用户数据 -->
@@ -42,7 +46,7 @@
         <td>{$newdata.sex}</td>
         <td>{$newdata.comment}</td>
         <td>{$newdata.addtime|date="Y-m-d,H:i",###}</td>
-        <td>{$newdata.uptime|date="Y-m-d,H:i",###}</td>
+        <td></td>
         <td>{$newdata.handman|get_user_truename_by_id}</td>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>
