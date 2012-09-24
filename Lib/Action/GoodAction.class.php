@@ -101,10 +101,10 @@ class GoodAction extends BaseAction {
             $serial = $this->_param("serial");
             $m_good = D("Good");
             $data = array("checkoutman" => null, "checkouttime" => null, "step" => 1);
-            if ($m_good->where("serial='$serial'")->setField($data)) {
+            if ($m_good->where("serial='$serial' AND step=2")->setField($data)) {
                 $this->success("条码为：" . $serial . " 的物资撤销出货成功");
             } else {
-                $this->error("无此条码物品");
+                $this->error("无此条码物品或物品非出库状态！");
             }
         } else {
             $this->redirect("Search/index");
