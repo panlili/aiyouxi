@@ -24,7 +24,7 @@ class BaseAction extends Action {
         //注意，配置数组里面的方法名应该全部小写。因为ACTION_NAME获取的字符串是全部小写的。
         $right_list = array(
             "0" => array(
-                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
                 "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
                 "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
                 "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
@@ -32,14 +32,14 @@ class BaseAction extends Action {
                 //"BaseAction"=>array("unitSearch"),
             ),
             "1" => array(
-               "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+               //"Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
                 "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
                 "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
                 "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),
                 "Retrieval"=>array("index","query","toexcel","add","geteditform","edit","changestatus","unitsearch")
             ),
             "2"=>array(
-                "Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch"),
+                //"Admin" => array("index", "users","recyle","analyse","recyledata","deletedata","add","geteditform","edit","changestatus","unitsearch","tongji"),
                 "Donater" => array("index", "donaters","getdonaterList","add","geteditForm","edit","changestatus","unitsearch"),
                 "Family"=>array("index","families","survey","getonedetail","setserial","getfamilylist","add","geteditform","edit","changestatus","unitsearch"),
                 "Good"=>array("index", "goods","checkin","checkout","getcheckoutgood","docheckout","rollback","endgood","goods","getgoodlist","addrecord","add","geteditform","edit","changestatus","unitsearch"),

@@ -79,7 +79,7 @@ class AdminAction extends BaseAction {
             $content = $this->fetch("_result");
             $this->ajaxReturn($content, "数据获取成功", 1);
         }else {
-
+            $this->redirect("Search/index");
         }
     }
 
