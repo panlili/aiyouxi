@@ -39,16 +39,16 @@ class AdminAction extends BaseAction {
             //接收物资数量
             $map["donatetime"] = array("between", array($analyse_time1, $analyse_time2));
             $get_wuzi = $model->where($map)->count();
-            $get_wuzi_month = $model->field(array("EXTRACT(MONTH from NOW(donatetime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-            $get_wuzi_week = $model->field(array("EXTRACT(WEEK from NOW(donatetime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-            $get_wuzi_day = $model->field(array("EXTRACT(DAY from NOW(donatetime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
+            $get_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(donatetime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
+            $get_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(donatetime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
+            $get_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(donatetime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
             //发放物资的数量
             $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));
             $checkout_wuzi = $model->where($map)->count();
-            $checkout_wuzi_month = $model->field(array("EXTRACT(MONTH from NOW(checkouttime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-            $checkout_wuzi_week = $model->field(array("EXTRACT(WEEK from NOW(checkouttime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-            $checkout_wuzi_day = $model->field(array("EXTRACT(DAY from NOW(checkouttime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
+            $checkout_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(checkouttime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
+            $checkout_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(checkouttime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
+            $checkout_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(checkouttime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
 
             $this->assign("get_wuzi_month", $get_wuzi_month);
