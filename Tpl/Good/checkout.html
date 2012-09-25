@@ -41,20 +41,24 @@
         </p>
     </div>
 </div>
+
 <script type="text/javascript">
     $(function(){
         $("#tabs").tabs();
         $("input:button").button();
-
+		
         //textarea接受扫描条码，获取数据展示在右侧列表中
         $("textarea").keydown(function(event) {
             if (event.keyCode == 13) {
                 var arr=$.trim($("textarea").val()).split("\n");
                 var goodserial=$.trim(arr[arr.length-1]);
+				$("#message").html("数据获取中......").show();
                 $.get("__APP__/Good/getCheckoutGood", {serial:goodserial}, function(data){
                     if(0==data.status){
+						$("#message").html("").hide();
                         alert(data.info);
                     }else if(1==data.status){
+						$("#message").html("").hide();
                         $("#checkoutlist").append(data.data);
                     }
                 },"JSON");
