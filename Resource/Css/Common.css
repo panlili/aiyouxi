@@ -16,8 +16,6 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
 /* 后台 */
 .kkk{
     min-width: 960px;
-    background:url(../image/leftback-1.png) repeat-y left;
-    /*background-repeat: ;*/
     background:url(../image/content_back.gif) no-repeat right bottom;
 }
 
@@ -53,8 +51,9 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
     overflow:hidden;
     z-index:10;
     width: 100%;
-    border-bottom: 1px solid #bd3f09;
+    border-bottom: 1px solid #F7FBFE;
     background:url(../image/sysname.gif) no-repeat right;
+	background-color: #F7FBFE;
 }
 
 #topContent .logo{
@@ -63,14 +62,6 @@ body{text-align:center;margin-left: auto;margin-right: auto;margin-top: 0px;}
     height:85px;
     margin:5px 0 0 62px;
     float:left;
-}
-
-#topContent .search {
-    background:url(../image/search.png);
-    float:right; margin-right:12px;
-    width:295px;
-    height:35px;
-    margin-top:25px;
 }
 
 /* 左边菜单的 */
