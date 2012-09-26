@@ -32,9 +32,9 @@
             <tr>
                 <td>
                     <h3>受捐信息</h3>
-                    <p><b>受捐家庭编号：</b>{$each.familyserial}</p>
-                    <p><b>受捐家庭代表：</b>{$each.agent|msubstr=0,1,'utf-8',false}<notempty name="each.agentsex"><if condition="$each.agentsex eq '男'">先生<else/>女士</if></notempty></p>
-            <p><b>受捐家庭地址：</b><notempty name="each.agentsex">{$each.address|msubstr=0,13,'utf-8',true}</notempty></p>
+                    <p><b>受助家庭编号：</b>{$each.familyserial}</p>
+                    <p><b>受助家庭代表：</b>{$each.agent|msubstr=0,1,'utf-8',false}<notempty name="each.agentsex"><if condition="$each.agentsex eq '男'">先生<else/>女士</if></notempty></p>
+            <p><b>受助家庭地址：</b><notempty name="each.agentsex">{$each.address|msubstr=0,13,'utf-8',true}</notempty></p>
             </td>
             </tr>
         </table>

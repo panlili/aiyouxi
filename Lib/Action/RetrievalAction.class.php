@@ -75,8 +75,9 @@ class RetrievalAction extends BaseAction {
 
         $query = session("querytext");
         $list = M("Fullgood")->where($query)->select();
+        $filename = auto_charset("物资列表_导出时间_" . date("Y_m_d_H_i_m"), "utf-8", "gbk");
         header("Content-type:application/vnd.ms-excel");
-        header("Content-Disposition:attachment;filename=goods.xls");
+        header("Content-Disposition:attachment;filename=" . $filename . ".xls");
         $this->assign("list", $list);
         echo $this->fetch("_excel");
     }

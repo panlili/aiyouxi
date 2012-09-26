@@ -18,7 +18,7 @@
             <th>收据编号</th>
             <th>出库日期</th>
             <th>出库领取人</th>
-            <th>受捐家庭</th>
+            <th>受助家庭</th>
             <th>家庭代表</th>
             <th>家庭代表性别</th>
             <th>家庭代表电话</th>
@@ -41,17 +41,21 @@
             <td>{$each.donaterphone}</td>
             <td>{$each.donaterserial}</td>
             <td>{$each.receipt}</td>
-            <td>{$each.checkouttime|date="Y-m-d",###}</td>
-            <td>{$each.checkoutman|get_user_truename_by_id}</td>
-            <td>{$each.familyserial}</td>
-            <td>{$each.agent}</td>
-            <td>{$each.agentsex}</td>
-            <td>{$each.familyphone}</td>
-            <td>{$each.address}</td>
-            <td>{$each.recordserial}</td>
-            <td>{$each.distributeday}</td>
-            <td>{$each.handman|get_user_truename_by_id}</td>
-            <td>{$each.verifier|get_user_truename_by_id}</td>
+            <td>
+        <notempty name="each.checkouttime">
+            {$each.checkouttime|date="Y-m-d",###}
+        </notempty>
+        </td>
+        <td>{$each.checkoutman|get_user_truename_by_id}</td>
+        <td>{$each.familyserial}</td>
+        <td>{$each.agent}</td>
+        <td>{$each.agentsex}</td>
+        <td>{$each.familyphone}</td>
+        <td>{$each.address}</td>
+        <td>{$each.recordserial}</td>
+        <td>{$each.distributeday}</td>
+        <td>{$each.handman|get_user_truename_by_id}</td>
+        <td>{$each.verifier|get_user_truename_by_id}</td>
         </tr>
     </volist>
 </tbody>

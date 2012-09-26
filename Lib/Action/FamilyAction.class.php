@@ -3,8 +3,8 @@
 class FamilyAction extends BaseAction {
 
     public static $method_array = array(
-        "index" => "受捐家庭查询",
-        "families" => "受捐家庭列表",
+        "index" => "受助家庭查询",
+        "families" => "受助家庭列表",
         "survey" => "困难家庭调研",
     );
 
@@ -62,7 +62,7 @@ class FamilyAction extends BaseAction {
         }
     }
 
-    //从调研家庭升级为受捐家庭
+    //从调研家庭升级为受助家庭
     public function setSerial() {
         if ($this->isAjax()) {
             $id = $this->_param("id");

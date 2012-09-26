@@ -27,7 +27,7 @@
                 <empty name="each.serial">
                     <a href="#" class="update" id="{$each.id}">升级</a>
                     <else/>
-                    <img src="__IMAGE__/heart.ico" title="已经是受捐家庭"/>
+                    <img src="__IMAGE__/heart.ico" title="已经是受助家庭"/>
                 </empty>
                 </td>
                 <!-- 数据删除不真删除，而是将其status转换为0 -->
@@ -77,7 +77,7 @@
 
 <!-- 设置家庭serial的对话框-->
 <div id="setSerial" style="display: none">
-    <label>分配受捐家庭编号</label><input name="serial" type="text" />
+    <label>分配受助家庭编号</label><input name="serial" type="text" />
 </div>
 
 <script type="text/javascript">
@@ -96,7 +96,7 @@
         });
 
         $("a.update").qtip({
-            content: {text:"点击升级此家庭为受捐家庭"},
+            content: {text:"点击升级此家庭为受助家庭"},
             position: {my:  'right center',at: 'left center'}
         });
 
