@@ -13,7 +13,7 @@
                 <td>{$each.serial}</td>
                 <td>{$each.agent}</td>
                 <td>{$each.sex}</td>
-                <td>{$each.birthday}</td>
+                <td><neq name="each.birthday" value="0000-00-00">{$each.birthday}</neq></td>
                 <td>{$each.address}</td>
                 <td>{$each.idcard}</td>
                 <td>{$each.phone}</td>
@@ -93,7 +93,7 @@
     <p><label>家庭编号：</label>{$onefamilydata.serial|default="调研家庭暂无编号"}</p>
     <p><label>家庭代表名：</label>{$onefamilydata.agent|default="&nbsp;"}</p>
     <p><label>性别：</label>{$onefamilydata.sex|default="&nbsp;"}</p>
-    <p><label>出生日期：</label>{$onefamilydata.birthday|default="&nbsp;"}</p>
+    <p><label>出生日期：</label><neq name="onefamilydata.birthday" value="0000-00-00">{$onefamilydata.birthday|default="&nbsp;"}</neq></p>
     <p><label>证件号码：</label>{$onefamilydata.idcard|default="&nbsp;"}</p>
     <p><label>联系地址：</label>{$onefamilydata.address|default="&nbsp;"}</p>
     <p><label>联系电话：</label>{$onefamilydata.phone|default="&nbsp;"}</p>
@@ -109,5 +109,5 @@
     <p><label>帮扶建议：</label>{$onefamilydata.advice|default="&nbsp;"}</p>
     <p><label>数据操作者：</label>{$onefamilydata.handman|get_user_truename_by_id}</p>
     <p><label>数据添加时间：</label>{$onefamilydata.addtime|date="Y-m-d,H:i:s",###}</p>
-    <p><label>数据修改时间：</label>{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</p>
+    <p><label>数据修改时间：</label><notempty name="onefamilydata.uptime">{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</notempty></p>
 </present>

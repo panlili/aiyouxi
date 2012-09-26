@@ -17,7 +17,7 @@
                 <td>{$each.sex}</td>
                 <td>{$each.comment}</td>
                 <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
-                <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
+                <td><notempty name="each.uptime">{$each.uptime|date="Y-m-d,H:i:s",###}</notempty></td>
                 <td>{$each.handman|get_user_truename_by_id}</td>
             </tr>
         </volist>

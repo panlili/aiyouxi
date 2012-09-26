@@ -96,6 +96,7 @@
                     <th>领捐日期</th>
                     <th>领用编号</th>
                     <th>受助家庭编号</th>
+                    <th>家庭代表</th>
                     <th>经手人</th><th>审核人</th>
                 </tr>
             </thead>
@@ -112,6 +113,7 @@
                     <td>{$each.record.distributeday}</td>
                     <td>{$each.record.serial}</td>
                     <td>{$each.record.family_id|get_family_serial_by_id}</td>
+                    <td>{$each.record.family_id|get_family_agent_by_id}</td>
                     <td>{$each.record.handman|get_user_truename_by_id}</td>
                     <td>{$each.record.verifier|get_user_truename_by_id}</td>
                 </tr>

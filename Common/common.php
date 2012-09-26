@@ -57,6 +57,11 @@ function get_family_serial_by_id($id) {
     return !empty($id) ? M("Family")->where("id=$id")->getField("serial") : "";
 }
 
+//根据家庭id获取agent
+function get_family_agent_by_id($id) {
+    return !empty($id) ? M("Family")->where("id=$id")->getField("agent") : "";
+}
+
 function auto_charset($fContents, $from = 'gbk', $to = 'utf-8') {
     $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
     $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;

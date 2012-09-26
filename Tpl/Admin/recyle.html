@@ -23,7 +23,7 @@
                     <td>{$each.sex}</td>
                     <td>{$each.comment}</td>
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
-                    <td>{$each.uptime|date="Y-m-d,H:i:s",###}</td>
+                    <td><notempty name="each.uptime">{$each.uptime|date="Y-m-d,H:i:s",###}</notempty></td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
                     <td><a href="#" class="{$each.id}"
                            onclick="recyle_data('__APP__/Admin/recyleData','Donater',$.trim($(this).attr('class')),callback_recyle_donater);return false;">
@@ -55,7 +55,7 @@
                     <td>{$each.serial}</td>
                     <td>{$each.agent}</td>
                     <td>{$each.sex}</td>
-                    <td>{$each.birthday}</td>
+                    <td><neq name="each.birthday" value="0000-00-00">{$each.birthday}</neq></td>
                     <td>{$each.address}</td>
                     <td>{$each.idcard}</td>
                     <td>{$each.phone}</td>
@@ -114,6 +114,5 @@
 <script type="text/javascript">
     $(function(){
         $("#tabs").tabs();
-
     });
 </script>

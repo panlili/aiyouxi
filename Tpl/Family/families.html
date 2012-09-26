@@ -12,7 +12,11 @@
             <td>{$each.goodNumber}</td>
             <td>{$each.agent}</td>
             <td>{$each.sex}</td>
-            <td>{$each.birthday}</td>
+            <td>
+                <neq name="each.birthday" value="0000-00-00">
+                {$each.birthday}
+                </neq>
+            </td>
             <td>{$each.address}</td>
             <td>{$each.idcard}</td>
             <td>{$each.phone}</td>
