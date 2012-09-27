@@ -62,7 +62,7 @@ function get_family_agent_by_id($id) {
     return !empty($id) ? M("Family")->where("id=$id")->getField("agent") : "";
 }
 
-function auto_charset($fContents, $from = 'gbk', $to = 'utf-8') {
+function auto_charset_my($fContents, $from = 'gbk', $to = 'utf-8') {
     $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
     $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;
     if (strtoupper($from) === strtoupper($to) || empty($fContents) || (is_scalar($fContents) && !is_string($fContents))) {
