@@ -20,7 +20,10 @@
             <td>{$each.address}</td>
             <td>{$each.idcard}</td>
             <td>{$each.phone}</td>
-            <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+            <td>
+                <a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a>
+                <a href="__URL__/printable?id={$each.id}" target="_blank">详情表格</a>
+            </td>
         </tr>
     </volist>
 </tbody>

@@ -29,7 +29,7 @@ class BaseAction extends Action {
                 "Admin" => array("changepassword"),
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit", "unitsearch"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist",
-                    "add", "geteditform", "edit", "unitsearch"),
+                    "add", "geteditform", "edit", "unitsearch","_uploadphoto"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "unitsearch"),
                 "Retrieval" => array("index", "query")
@@ -40,7 +40,7 @@ class BaseAction extends Action {
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform",
                     "edit", "changestatus", "unitsearch"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
-                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch","_uploadphoto","printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
                 "Retrieval" => array("index", "query", "toexcel")
@@ -52,7 +52,7 @@ class BaseAction extends Action {
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit",
                     "changestatus", "unitsearch"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
-                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch"),
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch","_uploadphoto","printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
                 "Retrieval" => array("index", "query", "toexcel")
@@ -123,7 +123,7 @@ class BaseAction extends Action {
         }
     }
 
-    //更新数据，update
+    //更新数据，update。FamilyAction override
     public function edit() {
         if ($this->isAjax()) {
             //user的操作是在AdminAction里做的，故要特别判断一下

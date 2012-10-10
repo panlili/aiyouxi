@@ -19,8 +19,9 @@ DonaterAction: extends BaseAction
 FamilyAction: extends BaseAction
 	self:
 		index, families, survey, getOneDetail, setSerial, getFamilyList
+		add(Override), edit(Override), _uploadphoto, printable
 	extends:
-		add, getEditForm, edit, changeStatus, unitSearch
+		getEditForm, changeStatus, unitSearch
 	
 GoodAction: extends BaseAction
 	self:

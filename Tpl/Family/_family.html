@@ -31,6 +31,7 @@
 </present>
 
 <!-- 新增的用户数据 -->
+<!--
 <present name="newdata">
     <tr class="familylist" id="{$newdata.id}">
         <td>
@@ -46,7 +47,6 @@
         <td>{$newdata.phone}</td>
         <td><a href="#" id="{$newdata.id}" onclick="showFamilyDetail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
         <td><a href="#" class="update" id="{$each.id}">升级</a></td>
-        <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>
             <a class="delete" href="#"
                onclick="toggle_status('__APP__/Family/changeStatus','{$newdata.id}',callback_toggle_family_status);return false;">
@@ -54,14 +54,16 @@
         </td>
     </tr>
 </present>
+-->
 
 <!-- 修改单条数据的表单 -->
 <present name="olddata">
-    <form class="common_form">
+    <form class="common_form" enctype="multipart/form-data" method="post" action="__URL__/edit">
         <notempty name="olddata.serial">
             <p><label>受捐编号：</label><input type="text" name="serial" value="{$olddata.serial}"/></p>
         </notempty>
         <p><label>*家庭代表名：</label><input type="text" name="agent" value="{$olddata.agent}"/></p>
+        <p><label>更改家庭图片：</label><input type="file" name="photo" />【jpg,jpeg,gif,png,小于4M】
         <p><label>性别：</label>
             <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked"/>{$olddata.sex}
             <input type ="radio" name="sex" value="{$olddata.sex|reverseIt}" />{$olddata.sex|reverseIt}
@@ -80,11 +82,19 @@
         <p><label>备注：</label><textarea name="comment" cols="30" rows="5" wrap="virtual">{$olddata.comment}</textarea></p>
         <p><label>调研人员：</label><input type="text" name="survery" value="{$olddata.survery}"/></p>
         <p><label>帮扶建议：</label><textarea name="advice" cols="30" rows="5" wrap="virtual">{$olddata.advice}</textarea></p>
+        <notempty name="olddata.photo">
+            <p><label>家庭照片：</label>
+                <a href="__Familyphoto__/m_{$olddata.photo}" target="_blank">
+                    <img src="__Familyphoto__/s_{$olddata.photo}"/>
+                </a>
+            </p>
+        </notempty>
         <p><label>&nbsp;</label>
-            <input type="button" value="修改数据"
-                   onclick="edit_data('__APP__/Family/edit',$('#tabs-3 .common_form').serialize(),callback_edit_family);"/>
+            <!--<input type="button" value="修改数据"
+                       onclick="edit_data('__APP__/Family/edit',$('#tabs-3 .common_form').serialize(),callback_edit_family);"/>-->
+            <input type="submit" value="修改数据" />
             <input type="reset" value="重置" /></p>
-        <input type="hidden" name="id" value="{$olddata.id}" />
+        <input type="hidden" name="id" value="{$olddata.id}"/>
     </form>
 </present>
 
@@ -110,4 +120,11 @@
     <p><label>数据操作者：</label>{$onefamilydata.handman|get_user_truename_by_id}</p>
     <p><label>数据添加时间：</label>{$onefamilydata.addtime|date="Y-m-d,H:i:s",###}</p>
     <p><label>数据修改时间：</label><notempty name="onefamilydata.uptime">{$onefamilydata.uptime|date="Y-m-d,H:i:s",###}</notempty></p>
+<notempty name="onefamilydata.photo">
+    <p><label>家庭照片：</label>
+        <a href="__Familyphoto__/m_{$onefamilydata.photo}" target="_blank">
+            <img src="__Familyphoto__/s_{$onefamilydata.photo}"/>
+        </a>
+    </p>
+</notempty>
 </present>

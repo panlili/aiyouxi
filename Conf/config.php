@@ -19,6 +19,7 @@ return array(
         '__CSS__' => '/aiyouxi/Resource/Css',
         '__JS__' => '/aiyouxi/Resource/Js',
         '__IMAGE__' => '/aiyouxi/Resource/Image',
+        '__Familyphoto__' =>'/aiyouxi/Resource/Uploads/Family',
     ),
 );
 ?>

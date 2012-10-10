@@ -32,6 +32,26 @@ class FamilyAction extends BaseAction {
         $this->display();
     }
 
+    public function printable() {
+        $familyid = $this->_param("id");
+        $m_family = M("Family");
+        $v_fullgood = M("Fullgood");
+        $familydetail = $m_family->where("id='$familyid'")->find();
+        if ($familydetail) {
+            $serial = $familydetail["serial"];
+            $goodcount = $v_fullgood->where("familyserial='$serial'")->count();
+            if ($goodcount > 0) {
+                $goods = $v_fullgood->where("familyserial='$serial'")->select();
+                $this->assign("goods", $goods);
+            }
+            $this->assign("goodcount", $goodcount);
+            $this->assign("family", $familydetail);
+            $this->display();
+        } else {
+            $this->error("家庭数据不存在！");
+        }
+    }
+
     public function survey() {
         $m_family = M("Family");
         import("ORG.Util.Page");
@@ -46,40 +66,53 @@ class FamilyAction extends BaseAction {
 
     //添加数据
     public function add() {
-        if ($this->isAjax()) {
-            $model = D("Family");
-            if (!empty($_FILES)) {
-                $this->_uploadPhoto();
-            }
-            if ($model->create()) {
-                if ($newid = $model->add()) {
-                    $this->assign("newdata", $model->find($newid));
-                    $content = $this->fetch("_family");
-                    $this->ajaxReturn($content, "数据添加成功", 1);
-                } else {
-                    $this->error("写入数据库错误");
-                }
+        if (!empty($_FILES["photo"]["name"])) {
+            $this->_uploadPhoto();
+        }
+        $model = D("Family");
+        if ($model->create()) {
+            if ($newid = $model->add()) {
+                $this->success("调研家庭数据添加成功！");
             } else {
-                $this->error($model->getError());
+                $this->error("写入数据库错误");
             }
         } else {
-            $this->redirect("Search/index");
+            $this->error($model->getError());
+        }
+    }
+
+    //修改数据
+    public function edit() {
+        if (!empty($_FILES["photo"]["name"])) {
+            $this->_uploadPhoto();
+        }
+        $model = D("Family");
+        if ($model->create()) {
+            if ($model->save()) {
+                $this->success("数据更新成功");
+            } else {
+                $this->error("写入数据库错误");
+            }
+        } else {
+            $this->error($model->getError());
         }
     }
 
     protected function _uploadPhoto() {
         import("ORG.Net.UploadFile");
         $upload = new UploadFile();
-        $upload->maxSize = 3292200;
         $upload->allowExts = explode(",", "jpg,gif,png,jpeg");
+        $upload->maxSize = 4292200;
+
         $upload->savePath = "./Resource/Uploads/Family/";
         $upload->thumb = true;
         $upload->imageClassPath = "ORG.Util.Image";
         //两张图
         $upload->thumbPrefix = "m_,s_";
-        $upload->thumbMaxWidth = "400,100";
-        $upload->thumbMaxHeight = "400,100";
+        $upload->thumbMaxWidth = "600,100";
+        $upload->thumbMaxHeight = "600,100";
         $upload->thumbRemoveOrigin = true;
+        $upload->saveRule = uniqid;
         if (!$upload->upload()) {
             $this->error($upload->getErrorMsg());
         } else {

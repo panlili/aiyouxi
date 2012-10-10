@@ -108,7 +108,7 @@ function callback_get_user_edit_form(json){
         alert(json.info);
     }else{
         $("#tabs-3").html(json.data);
-        $("input:button,input:reset").button();
+        $("input:button,input:submit,input:reset").button();
         $("#tabs").tabs().tabs('select', 2);
     }
 }
@@ -187,6 +187,7 @@ function callback_toggle_family_status(json){
     callback_toggle_donater_status(json);
 }
 
+/*
 function callback_add_family(json){
     if(0==json.status){
         alert(json.info);
@@ -196,14 +197,17 @@ function callback_add_family(json){
         $("#message").html(json.info).show().slideUp(1500);
     }
 }
+*/
 
 function callback_get_family_edit_form(json) {
     callback_get_user_edit_form(json);
 }
 
+/*
 function callback_edit_family(json){
     callback_edit_user(json);
 }
+*/
 
 function show_family_detail(path,id){
     $.get(path,{

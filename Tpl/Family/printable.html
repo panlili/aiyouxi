@@ -1,0 +1,114 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>家庭详细表格</title>
+        <js href="__JS__/jquery172.js,__JS__/Common.js" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            .common_table{
+                margin-bottom: 10px;
+                width:100%;
+                border-collapse:collapse;
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            }
+            .common_table tr td{
+                height: 15px;
+                font-size:13px;
+                border:1px solid #b2b2b2;
+                padding:3px 7px 2px 7px;
+            }
+            .common_table tr{
+                color:#000000;
+            }
+            .common_table th{
+                height: 25px;
+                border:1px solid #b2b2b2;
+                font-size:13px;
+                padding-top:5px;
+                padding-bottom:4px;
+                background-color:gray;
+                color:#ffffff;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function(){
+                setNumber();
+            });
+        </script>
+    </head>
+    <body>
+        <div style="margin: 50px auto;width: 800px;">
+            <table class="common_table">
+                <thead><tr><th style="width: 15%">数据项</th><th>详细数据</th></tr></thead>
+                <tbody>
+                    <tr><td>家庭编号：</td><td>{$family.serial}</td></tr>
+                    <tr><td>家庭代表名：</td><td>{$family.agent|default="&nbsp;"}</td></tr>
+                    <tr><td>性别：</td><td>{$family.sex|default="&nbsp;"}</td></tr>
+                    <tr><td>出生日期：</td><td><neq name="family.birthday" value="0000-00-00">{$family.birthday|default="&nbsp;"}</neq></td></tr>
+                    <tr><td>证件号码：</td><td>{$family.idcard|default="&nbsp;"}</td></tr>
+                    <tr><td>联系地址：</td><td>{$family.address|default="&nbsp;"}</td></tr>
+                    <tr><td>联系电话：</td><td>{$family.phone|default="&nbsp;"}</td></tr>
+                    <tr><td>健康状况：</td><td>{$family.health|default="&nbsp;"}</td></tr>
+                    <tr><td>婚姻情况：</td><td>{$family.marry|default="&nbsp;"}</td></tr>
+                    <tr><td>家庭成员情况：</td><td>{$family.member|default="&nbsp;"}</td></tr>
+                    <tr><td>职业：</td><td>{$family.work|default="&nbsp;"}</td></tr>
+                    <tr><td>家庭收入：</td><td>{$family.income|default="&nbsp;"}</td></tr>
+                    <tr><td>家庭保障情况：</td><td>{$family.ensure|default="&nbsp;"}</td></tr>
+                    <tr><td>家庭主要问题：</td><td>{$family.problem|default="&nbsp;"}</td></tr>
+                    <tr><td>备注：</td><td>{$family.comment|default="&nbsp;"}</td></tr>
+                    <tr><td>调研人员：</td><td>{$family.survery|default="&nbsp;"}</td></tr>
+                    <tr><td>帮扶建议：</td><td>{$family.advice|default="&nbsp;"}</td></tr>
+                    <tr><td>数据操作者：</td><td>{$family.handman|get_user_truename_by_id}</td></tr>
+                    <tr><td>数据添加时间：</td><td>{$family.addtime|date="Y-m-d,H:i:s",###}</td></tr>
+                    <tr><td>数据修改时间：</td><td><notempty name="family.uptime">{$family.uptime|date="Y-m-d,H:i:s",###}</notempty></td></tr>
+                <notempty name="family.photo">
+                    <tr><td>家庭照片：</td><td>
+                            <a href="__Familyphoto__/m_{$family.photo}" target="_blank">
+                                <img src="__Familyphoto__/s_{$family.photo}"/>
+                            </a>
+                        </td></tr>
+                </notempty>
+                </tbody>
+            </table>
+            <!-- 物资信息表格 -->
+            <table class="common_table"> 
+                <thead><tr><th style="width: 15%" colspan="2">领用物资</th><th colspan="9">{$goodcount}件</th></tr></thead>
+                <present name="goods">
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>物资编号</td>
+                            <td>物资</td>
+                            <td>捐赠日期</td>
+                            <td>捐赠人</td>
+                            <td>捐赠人编号</td>
+                            <td>出库日期</td>
+                            <td>领物编号</td>
+                            <td>领物日期</td>
+                            <td>经手人</td>
+                            <td>审核人</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="goods" id="each">
+                        <tr>
+                            <td class="number"></td>
+                            <td>{$each.goodserial}</td>
+                            <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
+                            <td>{$each.donatetime|date="Y-m-d",###}</td>
+                            <td>{$each.donatername}</td>
+                            <td>{$each.donaterserial}</td>
+                            <td>{$each.checkouttime|date="Y-m-d",###}</td>
+                            <td>{$each.recordserial}</td>
+                            <td>{$each.distributeday}</td>
+                            <td>{$each.handman|get_user_truename_by_id}</td>
+                            <td>{$each.verifier|get_user_truename_by_id}</td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </present>
+            </table>
+        </div>
+    </body>
+</html>
