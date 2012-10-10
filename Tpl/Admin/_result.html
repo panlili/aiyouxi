@@ -1,33 +1,66 @@
 {__NOLAYOUT__}
+<div>系统运行状况统计</div>
 <table class="common_table">
     <thead>
         <tr>
-            <th>接受物资统计</th><th></th>
+            <th>统计时间段</th><th>接收物资</th><th>发放物资</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>接收物资</td><td>总数：{$get_wuzi}</td></tr>        
-        <tr><td>按月统计</td><td><volist name="get_wuzi_month" id="eachmonth">
-        <p>第{$eachmonth.month}月：{$eachmonth.count}</p></volist></td></tr>
-    <tr><td>按周统计</td><td><volist name="get_wuzi_week" id="eachweek">
-        <p>第{$eachweek.week}周:{$eachweek.count}</p></volist></td></tr> 
-    <tr><td>按天统计</td><td><volist name="get_wuzi_day" id="eachday">
-        <p>第{$eachday.day}天:{$eachday.count}</p></volist></td></tr>
+        <tr><td>从{$analyse_time1}到{$analyse_time2}</td><td>接收物资：{$get_wuzi}件</td><td>发放物资：{$get_wuzi}件</td></tr>        
+        
     </tbody>
 </table>
+<div>捐赠人情况统计</div>
 <table class="common_table">
     <thead>
         <tr>
-            <th>发放物资统计</th><th></th>
+            <th>统计项</th><th>数字</th><th>统计时间段</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>发放物资</td><td>总数：{$checkout_wuzi}</td></tr>        
-        <tr><td>按月统计</td><td><volist name="checkout_wuzi_month" id="eachmonth2">
-        <p>第{$eachmonth2.month}月：{$eachmonth2.count}</p></volist></td></tr>
-    <tr><td>按周统计</td><td><volist name="checkout_wuzi_week" id="eachweek2">
-        <p>第{$eachweek2.week}周:{$eachweek2.count}</p></volist></td></tr>
-<tr><td>按天统计</td><td><volist name="checkout_wuzi_day" id="eachday2">
-        <p>第{$eachday2.day}天:{$eachday2.count}</p></volist></td></tr>
+        
+        <tr><td>捐赠人总数</td><td>总数：{$donater_total_count}</td><td></td></tr>        
+       <tr><td>增加的捐赠人数</td><td>总数：{$donater_add_count}</td><td>从{$analyse_time1}到{$analyse_time2}</td></tr>  
     </tbody>
 </table>
+
+<div>物资情况统计</div>
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>统计项</th><th>数字</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr><td>库存物资</td><td>总数：{$good_inbase}</td></tr>        
+       <tr><td>出库待发放物资</td><td>总数：{$good_outbase}</td></tr>
+       <tr><td>已发放物资</td><td>总数：{$good_finish}</td></tr>
+    </tbody>
+</table>
+<div>受捐家庭情况统计</div>
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>统计项</th><th>数字</th><th>统计时间段</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr><td>受捐家庭总数</td><td>总数：{$family_total_count}</td><td></td></tr>        
+       <tr><td>增加的受捐家庭数</td><td>总数：{$family_add_count}</td><td>从{$analyse_time1}到{$analyse_time2}</td></tr>  
+    </tbody>
+</table>
+
+<!--<div>人员工作情况统计</div>
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>统计时间段：从{$analyse_time1}到{$analyse_time2}</th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr><td>发放物资</td></tr>  
+    </tbody>
+</table>-->

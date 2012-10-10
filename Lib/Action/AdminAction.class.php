@@ -30,39 +30,74 @@ class AdminAction extends BaseAction {
             //统计特定时间段的工作量，捐赠次数等。
             $analyse_time1 = $this->_param("analyse_time1");
             $analyse_time2 = $this->_param("analyse_time2");
-            if (!empty($analyse_time1))
+            if (!empty($analyse_time1)) {
                 $analyse_time1 = strtotime($analyse_time1 . " 00:00:00");
-            if (!empty($analyse_time2))
+            } else {
+                $analyse_time1 = strtotime("2012-01-01 00:00:00");
+            }
+            if (!empty($analyse_time2)) {
                 $analyse_time2 = strtotime($analyse_time2 . " 23:59:59");
+            } else {
+                $analyse_time2 = strtotime("2013-01-01  23:59:59");
+            }
 
             $model = D("fullgood");
             //接收物资数量
             $map["donatetime"] = array("between", array($analyse_time1, $analyse_time2));
             $get_wuzi = $model->where($map)->count();
-            $get_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(donatetime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-            $get_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(donatetime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-            $get_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(donatetime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
+//            $get_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(donatetime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
+//            $get_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(donatetime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
+//            $get_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(donatetime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
             //发放物资的数量
             $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));
             $checkout_wuzi = $model->where($map)->count();
-            $checkout_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(checkouttime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-            $checkout_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(checkouttime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-            $checkout_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(checkouttime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
+//            $checkout_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(checkouttime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
+//            $checkout_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(checkouttime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
+//            $checkout_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(checkouttime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
-
-            $this->assign("get_wuzi_month", $get_wuzi_month);
-            $this->assign("get_wuzi_week", $get_wuzi_week);
-            $this->assign("get_wuzi_day", $get_wuzi_day);
+            
+            $donater=D("donater");
+            $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
+            $donater_total_count=$donater->count();
+            $donater_add_count=$donater->where($map)->count();
+            $map=array();
+            
+            $family=D("family");
+            $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
+            $family_total_count=$family->count();
+            $family_add_count=$family->where($map)->count();
+            $map=array();
+            
+            $goods=D("good");
+            $map["step"]="库存中";
+            $good_inbase=$goods->where($map)->count();
+            $map["step"]="出库中";
+            $good_outbase=$goods->where($map)->count();
+            $map["step"]="已捐赠";
+            $good_finish=$goods->where($map)->count();
+            
+            $this->assign("analyse_time1",date("Y-m-d",$analyse_time1));
+            $this->assign("analyse_time2",date("Y-m-d",$analyse_time2));
+            $this->assign("donater_add_count",$donater_add_count);
+            $this->assign("donater_total_count",$donater_total_count);
+            $this->assign("family_add_count",$family_add_count);
+            $this->assign("family_total_count",$family_total_count);
+            $this->assign("good_inbase",$good_inbase);
+            $this->assign("good_outbase",$good_outbase);
+            $this->assign("good_finish",$good_finish);
+//            $this->assign("get_wuzi_month", $get_wuzi_month);
+//            $this->assign("get_wuzi_week", $get_wuzi_week);
+//            $this->assign("get_wuzi_day", $get_wuzi_day);
             $this->assign("get_wuzi", $get_wuzi);   //接收物资的数量
-            $this->assign("checkout_wuzi_month", $checkout_wuzi_month);
-            $this->assign("checkout_wuzi_week", $checkout_wuzi_week);
-            $this->assign("checkout_wuzi_day", $checkout_wuzi_day);
+//            $this->assign("checkout_wuzi_month", $checkout_wuzi_month);
+//            $this->assign("checkout_wuzi_week", $checkout_wuzi_week);
+//            $this->assign("checkout_wuzi_day", $checkout_wuzi_day);
             $this->assign("checkout_wuzi", $checkout_wuzi);  //发放物资的数量
 
             $content = $this->fetch("_result");
             $this->ajaxReturn($content, "数据获取成功", 1);
-        }else {
+        } else {
             $this->redirect("Search/index");
         }
     }
