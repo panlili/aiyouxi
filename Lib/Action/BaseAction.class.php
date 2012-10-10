@@ -83,7 +83,7 @@ class BaseAction extends Action {
     }
 
     //curd相关的操作方法
-    //添加数据，create
+    //添加数据，create。FamilyAction Override
     public function add() {
         if ($this->isAjax()) {
             //user的操作是在AdminAction里做的，故要特别判断一下

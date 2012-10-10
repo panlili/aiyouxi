@@ -21,3 +21,6 @@
 	
 0920.zip
 	1.create a view include all data
+
+1010.zip
+	1.add photo field to family
