@@ -1,23 +1,23 @@
 0901_01.zip
-	1.���������ݿ⣬������Ҫ�ڳ����д��������˼��record�����ֶ����
+	1.创建了数据库，可能需要在程序编写过程中在思考record表的字段设计
 
 0902_01.zip
-	1.Ϊuser�������˵�½��Ϣ��¼���ֶ�
+	1.为user表添加了登陆信息记录的字段
 	
 0903_01.zip
-	1.Good��ȷ���˸�Ϊcheckoutman�����ˣ��ڻ�����д����ȷ�ϱ���record��ʱʹ�����ʵ�step�������ˣ�checkoutman��
-	��ȡ���г����е����ʡ�
+	1.Good表确认人改为checkoutman领用人，在回来填写领用确认表（record）时使用物资的step和领用人（checkoutman）
+	获取所有出库中的物资。
 	
 0911_01.zip
-	1.Ϊ��ͥ��������problem�ֶ�
-	2.�����˼����ֶε�����
+	1.为家庭表添加了problem字段
+	2.更改了几个字段的类型
 	
 0916.zip
-	1.�޸������ݿ�good������checkouttime
-	2.�޸���record�Ĺ����ֶ�ȫΪid����
+	1.修改了数据库good，添加checkouttime
+	2.修改了record的关联字段全为id关联
 	
 0918.zip
-	1.record�޸�
+	1.record修改
 	
 0920.zip
 	1.create a view include all data

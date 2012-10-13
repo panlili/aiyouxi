@@ -1,7 +1,7 @@
 BaseAction:
 	add, getEditForm, edit, changeStatus, unitSearch
 
-ĞèÒª½øĞĞÈ¨ÏŞ·ÖÅäµÄÄ£¿éºÍ·½·¨
+éœ€è¦è¿›è¡Œæƒé™åˆ†é…çš„æ¨¡å—å’Œæ–¹æ³•
 AdminAction: extends BaseAction
 	self:
 		index, users, analyse, tongji, changeStatus(Override), changePassword, 
