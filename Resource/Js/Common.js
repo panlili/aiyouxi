@@ -308,6 +308,9 @@ function callback_add_record(json){
     }
 }
 
+function callback_get_done_good__edit_form(json){
+    callback_get_good_edit_form(json);
+}
 //search相关
 function callback_search(json){
     if(0==json.status){
@@ -332,8 +335,8 @@ function callback_index_search(json) {
             $("#index_result").empty().append("没有命中记录，请检查编号输入是否正确，并重新输入。").show();
         }else{
             $("#message").html(json.info).show().slideUp(1500);
-            $("#index_result").empty().append(json.data).show();            
+            $("#index_result").empty().append(json.data).show();
         }
     }
-    
+
 }

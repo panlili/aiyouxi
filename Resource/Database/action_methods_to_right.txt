@@ -26,7 +26,7 @@ FamilyAction: extends BaseAction
 GoodAction: extends BaseAction
 	self:
 		index, checkin, add(Override), checkout, getCheckoutGood, doCheckout, 
-		rollback, endgood, goods, getGoodList, addRecord
+		rollback, endgood, goods, getGoodList, addRecord, getDoneEditForm, editRecord
 	extends:
 		getEditForm, edit, changeStatus, unitSearch
 	

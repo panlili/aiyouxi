@@ -203,6 +203,37 @@ class GoodAction extends BaseAction {
         }
     }
 
+    //领物登记后的物资信息修改
+    public function getDoneEditForm() {
+        if ($this->isAjax()) {
+            $m_record = D("Record");
+            $good_id = $this->_param("id");
+            $oldrecord = $m_record->where("good_id='$good_id'")->find();
+            if ($oldrecord) {
+                $this->assign("oldrecord", $oldrecord);
+                $content = $this->fetch("_good");
+                $this->ajaxReturn($content, "数据获取成功", 1);
+            }
+            $this->error("数据不存在");
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
+    public function editRecord() {
+        if ($this->isAjax()) {
+            $m_record = D("Record");
+            if ($m_record->create()) {
+                $m_record->save();
+                $this->success("数据修改成功");
+            } else {
+                $this->error($m_record->getError());
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+
 }
 
 ?>

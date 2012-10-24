@@ -1,5 +1,6 @@
 {__NOLAYOUT__}
 <present name="datalist">
+    <!--物资检索首页 -->
     <table class="common_table">
         <thead>
             <tr>
@@ -86,7 +87,8 @@
     </script>
 </present>
 
-<present name="good">    
+<present name="good">
+    <!-- 出库登记中右侧的table中数据, 当点出库时所有数据消失-->
     <tr class="fordelete">
         <td><input type="checkbox" id="{$good.id}" checked="checked" /></td>
         <td>{$good.id}</td>
@@ -99,4 +101,52 @@
         <td>{$good.step}</td>
         <td>{$good.handman|get_user_truename_by_id}</td>
     </tr>
+</present>
+
+<present name="oldrecord">
+    <!-- 领用登记后修改物资数据，主要修改的是物资的受捐家庭，所以修改的是Record表 -->
+    <form class="common_form">
+        <p><label>*物资号：</label><input type="text" name="good_id" value="{$oldrecord.good_id}" disabled=""/></p>
+        <p><label>*领物编号：</label><input type="text" name="serial" value="{$oldrecord.serial}"/></p>
+        <p><label>领物日期：</label><input type="text" name="distributeday" value="{$oldrecord.distributeday}"/></p>
+        <p><label>受助家庭：</label><input type="text" name="family_id" value="{$oldrecord.family_id}"/></p>
+        <p><label>&nbsp;</label>
+            <input type="button" value="修改数据"
+                   onclick="edit_data('__APP__/Good/editRecord',$('#tabs-2 .common_form').serialize(),callback_edit_good);"/>
+            <input type="reset" value="重置" /></p>
+        <input type="hidden" name="id" value="{$oldrecord.id}" />
+    </form>
+
+    <script type="text/javascript">
+        $(function(){
+            $("input[name=distributeday]").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $("input:button,input:reset").button();
+
+            //领物家庭的autocomplete
+            $( "input[name=family_id]" ).autocomplete({
+                source:function(request, response){
+                    $.get("__APP__/Family/getFamilyList",{serial: request.term },function(data){
+                        if(0==data.status)
+                        {
+                            if(window.confirm(data.info))
+                                window.location="__APP__/Family/survey";
+                            else
+                                $("input[name=family_id]").val("");
+                        }
+                        else
+                        {
+                            response($.map(data,function(data){
+                                return {
+                                    label:"序号："+data.id+"，家庭代表姓名："+data.agent+"，编号："+data.serial,
+                                    value:data.id
+                                }
+                            }));
+                        }
+                    },"JSON");
+                }
+            });
+        });
+    </script>
 </present>

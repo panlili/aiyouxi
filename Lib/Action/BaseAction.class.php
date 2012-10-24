@@ -2,7 +2,7 @@
 
 class BaseAction extends Action {
 
-    const RECORDS_ONE_PAGE = 5;
+    const RECORDS_ONE_PAGE = 25;
 
     public function _initialize() {
         if (!session("?truename") || !session("?uid")) {
@@ -29,9 +29,9 @@ class BaseAction extends Action {
                 "Admin" => array("changepassword"),
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit", "unitsearch", "getpinyin"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist",
-                    "add", "geteditform", "edit", "unitsearch","_uploadphoto"),
+                    "add", "geteditform", "edit", "unitsearch", "_uploadphoto"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
-                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "unitsearch"),
+                    "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "unitsearch"),
                 "Retrieval" => array("index", "query")
             ),
             //管理员
@@ -40,9 +40,9 @@ class BaseAction extends Action {
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform",
                     "edit", "changestatus", "unitsearch", "getpinyin"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
-                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch","_uploadphoto","printable"),
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch", "_uploadphoto", "printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
-                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
+                    "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "changestatus", "unitsearch"),
                 "Retrieval" => array("index", "query", "toexcel")
             ),
             //超级管理员
@@ -52,9 +52,9 @@ class BaseAction extends Action {
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit",
                     "changestatus", "unitsearch", "getpinyin"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
-                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch","_uploadphoto","printable"),
+                    "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch", "_uploadphoto", "printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
-                    "endgood", "goods", "getgoodlist", "addrecord", "geteditform", "edit", "changestatus", "unitsearch"),
+                    "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "changestatus", "unitsearch"),
                 "Retrieval" => array("index", "query", "toexcel")
             )
         );

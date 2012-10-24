@@ -103,7 +103,8 @@
             <tbody>
             <volist name="goods3" id="each">
                 <tr id="{$each.id}">
-                    <td>{$each.id}</td>
+                    <td><a class="changeDone" href="#" onclick='get_data("__APP__/Good/getDoneEditForm",$(this).text(),callback_get_done_good__edit_form);
+                        return false;'>{$each.id}</a></td>
                     <td>{$each.serial}</td>
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
@@ -140,7 +141,7 @@
             "padding": 0
         });
 
-        $("a.change").qtip({
+        $("a.change, a.changeDone").qtip({
             content: {text:"点击修改物资数据"},
             position: {my:  'left center',at: 'right center'}
         });
