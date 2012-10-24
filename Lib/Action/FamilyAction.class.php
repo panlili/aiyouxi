@@ -143,7 +143,7 @@ class FamilyAction extends BaseAction {
     public function setSerial() {
         if ($this->isAjax()) {
             $id = $this->_param("id");
-            $text = $this->_param("text");
+            $text = strtoupper($this->_param("text"));
             $m_family = D("Family");
             $isexist = $m_family->where("serial='$text'")->select();
             if ($isexist) {

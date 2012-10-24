@@ -12,7 +12,7 @@ AdminAction: extends BaseAction
 	
 DonaterAction: extends BaseAction
 	self:
-		index, donaters, getDonaterList
+		index, donaters, getDonaterList, getPinyin
 	extends:
 		add, getEditForm, edit, changeStatus, unitSearch
 	
