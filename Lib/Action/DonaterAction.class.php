@@ -45,6 +45,13 @@ class DonaterAction extends BaseAction {
         }
     }
 
+    //根据捐赠者姓名生成serial
+    public function getPinyin(){
+        $text = $this->_param("text");
+        $text = strtoupper(Pinyin($text, 1, 1).date("Ym"));
+        $this->ajaxReturn($text,"",1);
+    }
+
 }
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-//潘修改过的
+//最原始的ajax 分页类
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -11,7 +11,7 @@
 // +----------------------------------------------------------------------
 // $Id: Page.class.php 2712 2012-02-06 10:12:49Z liu21st $
 
-class Pagea {
+class Pageli {
 
     // 分页栏每页显示的页数
     public $rollPage = 5;
@@ -149,11 +149,11 @@ class Pagea {
             $('#{$this->pagesId} a').click(function(){
                 $.ajax({
                     url: $(this).attr('href'),
-                    dataType: "json",
+                    dataType: "html",
                     type: "POST",
                     cache: false,
-                    success: function(json){
-                        $("#{$this->target}").html(json.data);
+                    success: function(html){
+                        $("#{$this->target}").html(html);
                     }
                 });
                 return false;
