@@ -17,6 +17,7 @@ class RetrievalAction extends BaseAction {
             $map = $this->generateQuerySql($this->_param());
             session("querytext", $map);
         } else {
+            //检索结果的分页，不会传递表单数据，只能这样处理
             $map = session("querytext");
         }
 
@@ -27,7 +28,8 @@ class RetrievalAction extends BaseAction {
             $this->display();
         } else {
             import("ORG.Util.Page");
-            $p = new Page($count, self::RECORDS_ONE_PAGE);
+            // $p = new Page($count, self::RECORDS_ONE_PAGE);
+            $p = new Page($count, 3);
             $page = $p->show();
             $result = $m_fullgood->where($map)->limit($p->firstRow . "," . $p->listRows)->select();
             $this->assign("page", $page);
@@ -53,7 +55,7 @@ class RetrievalAction extends BaseAction {
         $donatetimestart = strtotime("2004-01-01");
         $donatetimeend = strtotime("2030-01-01");
         foreach ($queryArray as $key => $value) {
-            if ($key != "donatetimestart" && $key != "donatetimeend" && $key != "distributedaystart" && $key != "distributedayend") {
+            if ($key != "donatetimestart" && $key != "donatetimeend") {
                 if (!empty($value)) {
                     $map[$key] = array("like", "%" . trim($value) . "%");
                 }
