@@ -12,7 +12,6 @@
             <th>物资状态</th>
             <th>捐赠日期</th>
             <th>捐赠人</th>
-            <th>性别</th>
             <th>电话</th>
             <th>捐赠人编号</th>
             <th>收据编号</th>
@@ -20,7 +19,6 @@
             <th>出库领取人</th>
             <th>受助家庭</th>
             <th>家庭代表</th>
-            <th>家庭代表性别</th>
             <th>家庭代表电话</th>
             <th>家庭地址</th>
             <th>领物编号</th>
@@ -36,20 +34,20 @@
             <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
             <td>{$each.step}</td>
             <td>{$each.donatetime|date="Y-m-d",###}</td>
-            <td>{$each.donatername}</td>
-            <td>{$each.donatersex}</td>
-            <td>{$each.donaterphone}</td>
-            <td>{$each.donaterserial}</td>
-            <td>{$each.receipt}</td>
-            <td>
+            <td>{$each.donatername|msubstr=0,1,'utf-8',false}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></td>
+        <td>{$each.donaterphone}</td>
+        <td>{$each.donaterserial}</td>
+        <td>{$each.receipt}</td>
+        <td>
         <notempty name="each.checkouttime">
             {$each.checkouttime|date="Y-m-d",###}
         </notempty>
         </td>
         <td>{$each.checkoutman|get_user_truename_by_id}</td>
         <td>{$each.familyserial}</td>
-        <td>{$each.agent}</td>
-        <td>{$each.agentsex}</td>
+        <td>
+            {$each.agent|msubstr=0,1,'utf-8',false}<notempty name="each.agent"><if condition="$each.donatersex eq '男'">先生<else/>女士</if></notempty>
+        </td>
         <td>{$each.familyphone}</td>
         <td>{$each.address}</td>
         <td>{$each.recordserial}</td>

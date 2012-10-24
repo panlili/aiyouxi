@@ -28,8 +28,7 @@ class RetrievalAction extends BaseAction {
             $this->display();
         } else {
             import("ORG.Util.Page");
-            // $p = new Page($count, self::RECORDS_ONE_PAGE);
-            $p = new Page($count, 3);
+            $p = new Page($count, self::RECORDS_ONE_PAGE);
             $page = $p->show();
             $result = $m_fullgood->where($map)->limit($p->firstRow . "," . $p->listRows)->select();
             $this->assign("page", $page);
@@ -75,6 +74,7 @@ class RetrievalAction extends BaseAction {
         if (!isset($_SESSION["querytext"]))
             $this->redirect("Retrieval/index");
 
+        load("extend");
         $query = session("querytext");
         $list = M("Fullgood")->where($query)->select();
         $filename = auto_charset_my("物资列表_导出时间_" . date("Y_m_d_H_i_m"), "utf-8", "gbk");

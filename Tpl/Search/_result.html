@@ -13,7 +13,6 @@
                     <p><b>捐赠人：</b>{$each.donatername|msubstr=0,1,'utf-8',false}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></p>
             <p><b>所捐物资名：</b>{$each.goodname}</p>
             <p><b>捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}</p>
-
             </td>
             </tr>
             <tr>
@@ -41,7 +40,6 @@
     </volist>
 </present>
 <present name="index_result2">
-
     <table>
         <tr class="firsttr">
             <td>
@@ -52,13 +50,10 @@
             <tr>
                 <td>
                     <p><b style="color:orangered;">所捐物资名：</b>{$each.goodname}&nbsp;&nbsp;<b style="color:orangered;">捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}&nbsp;&nbsp;<b style="color:orangered;">状态：</b>{$each.step}</p>
-            <p></p>
-
-            </td>
+                    <p></p>
+                </td>
             </tr>
-
         </volist>
-
     </table>
     <div class="green-black" id="pages1">{$page}</div>
 </present>
