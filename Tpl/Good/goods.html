@@ -126,7 +126,14 @@
 
 <script type="text/javascript">
     $(function(){
-        $("#tabs").tabs();
+        $("#tabs").tabs({
+            select: function(event, ui){
+                $.cookie("current",ui.index+1);
+            }
+        });
+
+        $("#tabs").tabs().tabs("select",$.cookie("current"));
+
         $("#page a").button().css({
             "margin-right": "0",
             "font-size": "13px",

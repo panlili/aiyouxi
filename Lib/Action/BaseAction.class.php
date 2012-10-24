@@ -2,7 +2,7 @@
 
 class BaseAction extends Action {
 
-    const RECORDS_ONE_PAGE = 25;
+    const RECORDS_ONE_PAGE = 5;
 
     public function _initialize() {
         if (!session("?truename") || !session("?uid")) {
