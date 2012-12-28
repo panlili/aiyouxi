@@ -10,7 +10,7 @@
             <tr>
                 <td>
                     <h3>捐赠信息</h3>
-                    <p><b>捐赠人：</b>{$each.donatername|msubstr=0,1,'utf-8',false}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></p>
+                    <p><b>捐赠人：</b>{$each.donatername}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></p>
             <p><b>所捐物资名：</b>{$each.goodname}</p>
             <p><b>捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}</p>
             </td>
@@ -43,7 +43,7 @@
     <table>
         <tr class="firsttr">
             <td>
-                <h2>捐赠人编号：<i>{$donaterserial}</i></h2><h2>姓名：<i>{$donatername|msubstr=0,1,'utf-8',false}<if condition="$donatersex eq '男'">先生<else/>女士</if></i></h2>
+                <h2>捐赠人编号：<i>{$donaterserial}</i></h2><h2>姓名：<i>{$donatername}<if condition="$donatersex eq '男'">先生<else/>女士</if></i></h2>
             </td>
         </tr>
         <volist name="index_result2" id="each">
