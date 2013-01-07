@@ -50,7 +50,7 @@
         <p><label>数量</label><input type="text" name="number" value="{$olddata.number}"/></p>
         <p><label>单位:</label><input type="text" name="unit" value="{$olddata.unit}"/></p>
         <p><label>计量：</label><input type="text" name="measure" value="{$olddata.measure}"/></p>
-        <p><label>捐赠者编号：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/></p>
+        <p><label>捐赠人：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/></p>
         <p><label>收据号：</label><input type="text" name="receipt" value="{$olddata.receipt}"/></p>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
@@ -76,7 +76,7 @@
                         //可以先var objects=$.map(), 后response(objects)
                         response($.map(data,function(data){
                             return {
-                                label:"姓名："+data.name+" 编号："+data.serial,
+                                label:"姓名："+data.name+" 编号："+data.serial+"，电话："+data.phone,
                                 value:data.id
                             }
                         }));
