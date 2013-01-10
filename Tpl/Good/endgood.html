@@ -7,9 +7,13 @@
         <label>领物编号：</label>
         <input type="text" name="serial" />
     </p>
-    <p>
+    <!--  <p>
         <label>领用家庭编号：</label>
         <input type="text" name="family_id" />
+    </p>-->
+    <p>
+        <label>领用家庭姓名：</label>
+        <input type="text" name="family_agent" />
     </p>
     <p>
         <label>物资编号：</label>
@@ -38,6 +42,7 @@
         $("input:button,input:reset").button();
 
         //领物家庭的autocomplete
+        /**
         $( "input[name=family_id]" ).autocomplete({
             source:function(request, response){
                 $.get("__APP__/Family/getFamilyList",{serial: request.term },function(data){
@@ -60,6 +65,7 @@
                 },"JSON");
             }
         });
+         */
 
         //物资的autocomplete,先定义两个函数
         function split( val ) {

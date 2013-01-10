@@ -21,7 +21,20 @@ class GoodAction extends BaseAction {
     //因为不用返回新添加数据ajax更新，故需重写此方法
     public function add() {
         if ($this->isAjax()) {
-            $model = D("Good");
+            //根据表单donater_name的值查询是否有此名的捐赠人存在
+            //如果有获取捐赠人的id，否则插入一条记录并获取id
+            $donater_name = empty($_POST["donater_name"]) ? "匿名捐赠人" : trim($_POST["donater_name"]);
+            $m_donater = M("Donater");
+            $donater_id = $m_donater->where("name='$donater_name'")->getField("id");
+            if (!is_numeric($donater_id)) {
+                $data["name"] = $donater_name;
+                $data["status"] = 1;
+                $data["handman"] = get_session_user_id();
+                $data["addtime"] = time();
+                $donater_id = $m_donater->data($data)->add();
+            }
+            //至此根据表单输入获取或添加数据的donater id以存放在$donater_id中
+            $m_good = D("Good");
             $serial = strtoupper(trim($_POST["serial"]));
             $serial_array = preg_split('/[\s]+/', $serial);
             $errors = array();
@@ -29,11 +42,12 @@ class GoodAction extends BaseAction {
             //支持同一类物品同时输入多个条码号，统一添加数据
             foreach ($serial_array as $s) {
                 $_POST["serial"] = $s;
-                if (!$model->create()) {
-                    $errors[] = "编号为" . $s . "的数据出错：" . $model->getError() . "<br/>";
+                $_POST["donater_id"] = $donater_id;
+                if (!$m_good->create()) {
+                    $errors[] = "编号为" . $s . "的数据出错：" . $m_good->getError() . "<br/>";
                     break;
                 } else {
-                    $model->add();
+                    $m_good->add();
                     $success[] = "编号为" . $s . "的数据添加成功</br>";
                 }
             }
@@ -163,6 +177,18 @@ class GoodAction extends BaseAction {
     //领物回来添加record数据
     public function addRecord() {
         if ($this->isAjax()) {
+            //领用家庭姓名要求输名字，不用serial，故添加内容获取family id
+            $family_agent = empty($_POST["family_agent"]) ? "匿名受助家庭" : trim($_POST["family_agent"]);
+            $m_family = M("Family");
+            $family_id = $m_family->where("agent='$family_agent'")->getField("id");
+            if (!is_numeric($family_id)) {
+                $data["agent"] = $family_agent;
+                $data["status"] = 1;
+                $data["handman"] = get_session_user_id();
+                $data["addtime"] = time();
+                $family_id = $m_family->data($data)->add();
+            }
+            //family id获取结束
             $goodids = preg_split("/,/", trim($this->_param("good_id")));
             foreach ($goodids as &$value) {
                 //强制去除元素前后的空格
@@ -181,6 +207,7 @@ class GoodAction extends BaseAction {
             $success = array();
             foreach ($wellids as $goodid) {
                 $_POST["good_id"] = $goodid;
+                $_POST["family_id"] = $family_id;
                 if (!$m_record->create()) {
                     $errors[] = "物资ID为" . $goodid . "的数据出错：" . $m_record->getError() . "<br/>";
                     break;

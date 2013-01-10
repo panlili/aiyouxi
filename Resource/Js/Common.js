@@ -146,7 +146,7 @@ function callback_add_donater(json){
         alert(json.info);
     }else{
         $(".donaterlist:first").before(json.data);
-        $("#tabs-2 input:reset").click();
+        $("#tabs-1 input:reset").click();
         $("#message").html(json.info).show().slideUp(1500);
     }
 }

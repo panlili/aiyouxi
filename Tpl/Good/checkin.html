@@ -1,5 +1,6 @@
 <form class="common_form">
-    <p><label>捐赠人姓名：</label><input type="text" name="donater_id"/>(输入名字后选择，如数据库中无，则需先添加捐赠人)</p>
+    <!--<p><label>捐赠人姓名：</label><input type="text" name="donater_id"/>(输入名字后选择，如数据库中无，则需先添加捐赠人)</p>-->
+    <p><label>捐赠人姓名：</label><input type="text" name="donater_name"/></p>
     <p><label>*条码号：</label><input type="text" name="serial" style="width: 300px;"/>（不同条码的同类物资，条码用空格隔开）</p>
     <p><label>*物资名：</label>
         <input type="radio" name="name" value="大米"/>大米
@@ -68,6 +69,7 @@
             }
         });
 
+        /**根据输入姓名或编号获取donater id功能取消
         $( "input[name=donater_id]" ).autocomplete({
             source:function(request, response){
                 $.get("__APP__/Donater/getDonaterList",{serial: request.term },function(data){
@@ -92,7 +94,7 @@
                 },"JSON");
             }
         });
-
+        */
         $("a.change").qtip({
             content: {text:"点击修改捐赠者数据"},
             position: {my:  'left center',at: 'right center'}
