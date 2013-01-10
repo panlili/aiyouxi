@@ -188,33 +188,38 @@ class GoodAction extends BaseAction {
                 $data["addtime"] = time();
                 $family_id = $m_family->data($data)->add();
             }
-            //family id获取结束
-            $goodids = preg_split("/,/", trim($this->_param("good_id")));
-            foreach ($goodids as &$value) {
+
+            //获取物资编号框的内容
+            $oldserials = preg_split("/,/", trim($this->_param("good_serial")));
+            foreach ($oldserials as &$value) {
                 //强制去除元素前后的空格
-                $value = (int) ($value);
+                $value = trim($value);
             }
-            $wellids = array_filter(array_unique($goodids));
+            //除去重复和空的serial
+            $goodserials = array_filter(array_unique($oldserials));
 
-            //至此，good_id表单的数据处理完毕，全是数字id
-            if (0 == count($wellids)) {
-                $this->error("请填写物资");
-            }
-
-            $m_record = D("Record");
+            //至此多个物资编号变为A001 A002 B002这种形势的数组
             $m_good = D("Good");
+            $m_record = D("Record");
             $errors = array();
             $success = array();
-            foreach ($wellids as $goodid) {
-                $_POST["good_id"] = $goodid;
-                $_POST["family_id"] = $family_id;
-                if (!$m_record->create()) {
-                    $errors[] = "物资ID为" . $goodid . "的数据出错：" . $m_record->getError() . "<br/>";
-                    break;
+            foreach ($goodserials as $serial) {
+                //排除step=1
+                $goodid = $m_good->where("serial='$serial' AND status=1 AND step!=1")->getField("id");
+                if (!is_numeric($goodid)) {
+                    $errors[] = "编号为:" . $serial . "的物资不存在或物资非出库状态！<br/>";
                 } else {
-                    $m_record->add();
-                    $m_good->where("id='$goodid'")->setField("step", 3);
-                    $success[] = "物资ID为" . $goodid . "的数据领用登记成功<br/>";
+                    $_POST["good_id"] = $goodid;
+                    $_POST["family_id"] = $family_id;
+                    if (!$m_record->create()) {
+                        //排除step=3
+                        $errors[] = "编号为:" . $serial . "的物资出错：" . $m_record->getError() . "<br/>";
+                    } else {
+                        //只剩step=2的出库物资进行登记
+                        $m_record->add();
+                        $m_good->where("id='$goodid'")->setField("step", 3);
+                        $success[] = "编号为:" . $serial . "的物资领用登记成功！<br/>";
+                    }
                 }
             }
 

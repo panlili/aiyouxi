@@ -15,9 +15,13 @@
         <label>领用家庭姓名：</label>
         <input type="text" name="family_agent" />
     </p>
-    <p>
+<!--    <p>
         <label>物资编号：</label>
         <textarea name="good_id" rows="4" cols="40"></textarea>
+    </p>-->
+      <p>
+        <label>物资编号：</label>
+        <textarea name="good_serial" rows="4" cols="40"></textarea>【多个物资编号请用英文逗号隔开】
     </p>
     <p>
         <label>审核人：</label>
@@ -68,45 +72,45 @@
          */
 
         //物资的autocomplete,先定义两个函数
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) {
-            return split( term ).pop();
-        }
-
-        $( "textarea[name=good_id]" ).autocomplete({
-            source:function(request, response){
-                $.get("__APP__/Good/getGoodList",{serial: extractLast(request.term) },function(data){
-                    if(0==data.status)
-                    {
-                        if(window.confirm(data.info))
-                            window.location="__APP__/Good/checkin";
-                    }
-                    else
-                    {
-                        response($.map(data,function(data){
-                            return {
-                                label:"序号："+data.id+"，物资："+data.name+data.number+data.unit+"，编号："+data.serial,
-                                value:data.id
-                            }
-                        }));
-                    }
-                },"JSON");
-            },
-            select: function( event, ui ) {
-                var terms = split( this.value );
-                terms.pop();
-                terms.push( ui.item.value );
-                terms.push( "" );
-                this.value = terms.join( "," );
-                return false;
-            },
-            focus: function() {
-                // prevent value inserted on focus
-                return false;
-            }
-        });
+//        function split( val ) {
+//            return val.split( /,\s*/ );
+//        }
+//        function extractLast( term ) {
+//            return split( term ).pop();
+//        }
+//
+//        $( "textarea[name=good_id]" ).autocomplete({
+//            source:function(request, response){
+//                $.get("__APP__/Good/getGoodList",{serial: extractLast(request.term) },function(data){
+//                    if(0==data.status)
+//                    {
+//                        if(window.confirm(data.info))
+//                            window.location="__APP__/Good/checkin";
+//                    }
+//                    else
+//                    {
+//                        response($.map(data,function(data){
+//                            return {
+//                                label:"序号："+data.id+"，物资："+data.name+data.number+data.unit+"，编号："+data.serial,
+//                                value:data.id
+//                            }
+//                        }));
+//                    }
+//                },"JSON");
+//            },
+//            select: function( event, ui ) {
+//                var terms = split( this.value );
+//                terms.pop();
+//                terms.push( ui.item.value );
+//                terms.push( "" );
+//                this.value = terms.join( "," );
+//                return false;
+//            },
+//            focus: function() {
+//                // prevent value inserted on focus
+//                return false;
+//            }
+//        });
 
     });
 </script>

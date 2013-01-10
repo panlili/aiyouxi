@@ -29,6 +29,7 @@ class DonaterAction extends BaseAction {
         $this->display();
     }
 
+    //获取捐赠者autocomplete, 接收donater name
     public function getDonaterList() {
         if ($this->isAjax()) {
             $text = $this->_param("serial");
