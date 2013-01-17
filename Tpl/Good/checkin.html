@@ -1,7 +1,7 @@
 <form class="common_form">
     <!--<p><label>捐赠人姓名：</label><input type="text" name="donater_id"/>(输入名字后选择，如数据库中无，则需先添加捐赠人)</p>-->
     <p><label>捐赠人姓名：</label><input type="text" name="donater_name"/></p>
-    <p><label>*条码号：</label><input type="text" name="serial" style="width: 300px;"/>（不同条码的同类物资，条码用空格隔开）</p>
+    <p><label>*条码号：</label><input type="text" name="serial" style="width: 400px;"/>（不同条码的同类物资，条码用空格隔开）</p>
     <p><label>*物资名：</label>
         <input type="radio" name="name" value="大米"/>大米
         <input type="radio" name="name" value="盐"/>盐
@@ -19,7 +19,7 @@
     <p>
         <label>数量：</label><input type="text" name="number" value="1" style="width:40px"/>
         <input type="button" value="+" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>
-        <input type="button" value="-" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>
+        <input type="button" value="-" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>（数量是指每个条码对应的物资数，非条码号字段填写的条码个数。）
     </p>
     <p><label>单位：</label>
         <input type="radio" name="unit" value="个"/>个
