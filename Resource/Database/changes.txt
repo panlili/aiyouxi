@@ -27,3 +27,6 @@
 
 1025.rar
 	1.add field advice to family
+
+0223.zip
+	1.为good表增加了donateday字段，而不使用addtime作为捐赠日期了
