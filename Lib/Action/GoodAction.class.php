@@ -43,6 +43,7 @@ class GoodAction extends BaseAction {
             foreach ($serial_array as $s) {
                 $_POST["serial"] = $s;
                 $_POST["donater_id"] = $donater_id;
+                $_POST["donateday"] = trim($_POST["donateday"]) != "" ? $_POST["donateday"] : date("Y-m-d", time());
                 if (!$m_good->create()) {
                     $errors[] = "编号为" . $s . "的数据出错：" . $m_good->getError() . "<br/>";
                     break;
@@ -266,6 +267,18 @@ class GoodAction extends BaseAction {
         }
     }
 
+    /**
+    public function test() {
+        $m_good = M("Good");
+        $m_record=M("Record");
+        $map['distributeday']=array('neq',"2013-02-05");
+        $records = $m_record->order("good_id asc")->where($map)->select();
+        foreach ($records as $record) {
+           $good_id=$record["good_id"];
+           $m_good->where("id=$good_id")->setField("donateday","2013-01-15");
+        }
+    }
+    */
 }
 
 ?>

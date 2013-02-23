@@ -45,30 +45,24 @@ class AdminAction extends BaseAction {
             //接收物资数量
             $map["donatetime"] = array("between", array($analyse_time1, $analyse_time2));
             $get_wuzi = $model->where($map)->count();
-//            $get_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(donatetime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-//            $get_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(donatetime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-//            $get_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(donatetime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
             //发放物资的数量
             $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));
             $checkout_wuzi = $model->where($map)->count();
-//            $checkout_wuzi_month = $model->field(array("EXTRACT(MONTH from from_unixtime(checkouttime))" => "month", "COUNT(*)" => "count"))->where($map)->group('month')->select();
-//            $checkout_wuzi_week = $model->field(array("EXTRACT(WEEK from from_unixtime(checkouttime))" => "week", "COUNT(*)" => "count"))->where($map)->group('week')->select();
-//            $checkout_wuzi_day = $model->field(array("EXTRACT(DAY from from_unixtime(checkouttime))" => "day", "COUNT(*)" => "count"))->where($map)->group('day')->select();
             $map = array();
-            
+
             $donater=D("donater");
             $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
             $donater_total_count=$donater->count();
             $donater_add_count=$donater->where($map)->count();
             $map=array();
-            
+
             $family=D("family");
             $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
             $family_total_count=$family->count();
             $family_add_count=$family->where($map)->count();
             $map=array();
-            
+
             $goods=D("good");
             $map["step"]="库存中";
             $good_inbase=$goods->where($map)->count();
@@ -76,7 +70,7 @@ class AdminAction extends BaseAction {
             $good_outbase=$goods->where($map)->count();
             $map["step"]="已捐赠";
             $good_finish=$goods->where($map)->count();
-            
+
             $this->assign("analyse_time1",date("Y-m-d",$analyse_time1));
             $this->assign("analyse_time2",date("Y-m-d",$analyse_time2));
             $this->assign("donater_add_count",$donater_add_count);
@@ -86,13 +80,7 @@ class AdminAction extends BaseAction {
             $this->assign("good_inbase",$good_inbase);
             $this->assign("good_outbase",$good_outbase);
             $this->assign("good_finish",$good_finish);
-//            $this->assign("get_wuzi_month", $get_wuzi_month);
-//            $this->assign("get_wuzi_week", $get_wuzi_week);
-//            $this->assign("get_wuzi_day", $get_wuzi_day);
             $this->assign("get_wuzi", $get_wuzi);   //接收物资的数量
-//            $this->assign("checkout_wuzi_month", $checkout_wuzi_month);
-//            $this->assign("checkout_wuzi_week", $checkout_wuzi_week);
-//            $this->assign("checkout_wuzi_day", $checkout_wuzi_day);
             $this->assign("checkout_wuzi", $checkout_wuzi);  //发放物资的数量
 
             $content = $this->fetch("_result");

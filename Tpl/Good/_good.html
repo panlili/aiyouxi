@@ -20,7 +20,7 @@
                 <td>{$each.name}</td>
                 <td>{$each.number}{$each.unit}</td>
                 <td>{$each.measure}</td>
-                <td>{$each.addtime|date="Y-m-d",###}</td>
+                <td>{$each.donateday}</td>
                 <td>{$each.donater_id|get_donater_name_by_id}</td>
                 <td>{$each.step}</td>
                 <td>
@@ -51,6 +51,7 @@
         <p><label>单位:</label><input type="text" name="unit" value="{$olddata.unit}"/></p>
         <p><label>计量：</label><input type="text" name="measure" value="{$olddata.measure}"/></p>
         <p><label>捐赠人姓名：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/>【输入姓系统会自动提示，请从下拉列表选择一项】</p>
+        <p><label>捐赠日期：</label><input type="text" name="donateday" value="{$olddata.donateday}"</p>
         <p><label>收据号：</label><input type="text" name="receipt" value="{$olddata.receipt}"/></p>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
@@ -60,6 +61,10 @@
     </form>
 
     <script type="text/javascript">
+         $("input[name=donateday]").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
         var olddonaterid=$("input[name=donater_id]").val();
         $( "input[name=donater_id]" ).autocomplete({
             source:function(request, response){

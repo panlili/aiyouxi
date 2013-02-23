@@ -19,7 +19,7 @@
     <p>
         <label>数量：</label><input type="text" name="number" value="1" style="width:40px"/>
         <input type="button" value="+" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>
-        <input type="button" value="-" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>（数量是指每个条码对应的物资数，非条码号字段填写的条码个数。）
+        <input type="button" value="-" class="changeNumber" style="padding:0.2em 1em;height:25px;line-height: 18px"/>（数量是指每个条码对应的物资数，非条码号字段填写的条码个数）
     </p>
     <p><label>单位：</label>
         <input type="radio" name="unit" value="个"/>个
@@ -36,7 +36,7 @@
         自定义：<input type="text" name="unit" style="width: 48px;" />
     </p>
     <p><label>计量：</label><input type="text" name="measure"/>（重量等）</p>
-    
+    <p><label>捐赠日期：</label><input type="text" name="donateday"/>（如不填，捐赠日期默认为录入数据日期。如捐赠日非数据录入同一天，请填写此项）</p>
     <p><label>收据号：</label><input type="text" name="receipt"/></p>
     <p>
         <label>&nbsp;</label>
@@ -69,6 +69,9 @@
             }
         });
 
+        $("input[name=donateday]").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
         /**根据输入姓名或编号获取donater id功能取消
         $( "input[name=donater_id]" ).autocomplete({
             source:function(request, response){
@@ -94,7 +97,7 @@
                 },"JSON");
             }
         });
-        */
+         */
         $("a.change").qtip({
             content: {text:"点击修改捐赠者数据"},
             position: {my:  'left center',at: 'right center'}

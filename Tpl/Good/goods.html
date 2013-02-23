@@ -28,7 +28,7 @@
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
+                    <td>{$each.donateday}</td>
                     <td>{$each.donater_id|get_donater_name_by_id}</td>
                     <td>{$each.receipt}</td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
@@ -73,7 +73,7 @@
                     <td>{$each.name}</td>
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
+                    <td>{$each.donateday}</td>
                     <td>{$each.donater_id|get_donater_name_by_id}</td>
                     <td>{$each.checkouttime|date="Y-m-d,H:i",###}</td>
                     <td>{$each.checkoutman|get_user_truename_by_id}</td>
@@ -110,7 +110,7 @@
                     <td>{$each.number}{$each.unit}</td>
                     <td>{$each.measure}</td>
                     <td>{$each.donater_id|get_donater_name_by_id}</td>
-                    <td>{$each.addtime|date="Y-m-d",###}</td>
+                    <td>{$each.donateday}</td>
                     <td>{$each.record.distributeday}</td>
                     <td>{$each.record.serial}</td>
                     <td>{$each.record.family_id|get_family_serial_by_id}</td>

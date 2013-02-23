@@ -12,7 +12,7 @@
                     <h3>捐赠信息</h3>
                     <p><b>捐赠人：</b>{$each.donatername}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></p>
             <p><b>所捐物资名：</b>{$each.goodname}</p>
-            <p><b>捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}</p>
+            <p><b>捐赠时间：</b>{$each.donatetime}</p>
             </td>
             </tr>
             <tr>
@@ -49,7 +49,7 @@
         <volist name="index_result2" id="each">
             <tr>
                 <td>
-                    <p><b style="color:orangered;">所捐物资名：</b>{$each.goodname}&nbsp;&nbsp;<b style="color:orangered;">捐赠时间：</b>{$each.donatetime|date="Y-m-d",###}&nbsp;&nbsp;<b style="color:orangered;">状态：</b>{$each.step}</p>
+                    <p><b style="color:orangered;">所捐物资名：</b>{$each.goodname}&nbsp;&nbsp;<b style="color:orangered;">捐赠时间：</b>{$each.donatetime}&nbsp;&nbsp;<b style="color:orangered;">状态：</b>{$each.step}</p>
                     <p></p>
                 </td>
             </tr>

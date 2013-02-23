@@ -72,7 +72,7 @@
                 </tbody>
             </table>
             <!-- 物资信息表格 -->
-            <table class="common_table"> 
+            <table class="common_table">
                 <thead><tr><th style="width: 15%" colspan="2">领用物资</th><th colspan="9">{$goodcount}件</th></tr></thead>
                 <present name="goods">
                     <thead>
@@ -96,7 +96,7 @@
                             <td class="number"></td>
                             <td>{$each.goodserial}</td>
                             <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
-                            <td>{$each.donatetime|date="Y-m-d",###}</td>
+                            <td>{$each.donatetime}</td>
                             <td>{$each.donatername}</td>
                             <td>{$each.donaterserial}</td>
                             <td>{$each.checkouttime|date="Y-m-d",###}</td>

@@ -45,14 +45,14 @@ class RetrievalAction extends BaseAction {
         unset($queryArray[1]);
         //捐赠日期在数据库中是time形式
         if (!empty($queryArray["donatetimestart"]))
-            $queryArray["donatetimestart"] = strtotime($queryArray["donatetimestart"] . " 00:00:00");
+            $queryArray["donatetimestart"] = $queryArray["donatetimestart"];
         if (!empty($queryArray["donatetimeend"]))
-            $queryArray["donatetimeend"] = strtotime($queryArray["donatetimeend"] . " 23:59:59");
+            $queryArray["donatetimeend"] = $queryArray["donatetimeend"];
 
         //检索条件的构建
         $map = array();
-        $donatetimestart = strtotime("2004-01-01");
-        $donatetimeend = strtotime("2030-01-01");
+        $donatetimestart = "2004-01-01";
+        $donatetimeend = "2030-01-01";
         foreach ($queryArray as $key => $value) {
             if ($key != "donatetimestart" && $key != "donatetimeend") {
                 if (!empty($value)) {
