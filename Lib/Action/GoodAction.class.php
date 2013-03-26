@@ -91,11 +91,15 @@ class GoodAction extends BaseAction {
         if ($this->isAjax()) {
             //同一物资多次扫描去重复id
             $ids = array_unique($this->_param("ids"));
+            $checkoutday=  $this->_param("checkoutday");
+            if($checkoutday==""){
+                $checkoutday=date("Y-m-d", time());}
             $checkoutman = $this->_param("checkoutman");
             $m_good = D("Good");
             $error = 0;
             foreach ($ids as $id) {
-                $data = array("id" => $id, "checkouttime" => time(), "checkoutman" => $checkoutman, "step" => 2);
+                //$data = array("id" => $id, "checkouttime" => time(), "checkoutman" => $checkoutman, "step" => 2);
+                $data = array("id" => $id, "checkouttime" =>strtotime($checkoutday), "checkoutman" => $checkoutman, "step" => 2);
                 if (fales == $m_good->where("id='$id'")->setField($data)) {
                     $error++;
                 }

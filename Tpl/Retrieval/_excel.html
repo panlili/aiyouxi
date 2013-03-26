@@ -34,7 +34,7 @@
             <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
             <td>{$each.step}</td>
             <td>{$each.donatetime}</td>
-            <td>{$each.donatername|msubstr=0,1,'utf-8',false}<if condition="$each.donatersex eq '男'">先生<else/>女士</if></td>
+            <td>{$each.donatername}</td>
         <td>{$each.donaterphone}</td>
         <td>{$each.donaterserial}</td>
         <td>{$each.receipt}</td>
@@ -46,7 +46,7 @@
         <td>{$each.checkoutman|get_user_truename_by_id}</td>
         <td>{$each.familyserial}</td>
         <td>
-            {$each.agent|msubstr=0,1,'utf-8',false}<notempty name="each.agent"><if condition="$each.donatersex eq '男'">先生<else/>女士</if></notempty>
+            {$each.agent|msubstr=0,1,'utf-8',false}<notempty name="each.agent"><if condition="$each.agentsex eq '男'">先生<else/>女士</if></notempty>
         </td>
         <td>{$each.familyphone}</td>
         <td>{$each.address}</td>

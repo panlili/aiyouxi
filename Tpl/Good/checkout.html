@@ -13,7 +13,7 @@
                     </td>
                     <td style="vertical-align: top;">
                         <p style="text-align: left;margin-bottom:5px;">
-                            出库负责人:<php>echo user_select("checkoutman");</php>
+                            出库负责人:<php>echo user_select("checkoutman");</php>出库日期<input type="text" name="checkoutday" />
             <input type="button" value="出库所选" id="checkout"/>
             </p>
             <table class="common_table">              
@@ -46,6 +46,13 @@
     $(function(){
         $("#tabs").tabs();
         $("input:button").button();
+        
+        $("input[name=checkoutday]").datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function(dateText, inst) {
+               
+            }
+        });
 		
         //textarea接受扫描条码，获取数据展示在右侧列表中
         $("textarea").keydown(function(event) {
@@ -69,6 +76,7 @@
         $("#checkout").click(function(){
             //出货人的id
             var checkoutmanId=$("select option:selected").val();
+            var checkday=$("input[name=checkoutday]").val();
 
             var checked_ids=$(":checkbox:checked");
             var goodids=new Array();
@@ -81,7 +89,7 @@
                 alert("请选择物资");return;
             }
 
-            $.post("__APP__/Good/doCheckout", {checkoutman:checkoutmanId,ids:goodids}, function(data){
+            $.post("__APP__/Good/doCheckout", {checkoutman:checkoutmanId,ids:goodids,checkoutday:checkday}, function(data){
                 $("tr.fordelete").fadeOut("fast");
                 $("#message").html(data.info).show();
             }, "JSON");
