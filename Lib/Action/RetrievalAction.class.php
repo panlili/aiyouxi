@@ -30,7 +30,7 @@ class RetrievalAction extends BaseAction {
             import("ORG.Util.Page");
             $p = new Page($count, self::RECORDS_ONE_PAGE);
             $page = $p->show();
-            $result = $m_fullgood->where($map)->limit($p->firstRow . "," . $p->listRows)->select();
+            $result = $m_fullgood->where($map)->order("donatetime asc")->limit($p->firstRow . "," . $p->listRows)->select();
             $this->assign("page", $page);
             $this->assign("result", $result);
             $this->display();

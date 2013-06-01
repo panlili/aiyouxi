@@ -13,5 +13,5 @@ CREATE TABLE `ayx_location` (
 `name`  varchar(50)  NULL COMMENT '地点名' ,
 `comment`  text  NULL COMMENT '有关地点的注释' ,
 PRIMARY KEY (`id`)
-)
+) ENGINE=MyISAM;
 ;
