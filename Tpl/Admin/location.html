@@ -1,16 +1,63 @@
-<table class="common_table">
-    <thead>
-        <tr>
-            <th>序号</th><th>站点名</th><th>站点备注</th>
-        </tr>
-    </thead>
-    <tbody>
-    <volist name="locations" id="each">
-        <tr class="userlist">
-            <td>{$each.id}</td>
-            <td>{$each.name}</td>
-            <td>{$each.comment}</td>
-        </tr>
-    </volist>
-</tbody>
-</table>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">站点列表</a></li>
+        <li><a href="#tabs-2">添加站点</a></li>
+        <li><a href="#tabs-3">修改数据</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table class="common_table">
+            <thead>
+                <tr>
+                    <th>序号</th><th>站点名</th><th>站点备注</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="locations" id="each">
+                <tr class="userlist">
+                    <td><a class="change" href="#" onclick='get_data("__APP__/Location/getEditForm", $(this).text(), callback_get_location_edit_form);
+                            return false;'>{$each.id}</a></td>
+
+                    <td>{$each.name}</td>
+                    <td>{$each.comment}</td>                   
+
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <form class="common_form">
+            <p><label>*站点名:</label><input type="text" name="name"/></p>
+            <p><label>备注:</label><input type="text" name="comment"/></p>
+            
+            <p><label>&nbsp;</label>
+                <input type="button" value="添加站点"
+                       onclick="add_data('__APP__/Location/add', $('#tabs-2 .common_form').serialize(), callback_add_location);"/>
+                <input type="reset" value="重置" /></p>
+        </form>
+    </div>
+    <div id="tabs-3">
+        请从站点列表选择数据!
+    </div>
+</div>
+
+<script type="text/javascript">
+                        $(function() {
+                            $("#tabs").tabs();
+                            //按钮和重置键用Jquery ui 的button美化
+                            $("input:button,input:reset").button();
+                            //数据的id和禁用链接的数据提示
+                            $("a.status").qtip({
+                                content: {text: function() {
+                                        return $.trim($(this).text()) == "启用中" ? "点击禁用用户" : "点击启用用户";
+                                    }},
+                                position: {my: 'right center', at: 'left center'}
+                            });
+
+                            $("a.change").qtip({
+                                content: {text: "点击修改用户数据"},
+                                position: {my: 'left center', at: 'right center'}
+                            });
+                        });
+</script>

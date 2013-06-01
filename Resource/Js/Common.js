@@ -131,6 +131,33 @@ function callback_change_password(json){
     }
 }
 
+//location相关
+function callback_add_location(json){
+     if(0==json.status){
+        alert(json.info);
+    }else{
+        $(".locationlist:last").after(json.data);
+        $("#tabs-2 input:reset").click();
+        $("#message").html(json.info).show().slideUp(1500);
+    }
+}
+function callback_edit_location(json){
+    if(0==json.status){
+        alert(json.info);
+    }else{
+        $("#message").html(json.info).show().slideUp(1500);
+        $("#tabs-3").html("数据修改成功，刷新页面后进入数据列表能看到修改后的数据。");
+    }
+}
+function callback_get_location_edit_form(json){    
+    if(0==json.status){
+        alert(json.info);
+    }else{        
+        $("#tabs-3").html(json.data);
+        $("input:button,input:submit,input:reset").button();
+        $("#tabs").tabs().tabs('select', 2);
+    }
+}
 //donater相关
 function callback_toggle_donater_status(json){
     if(1==json.status){

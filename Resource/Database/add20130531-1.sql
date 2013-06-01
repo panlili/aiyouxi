@@ -1,4 +1,4 @@
-﻿ALTER TABLE `ayx_donater`
+ALTER TABLE `ayx_donater`
 ADD COLUMN `location`  int(11) NULL COMMENT '地点' AFTER `uptime`;
 ALTER TABLE `ayx_family`
 ADD COLUMN `location`  int(11) NULL COMMENT '地点' AFTER `uptime`;

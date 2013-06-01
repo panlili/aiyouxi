@@ -55,7 +55,8 @@ class BaseAction extends Action {
                     "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch", "_uploadphoto", "printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "changestatus", "unitsearch"),
-                "Retrieval" => array("index", "query", "toexcel")
+                "Retrieval" => array("index", "query", "toexcel"),
+                "Location"=>array("add","geteditform","edit")
             )
         );
         $flag = 0;
