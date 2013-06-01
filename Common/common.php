@@ -91,6 +91,11 @@ function auto_charset_my($fContents, $from = 'gbk', $to = 'utf-8') {
     }
 }
 
+//根据站点id获取站点名
+function get_location_name_by_id($id){
+    return !empty($id) ? M("Location")->where("id=$id")->getField("name") : "";
+}
+
 //生成汉语拼音
 function Pinyin($_String, $firstletter = '0', $_Code = 'gb2312') {
     $_DataKey = "a|ai|an|ang|ao|ba|bai|ban|bang|bao|bei|ben|beng|bi|bian|biao|bie|bin|bing|bo|bu|ca|cai|can|cang|cao|ce|ceng|cha" .

@@ -37,6 +37,29 @@ function right_select($selected = "") {
     return $str;
 }
 
+function location_select($selected = "") {
+    $html = "";
+    $m_location = M("Location");
+    $locations = $m_location->select();
+    if ("" == $selected) {
+        $html = '<select name="location">';
+        foreach ($locations as $location) {
+            $html.='<option value=' . $location["id"] . '>' . $location["name"] . '</option>';
+        }
+        $html.='</select>';
+    } else {
+        $location = $m_location->where("id= $selected")->find();
+        $html = '<select name="location">
+                <option value=' . $location["id"] . '>' . $location["name"] . '</option>
+                <option value=' . $location["id"] . '>--修改请重选--</option>';
+        foreach ($locations as $location) {
+            $html.='<option value=' . $location["id"] . '>' . $location["name"] . '</option>';
+        }
+        $html.='</select>';
+    }
+    return $html;
+}
+
 function reverseIt($arg) {
     if ($arg === "男")
         return "女";

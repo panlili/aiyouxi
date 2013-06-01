@@ -5,12 +5,20 @@ class AdminAction extends BaseAction {
     public static $method_array = array(
         "index" => "功能描述",
         "users" => "用户管理",
+        "location" => "站点管理",
         "analyse" => "统计分析",
-        "recyle" => "数据回收站",
+        "recyle" => "数据回收站"
     );
 
     //这一页做什么用?
     public function index() {
+        $this->display();
+    }
+
+    public function location() {
+        $m_location = D("Location");
+        $locationList = $m_location->select();
+        $this->assign("locations", $locationList);
         $this->display();
     }
 
@@ -51,35 +59,35 @@ class AdminAction extends BaseAction {
             $checkout_wuzi = $model->where($map)->count();
             $map = array();
 
-            $donater=D("donater");
+            $donater = D("donater");
             $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
-            $donater_total_count=$donater->count();
-            $donater_add_count=$donater->where($map)->count();
-            $map=array();
+            $donater_total_count = $donater->count();
+            $donater_add_count = $donater->where($map)->count();
+            $map = array();
 
-            $family=D("family");
+            $family = D("family");
             $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
-            $family_total_count=$family->count();
-            $family_add_count=$family->where($map)->count();
-            $map=array();
+            $family_total_count = $family->count();
+            $family_add_count = $family->where($map)->count();
+            $map = array();
 
-            $goods=D("good");
-            $map["step"]="库存中";
-            $good_inbase=$goods->where($map)->count();
-            $map["step"]="出库中";
-            $good_outbase=$goods->where($map)->count();
-            $map["step"]="已捐赠";
-            $good_finish=$goods->where($map)->count();
+            $goods = D("good");
+            $map["step"] = "库存中";
+            $good_inbase = $goods->where($map)->count();
+            $map["step"] = "出库中";
+            $good_outbase = $goods->where($map)->count();
+            $map["step"] = "已捐赠";
+            $good_finish = $goods->where($map)->count();
 
-            $this->assign("analyse_time1",date("Y-m-d",$analyse_time1));
-            $this->assign("analyse_time2",date("Y-m-d",$analyse_time2));
-            $this->assign("donater_add_count",$donater_add_count);
-            $this->assign("donater_total_count",$donater_total_count);
-            $this->assign("family_add_count",$family_add_count);
-            $this->assign("family_total_count",$family_total_count);
-            $this->assign("good_inbase",$good_inbase);
-            $this->assign("good_outbase",$good_outbase);
-            $this->assign("good_finish",$good_finish);
+            $this->assign("analyse_time1", date("Y-m-d", $analyse_time1));
+            $this->assign("analyse_time2", date("Y-m-d", $analyse_time2));
+            $this->assign("donater_add_count", $donater_add_count);
+            $this->assign("donater_total_count", $donater_total_count);
+            $this->assign("family_add_count", $family_add_count);
+            $this->assign("family_total_count", $family_total_count);
+            $this->assign("good_inbase", $good_inbase);
+            $this->assign("good_outbase", $good_outbase);
+            $this->assign("good_finish", $good_finish);
             $this->assign("get_wuzi", $get_wuzi);   //接收物资的数量
             $this->assign("checkout_wuzi", $checkout_wuzi);  //发放物资的数量
 

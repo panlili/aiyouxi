@@ -48,7 +48,7 @@ class BaseAction extends Action {
             //超级管理员
             "2" => array(
                 "Admin" => array("index", "users", "analyse", "tongji", "changestatus", "changepassword",
-                    "recyle", "recyledata", "deletedata", "add", "geteditform", "edit"),
+                    "recyle", "recyledata", "deletedata", "add", "geteditform", "edit", "location"),
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit",
                     "changestatus", "unitsearch", "getpinyin"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",

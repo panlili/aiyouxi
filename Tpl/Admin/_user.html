@@ -6,6 +6,7 @@
         <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$newdata.id}</a></td>
         <td>{$newdata.username}</td>
         <td>{$newdata.truename}</td>
+        <td>{$newdata.location|get_location_name_by_id}</td>
         <td>{$newdata.right}</td>
         <td>{$newdata.comment}</td>
         <td>{$newdata.addtime|date="Y-m-d,H:i:s",###}</td>
@@ -26,6 +27,7 @@
     <form class="common_form">
         <p><label>*用户名:</label><input type="text" name="username" value="{$olddata.username}"/></p>
         <p><label>*姓名:</label><input type="text" name="truename" value="{$olddata.truename}"/></p>
+        <p><label>所属站点:</label>{$olddata.location|location_select}</p>
         <p><label>权限级别:</label>{$olddata.right|right_select}</p>
         <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}</textarea></p>
         <p><label>&nbsp;</label>

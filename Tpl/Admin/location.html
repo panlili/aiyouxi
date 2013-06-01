@@ -1,0 +1,16 @@
+<table class="common_table">
+    <thead>
+        <tr>
+            <th>序号</th><th>站点名</th><th>站点备注</th>
+        </tr>
+    </thead>
+    <tbody>
+    <volist name="locations" id="each">
+        <tr class="userlist">
+            <td>{$each.id}</td>
+            <td>{$each.name}</td>
+            <td>{$each.comment}</td>
+        </tr>
+    </volist>
+</tbody>
+</table>

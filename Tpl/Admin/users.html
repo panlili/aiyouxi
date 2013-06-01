@@ -8,7 +8,7 @@
         <table class="common_table">
             <thead>
                 <tr>
-                    <th>序号</th><th>用户名</th><th>姓名</th><th>权限级别</th><th>备注</th><th>添加日期</th>
+                    <th>序号</th><th>用户名</th><th>姓名</th><th>所属站点</th><th>权限级别</th><th>备注</th><th>添加日期</th>
                     <th>上次登陆</th><th>登陆IP</th><th>登陆次数</th><th>状态</th>
                 </tr>
             </thead>
@@ -18,6 +18,7 @@
                     <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.username}</td>
                     <td>{$each.truename}</td>
+                    <td>{$each.location|get_location_name_by_id}</td>
                     <td>{$each.right}</td>
                     <td>{$each.comment}</td>
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
@@ -44,6 +45,7 @@
             <p><label>*用户名:</label><input type="text" name="username"/></p>
             <p><label>*密码:</label><input type="text" name="password"/></p>
             <p><label>*姓名:</label><input type="text" name="truename"/></p>
+            <p><label>所属站点:</label><php>echo location_select()</php></p>
             <p><label>权限级别:</label><php>echo right_select();</php></p>
             <p><label>备注：</label><textarea name="comment" rows="4" cols="30" wrap="virtual"></textarea></p>
             <p><label>&nbsp;</label>
