@@ -14,12 +14,12 @@
             </thead>
             <tbody>
             <volist name="locations" id="each">
-                <tr class="userlist">
+                <tr class="locationlist">
                     <td><a class="change" href="#" onclick='get_data("__APP__/Location/getEditForm", $(this).text(), callback_get_location_edit_form);
                             return false;'>{$each.id}</a></td>
 
                     <td>{$each.name}</td>
-                    <td>{$each.comment}</td>                   
+                    <td>{$each.comment}</td>
 
                 </tr>
             </volist>
@@ -30,7 +30,7 @@
         <form class="common_form">
             <p><label>*站点名:</label><input type="text" name="name"/></p>
             <p><label>备注:</label><input type="text" name="comment"/></p>
-            
+
             <p><label>&nbsp;</label>
                 <input type="button" value="添加站点"
                        onclick="add_data('__APP__/Location/add', $('#tabs-2 .common_form').serialize(), callback_add_location);"/>
@@ -47,16 +47,9 @@
                             $("#tabs").tabs();
                             //按钮和重置键用Jquery ui 的button美化
                             $("input:button,input:reset").button();
-                            //数据的id和禁用链接的数据提示
-                            $("a.status").qtip({
-                                content: {text: function() {
-                                        return $.trim($(this).text()) == "启用中" ? "点击禁用用户" : "点击启用用户";
-                                    }},
-                                position: {my: 'right center', at: 'left center'}
-                            });
 
                             $("a.change").qtip({
-                                content: {text: "点击修改用户数据"},
+                                content: {text: "点击修改站点数据"},
                                 position: {my: 'left center', at: 'right center'}
                             });
                         });

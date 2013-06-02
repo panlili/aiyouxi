@@ -7,10 +7,6 @@ class RetrievalAction extends BaseAction {
         "query" => "检索结果"
     );
 
-    public function index() {
-        $this->display();
-    }
-
     public function query() {
         $m_fullgood = M("Fullgood");
         if (array_key_exists("step", $this->_param())) {

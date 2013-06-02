@@ -1,17 +1,8 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of LocationAction
- *
- * @author Administrator
- */
 class LocationAction extends BaseAction{
-    //put your code here
+    //  主要用到继承的三个action: array("add","geteditform","edit")
 }
 
 ?>

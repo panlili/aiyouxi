@@ -10,10 +10,6 @@ class GoodAction extends BaseAction {
         "goods" => "物资管理"
     );
 
-    public function index() {
-        $this->display();
-    }
-
     public function checkin() {
         $this->display();
     }

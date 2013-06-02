@@ -10,11 +10,6 @@ class AdminAction extends BaseAction {
         "recyle" => "数据回收站"
     );
 
-    //这一页做什么用?
-    public function index() {
-        $this->display();
-    }
-
     public function location() {
         $m_location = D("Location");
         $locationList = $m_location->select();

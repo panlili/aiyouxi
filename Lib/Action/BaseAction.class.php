@@ -56,7 +56,7 @@ class BaseAction extends Action {
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "changestatus", "unitsearch"),
                 "Retrieval" => array("index", "query", "toexcel"),
-                "Location"=>array("add","geteditform","edit")
+                "Location" => array("add", "geteditform", "edit")
             )
         );
         $flag = 0;
@@ -81,6 +81,10 @@ class BaseAction extends Action {
 
     public function _empty() {
         $this->redirect($this->getActionName() . "/index");
+    }
+
+    public function index() {
+        $this->display();
     }
 
     //curd相关的操作方法

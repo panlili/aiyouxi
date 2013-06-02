@@ -7,10 +7,6 @@ class DonaterAction extends BaseAction {
         "donaters" => "捐赠人管理"
     );
 
-    public function index() {
-        $this->display();
-    }
-
     public function donaters() {
         $m_donater = M("donater");
         $m_good = M("Good");

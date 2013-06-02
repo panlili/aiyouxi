@@ -8,10 +8,6 @@ class FamilyAction extends BaseAction {
         "survey" => "困难家庭调研",
     );
 
-    public function index() {
-        $this->display();
-    }
-
     public function families() {
         $m_family = M("Family");
         $m_record = M("Record");
