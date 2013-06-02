@@ -4,8 +4,8 @@ class AdminAction extends BaseAction {
 
     public static $method_array = array(
         "index" => "功能描述",
-        "users" => "用户管理",
         "location" => "站点管理",
+        "users" => "用户管理",
         "analyse" => "统计分析",
         "recyle" => "数据回收站"
     );

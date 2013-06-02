@@ -138,7 +138,7 @@ class BaseAction extends Action {
                 if ($model->save()) {
                     $this->success("数据更新成功");
                 } else {
-                    $this->error("写入数据库错误");
+                    $this->error("未修改数据或写入数据库错误");
                 }
             } else {
                 $this->error($model->getError());

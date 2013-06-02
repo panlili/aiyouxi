@@ -92,7 +92,9 @@ class SearchAction extends Action {
             session("username", $result["username"]);
             session("truename", $result["truename"]);
             session("right", $result["right"]);
-            session("location",$result["location"]);//点位信息
+            //点位信息,同时保存location的id和name
+            session("locationid",$result["location"]);
+            session("locationname",  get_location_name_by_id($result["location"]));
             //保存登录信息
             $data['id'] = $result['id'];
             $data['lastlogintime'] = time();
