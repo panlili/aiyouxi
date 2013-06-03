@@ -12,7 +12,16 @@ class AdminAction extends BaseAction {
 
     public function location() {
         $m_location = D("Location");
+        $v_fullgood = M("Fullgood");
+
         $locationList = $m_location->select();
+        foreach ($locationList as &$location) {
+            if ("所有站点" !== $location["name"]) {
+                $location["number"] = $v_fullgood->where("location='$location[id]'")->count();
+            } else {
+                $location["number"] = $v_fullgood->count();
+            }
+        }
         $this->assign("locations", $locationList);
         $this->display();
     }

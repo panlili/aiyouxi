@@ -9,7 +9,7 @@
         <table class="common_table">
             <thead>
                 <tr>
-                    <th>序号</th><th>站点名</th><th>站点备注</th>
+                    <th>序号</th><th>站点名</th><th>物资数量</th><th>站点备注</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +19,7 @@
                             return false;'>{$each.id}</a></td>
 
                     <td>{$each.name}</td>
+                    <td>{$each.number}</td>
                     <td>{$each.comment}</td>
 
                 </tr>
