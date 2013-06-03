@@ -1,8 +1,5 @@
 <form class="common_form">
     <!--<p><label>捐赠人姓名：</label><input type="text" name="donater_id"/>(输入名字后选择，如数据库中无，则需先添加捐赠人)</p>-->
-     <if condition="is_all_user() eq TRUE">
-                <p><label>所属站点：</label><?php echo location_select()?></p>
-                </if>
     <p><label>捐赠人姓名：</label><input type="text" name="donater_name"/></p>
     <p><label>*条码号：</label><input type="text" name="serial" style="width: 400px;"/>（不同条码的同类物资，条码用空格隔开）</p>
     <p><label>*物资名：</label>

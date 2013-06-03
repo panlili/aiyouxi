@@ -66,6 +66,17 @@ function location_select($selected = "") {
     return $html;
 }
 
+function location_select_for_retrieval_index() {
+    $m_location = M("Location");
+    $locations = $m_location->select();
+    $html = '<select name="location">';
+    foreach ($locations as $location) {
+        $html.='<option value=' . $location["id"] . '>' . $location["name"] . '</option>';
+    }
+    $html.='</select>';
+    return $html;
+}
+
 function reverseIt($arg) {
     if ($arg === "男")
         return "女";
@@ -73,13 +84,22 @@ function reverseIt($arg) {
         return "男";
 }
 
+//出库登记处的出库负责人，去掉选项，直接用当前登陆的用户代替
 function user_select($name) {
     $m_user = M("User");
-    $users = $m_user->where("status=1")->select();
+//    $users = $m_user->where("status=1")->select();
+//    foreach ($users as $key => $user) {
+//        if ("所有站点" === get_location_name_by_id($user["location"])) {
+//            unset($users[$key]);
+//        }
+//    }
+//    $html = '<select name=' . $name . '>';
+//    foreach ($users as $user) {
+//        $html.='<option value=' . $user["id"] . '>' . $user["truename"] . '</option>';
+//    }
+    $user = $m_user->where("id=" . session('uid'))->find();
     $html = '<select name=' . $name . '>';
-    foreach ($users as $user) {
-        $html.='<option value=' . $user["id"] . '>' . $user["truename"] . '</option>';
-    }
+    $html.='<option value=' . $user["id"] . '>' . $user["truename"] . '</option>';
     $html.='</select>';
     return $html;
 }

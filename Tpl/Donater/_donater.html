@@ -82,9 +82,6 @@
         </notempty>
         </p>
         <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}</textarea></p>
-         <if condition="is_all_user() eq TRUE">
-                <p><label>所属站点：</label><?php echo location_select()?></p>
-                </if>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Donater/edit',$('#tabs-3 .common_form').serialize(),callback_edit_donater);"/>

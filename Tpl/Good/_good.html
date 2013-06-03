@@ -59,9 +59,6 @@
         <p><label>捐赠人姓名：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/>【输入姓系统会自动提示，请从下拉列表选择一项】</p>
         <p><label>捐赠日期：</label><input type="text" name="donateday" value="{$olddata.donateday}"</p>
         <p><label>收据号：</label><input type="text" name="receipt" value="{$olddata.receipt}"/></p>
-         <if condition="is_all_user() eq TRUE">
-                <p><label>所属站点：</label><?php echo location_select()?></p>
-                </if>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Good/edit',$('#tabs-2 .common_form').serialize(),callback_edit_good);"/>

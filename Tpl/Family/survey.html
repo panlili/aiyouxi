@@ -75,9 +75,6 @@
             <p><label>备注：</label><textarea name="comment" cols="30" rows="5" wrap="virtual"></textarea></p>
             <p><label>调研人员：</label><input type="text" name="survery"/></p>
             <p><label>帮扶建议：</label><textarea name="advice" cols="30" rows="5" wrap="virtual"></textarea></p>
-            <if condition="is_all_user() eq TRUE">
-                <p><label>所属站点：</label><?php echo location_select()?></p>
-                </if>
             <p>
                 <label>&nbsp;</label>
                 <!--<input type="button" value="添加数据" onclick="add_data('__APP__/Family/add',$('#tabs-2 .common_form').serialize(),callback_add_family);"/>-->
