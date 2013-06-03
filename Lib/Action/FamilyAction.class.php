@@ -14,6 +14,10 @@ class FamilyAction extends BaseAction {
         import("ORG.Util.Page");
         $map["status"] = 1;
         $map["serial"] = array("neq", "");
+        //多站点
+        if (FALSE === is_all_user()){
+            $map["location"]=array("neq",session("locationid"));
+        }
         $count = $m_family->where($map)->count();
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
@@ -51,10 +55,23 @@ class FamilyAction extends BaseAction {
     public function survey() {
         $m_family = M("Family");
         import("ORG.Util.Page");
-        $count = $m_family->where("status=1")->count();
+        
+         if (FALSE === is_all_user()){
+        $count = $m_family->where("status=1 and location=" . session("locationid"))->count();
+        
+        }  else {
+            $count = $m_family->where("status=1")->count();
+        }
+        
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
-        $familyList = $m_family->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
+        
+        if (FALSE === is_all_user()){
+            $familyList = $m_family->order("id desc")->where("status=1 and location=" . session("locationid"))->limit($p->firstRow . ',' . $p->listRows)->select();
+        }  else {
+            $familyList = $m_family->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
+        }
+        
         $this->assign("families", $familyList);
         $this->assign("page", $page);
         $this->display();

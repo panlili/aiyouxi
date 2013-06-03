@@ -11,10 +11,21 @@ class DonaterAction extends BaseAction {
         $m_donater = M("donater");
         $m_good = M("Good");
         import("ORG.Util.Page");
-        $count = $m_donater->where("status=1")->count();
+//如果是可以看所有站点的用户，提供所有站点的数据，特定站点的用户，提供特定站点的数据
+        if (FALSE === is_all_user()) {
+            $count = $m_donater->where("status=1 and location=" . session("locationid"))->count();
+        } else {
+            $count = $m_donater->where("status=1")->count();
+        }
+
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
-        $donaterList = $m_donater->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
+        //多站点改造
+        if (FALSE === is_all_user()) {
+            $donaterList = $m_donater->order("id desc")->where("status=1 and location=" . session("locationid"))->limit($p->firstRow . ',' . $p->listRows)->select();
+        } else {
+            $donaterList = $m_donater->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
+        }
         foreach ($donaterList as &$donater) {
             $donaterId = $donater["id"];
             $goodNumber = $m_good->where("donater_id='$donaterId'")->count();
@@ -25,7 +36,7 @@ class DonaterAction extends BaseAction {
         $this->display();
     }
 
-    //获取捐赠者autocomplete, 接收donater name
+//获取捐赠者autocomplete, 接收donater name
     public function getDonaterList() {
         if ($this->isAjax()) {
             $text = $this->_param("serial");
@@ -42,11 +53,11 @@ class DonaterAction extends BaseAction {
         }
     }
 
-    //根据捐赠者姓名生成serial
-    public function getPinyin(){
+//根据捐赠者姓名生成serial
+    public function getPinyin() {
         $text = $this->_param("text");
-        $text = strtoupper(Pinyin($text, 1, 1).date("Ym"));
-        $this->ajaxReturn($text,"",1);
+        $text = strtoupper(Pinyin($text, 1, 1) . date("Ym"));
+        $this->ajaxReturn($text, "", 1);
     }
 
 }

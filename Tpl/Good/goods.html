@@ -17,6 +17,9 @@
                     <th>经手人</th>
                     <th>录入</th>
                     <th>修改</th>
+                     <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
                     <th>删除</th>
                 </tr>
             </thead>
@@ -38,6 +41,9 @@
                     {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
+                 <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
                 <td>
                     <a class="delete" href="#"
                        onclick="toggle_status('__APP__/Good/changeStatus','{$each.id}',callback_toggle_good_status);return false;">
@@ -63,6 +69,9 @@
                     <th>出库时间</th>
                     <th>出库领取人</th>
                     <th>经手人</th>
+                    <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +87,9 @@
                     <td>{$each.checkouttime|date="Y-m-d,H:i",###}</td>
                     <td>{$each.checkoutman|get_user_truename_by_id}</td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
+                     <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
                 </tr>
             </volist>
             </tbody>
@@ -98,6 +110,9 @@
                     <th>受助家庭编号</th>
                     <th>家庭代表</th>
                     <th>经手人</th><th>审核人</th>
+                    <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
                 </tr>
             </thead>
             <tbody>
@@ -117,6 +132,9 @@
                     <td>{$each.record.family_id|get_family_agent_by_id}</td>
                     <td>{$each.record.handman|get_user_truename_by_id}</td>
                     <td>{$each.record.verifier|get_user_truename_by_id}</td>
+                     <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
                 </tr>
             </volist>
             </tbody>

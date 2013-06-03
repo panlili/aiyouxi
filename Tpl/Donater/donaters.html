@@ -9,8 +9,12 @@
             <thead>
                 <tr>
                     <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>已捐物资数</th><th>联系电话</th>
-                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th>删除</th>
-                </tr>
+                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
+            <if condition="is_all_user() eq TRUE">
+                <th>所属站点</th>
+            </if>
+            <th>删除</th>
+            </tr>
             </thead>
             <tbody>
             <volist name="donaters" id="each">
@@ -28,6 +32,10 @@
                     {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
+                
+                <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
                 <td>{$each.handman|get_user_truename_by_id}</td>
                 <!-- 数据删除不真删除，而是将其status转换为0 -->
                 <td>
@@ -53,6 +61,9 @@
             <p>
                 <label>备注：</label><textarea name="comment" cols="30" rows="5" wrap="virtual"></textarea>
             </p>
+             <if condition="is_all_user() eq TRUE">
+                <p><label>所属站点：</label><?php echo location_select()?></p>
+                </if>
             <p>
                 <label>&nbsp;</label>
                 <input type="button" value="添加数据" onclick="add_data('__APP__/Donater/add',$('#tabs-1 .common_form').serialize(),callback_add_donater);"/>

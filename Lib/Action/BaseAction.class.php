@@ -171,7 +171,14 @@ class BaseAction extends Action {
             $searchfield = $this->_param("search_field");
             $search_key = trim($this->_param("search_key"));
             $model = D($action_name);
-            $tmp = $searchfield . " like '%" . $search_key . "%'";
+            
+            //如果是可以看所有站点的用户，提供所有站点的数据，特定站点的用户，提供特定站点的数据
+            if (FALSE === is_all_user()) {
+                $tmp = $searchfield . " like '%" . $search_key . "%' and location=" . session("locationid");
+            }  else {
+                $tmp = $searchfield . " like '%" . $search_key . "%' ";
+            }
+            
             if ($searchfield != "") {
                 $_SESSION['sKey'] = $tmp;
             }

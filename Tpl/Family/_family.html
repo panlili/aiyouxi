@@ -4,7 +4,11 @@
         <thead>
             <tr>
                 <th>编号</th><th>家庭代表</th><th>性别</th>
-                <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th><th>详情</th>
+                <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th>
+                <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
+                <th>详情</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +21,9 @@
                 <td>{$each.address}</td>
                 <td>{$each.idcard}</td>
                 <td>{$each.phone}</td>
+                 <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
                 <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
             </tr>
         </volist>

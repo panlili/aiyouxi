@@ -10,6 +10,9 @@
                 <th>捐赠日期</th><th>捐赠人</th>
                 <th>库存状态</th><th>出库日期</th><th>收据号</th>
                 <th>经手人</th>
+                 <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +33,9 @@
             </td>
             <td>{$each.receipt}</td>
             <td>{$each.handman|get_user_truename_by_id}</td>
+            <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
             </tr>
         </volist>
         </tbody>
@@ -53,6 +59,9 @@
         <p><label>捐赠人姓名：</label><input type="text" name="donater_id" value="{$olddata.donater_id}"/>【输入姓系统会自动提示，请从下拉列表选择一项】</p>
         <p><label>捐赠日期：</label><input type="text" name="donateday" value="{$olddata.donateday}"</p>
         <p><label>收据号：</label><input type="text" name="receipt" value="{$olddata.receipt}"/></p>
+         <if condition="is_all_user() eq TRUE">
+                <p><label>所属站点：</label><?php echo location_select()?></p>
+                </if>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Good/edit',$('#tabs-2 .common_form').serialize(),callback_edit_good);"/>

@@ -5,7 +5,10 @@
             <tr>
                 <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
                 <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
-            </tr>
+        <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
+        </tr>
         </thead>
         <tbody>
         <volist name="datalist" id="each">
@@ -19,6 +22,9 @@
                 <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
                 <td><notempty name="each.uptime">{$each.uptime|date="Y-m-d,H:i:s",###}</notempty></td>
             <td>{$each.handman|get_user_truename_by_id}</td>
+            <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
             </tr>
         </volist>
         </tbody>
@@ -48,6 +54,9 @@
         <td>{$newdata.addtime|date="Y-m-d,H:i",###}</td>
         <td></td>
         <td>{$newdata.handman|get_user_truename_by_id}</td>
+        <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
         <!-- 数据删除不真删除，而是将其status转换为0 -->
         <td>
             <a class="delete" href="#"
@@ -73,6 +82,9 @@
         </notempty>
         </p>
         <p><label>备注：</label><textarea name="comment" rows="4" cols="30">{$olddata.comment}</textarea></p>
+         <if condition="is_all_user() eq TRUE">
+                <p><label>所属站点：</label><?php echo location_select()?></p>
+                </if>
         <p><label>&nbsp;</label>
             <input type="button" value="修改数据"
                    onclick="edit_data('__APP__/Donater/edit',$('#tabs-3 .common_form').serialize(),callback_edit_donater);"/>
