@@ -69,8 +69,8 @@ class GoodAction extends BaseAction {
         if ($this->isAjax()) {
             $serial = $this->_param("serial");
             $m_good = M("Good");
-            //与扫描条码一致，且step=1(库存中状态)
-            $good = $m_good->where("serial='$serial' AND step=1")->find();
+            //与扫描条码一致，且step=1(库存中状态)，且是当前用户所在的站点物资
+            $good = $m_good->where("serial='$serial' AND step=1 And location=" . session('locationid'))->find();
             if (false != $good) {
                 $this->assign("good", $good);
                 $content = $this->fetch("_good");
@@ -87,15 +87,16 @@ class GoodAction extends BaseAction {
         if ($this->isAjax()) {
             //同一物资多次扫描去重复id
             $ids = array_unique($this->_param("ids"));
-            $checkoutday=  $this->_param("checkoutday");
-            if($checkoutday==""){
-                $checkoutday=date("Y-m-d", time());}
+            $checkoutday = $this->_param("checkoutday");
+            if ($checkoutday == "") {
+                $checkoutday = date("Y-m-d", time());
+            }
             $checkoutman = $this->_param("checkoutman");
             $m_good = D("Good");
             $error = 0;
             foreach ($ids as $id) {
                 //$data = array("id" => $id, "checkouttime" => time(), "checkoutman" => $checkoutman, "step" => 2);
-                $data = array("id" => $id, "checkouttime" =>strtotime($checkoutday), "checkoutman" => $checkoutman, "step" => 2);
+                $data = array("id" => $id, "checkouttime" => strtotime($checkoutday), "checkoutman" => $checkoutman, "step" => 2);
                 if (fales == $m_good->where("id='$id'")->setField($data)) {
                     $error++;
                 }
@@ -134,54 +135,54 @@ class GoodAction extends BaseAction {
         $m_good = D("Good");
         import("ORG.Util.Page");
         //在库物资,step=1
-         if (FALSE === is_all_user()){
-            $count1 = $m_good->where("status=1 AND step=1 and location=" . session("locationid"))->count(); 
-         }  else {
-            $count1 = $m_good->where("status=1 AND step=1")->count(); 
-         }
-        
+        if (FALSE === is_all_user()) {
+            $count1 = $m_good->where("status=1 AND step=1 and location=" . session("locationid"))->count();
+        } else {
+            $count1 = $m_good->where("status=1 AND step=1")->count();
+        }
+
         $p1 = new Page($count1, self::RECORDS_ONE_PAGE);
         $page1 = $p1->show();
-         if (FALSE === is_all_user()){
-             $goodList1 = $m_good->order("id desc")->where("status=1 AND step=1 and location=" . session("locationid"))->limit($p1->firstRow . ',' . $p1->listRows)->select();
-         }  else {
-            $goodList1 = $m_good->order("id desc")->where("status=1 AND step=1")->limit($p1->firstRow . ',' . $p1->listRows)->select(); 
-         }
-        
+        if (FALSE === is_all_user()) {
+            $goodList1 = $m_good->order("id desc")->where("status=1 AND step=1 and location=" . session("locationid"))->limit($p1->firstRow . ',' . $p1->listRows)->select();
+        } else {
+            $goodList1 = $m_good->order("id desc")->where("status=1 AND step=1")->limit($p1->firstRow . ',' . $p1->listRows)->select();
+        }
+
         $this->assign("goods1", $goodList1);
         $this->assign("page1", $page1);
         //出库物资,step=2
-         if (FALSE === is_all_user()){
-             $count2 = $m_good->where("status=1 AND step=2 and location=" . session("locationid"))->count();
-         }  else {
-             $count2 = $m_good->where("status=1 AND step=2")->count();
-         }
-        
+        if (FALSE === is_all_user()) {
+            $count2 = $m_good->where("status=1 AND step=2 and location=" . session("locationid"))->count();
+        } else {
+            $count2 = $m_good->where("status=1 AND step=2")->count();
+        }
+
         $p2 = new Page($count2, self::RECORDS_ONE_PAGE);
         $page2 = $p2->show();
-         if (FALSE === is_all_user()){
-             $goodList2 = $m_good->order("checkouttime desc")->where("status=1 AND step=2 and location=" . session("locationid"))->limit($p2->firstRow . ',' . $p2->listRows)->select();
-         }  else {
-             $goodList2 = $m_good->order("checkouttime desc")->where("status=1 AND step=2")->limit($p2->firstRow . ',' . $p2->listRows)->select();
-         }
-        
+        if (FALSE === is_all_user()) {
+            $goodList2 = $m_good->order("checkouttime desc")->where("status=1 AND step=2 and location=" . session("locationid"))->limit($p2->firstRow . ',' . $p2->listRows)->select();
+        } else {
+            $goodList2 = $m_good->order("checkouttime desc")->where("status=1 AND step=2")->limit($p2->firstRow . ',' . $p2->listRows)->select();
+        }
+
         $this->assign("goods2", $goodList2);
         $this->assign("page2", $page2);
         //已捐物资,step=3
-         if (FALSE === is_all_user()){
-             $count3 = $m_good->where("status=1 AND step=3 and location=" . session("locationid"))->count();
-         }  else {
-             $count3 = $m_good->where("status=1 AND step=3")->count();
-         }
-        
+        if (FALSE === is_all_user()) {
+            $count3 = $m_good->where("status=1 AND step=3 and location=" . session("locationid"))->count();
+        } else {
+            $count3 = $m_good->where("status=1 AND step=3")->count();
+        }
+
         $p3 = new Page($count3, self::RECORDS_ONE_PAGE);
         $page3 = $p3->show();
-         if (FALSE === is_all_user()){
-            $goodList3 = $m_good->relation("record")->order("uptime desc")->where("status=1 AND step=3 and location=" . session("locationid"))->limit($p3->firstRow . ',' . $p3->listRows)->select(); 
-         }  else {
-             $goodList3 = $m_good->relation("record")->order("uptime desc")->where("status=1 AND step=3")->limit($p3->firstRow . ',' . $p3->listRows)->select();
-         }
-        
+        if (FALSE === is_all_user()) {
+            $goodList3 = $m_good->relation("record")->order("uptime desc")->where("status=1 AND step=3 and location=" . session("locationid"))->limit($p3->firstRow . ',' . $p3->listRows)->select();
+        } else {
+            $goodList3 = $m_good->relation("record")->order("uptime desc")->where("status=1 AND step=3")->limit($p3->firstRow . ',' . $p3->listRows)->select();
+        }
+
         $this->assign("goods3", $goodList3);
         $this->assign("page3", $page3);
 
@@ -236,7 +237,7 @@ class GoodAction extends BaseAction {
             $success = array();
             foreach ($goodserials as $serial) {
                 //排除step=1
-                $goodid = $m_good->where("serial='$serial' AND status=1 AND step!=1")->getField("id");
+                $goodid = $m_good->where("serial='$serial' AND status=1 AND step!=1 And location=" . session("locationid"))->getField("id");
                 if (!is_numeric($goodid)) {
                     $errors[] = "编号为:" . $serial . "的物资不存在或物资非出库状态！<br/>";
                 } else {
@@ -298,17 +299,17 @@ class GoodAction extends BaseAction {
     }
 
     /**
-    public function test() {
-        $m_good = M("Good");
-        $m_record=M("Record");
-        $map['distributeday']=array('neq',"2013-02-05");
-        $records = $m_record->order("good_id asc")->where($map)->select();
-        foreach ($records as $record) {
-           $good_id=$record["good_id"];
-           $m_good->where("id=$good_id")->setField("donateday","2013-01-15");
-        }
-    }
-    */
+      public function test() {
+      $m_good = M("Good");
+      $m_record=M("Record");
+      $map['distributeday']=array('neq',"2013-02-05");
+      $records = $m_record->order("good_id asc")->where($map)->select();
+      foreach ($records as $record) {
+      $good_id=$record["good_id"];
+      $m_good->where("id=$good_id")->setField("donateday","2013-01-15");
+      }
+      }
+     */
 }
 
 ?>
