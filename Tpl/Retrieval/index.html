@@ -14,6 +14,9 @@
                 <p><label>编号：</label><input type="text" name="goodserial" /></p>
                 <p><label>收据号：</label><input type="text" name="receipt" /></p>
                 <p><label>状态：</label><select name="step"><option value="">全部</option><option value="库存中">库存中</option><option value="出库中">出库中</option><option value="已捐赠">已捐赠</option></select></p>
+                 <if condition="is_all_user() eq TRUE">
+                <p><label>所属站点：</label><?php echo location_select()?></p>
+                </if>
                 <p><label>捐赠时间：</label>始与<input type="text" name="donatetimestart" style="width:118px;" /></p>
                 <p><label>&nbsp;</label>终与<input type="text" name="donatetimeend"  style="width: 118px;"/></p>
             </td>

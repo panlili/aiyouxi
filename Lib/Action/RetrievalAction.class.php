@@ -63,7 +63,17 @@ class RetrievalAction extends BaseAction {
         }
 
         $map["donatetime"] = array('between', array($donatetimestart, $donatetimeend));
-        $map["location"] = session("locationid");
+        //如果不是"所有站点用户",需要匹配location的值，显示单个站点数据。否则不需要匹配location的值从而显示所有站点数据
+        if (FALSE === is_all_user()) {
+            $map["location"] = session("locationid");
+        } else {
+            //这里是特别处理当所以站点的用户进来时，检索页面提供了站点的下拉选项
+            //如果下拉选择所有站点，则就是检索所有数据，故不需要对location匹配
+            //如果选择了非所有站点，就需要匹配location，此处的匹配条件不需要在这里构造，而是自动在上面的foreach循环里构造了
+            if ("所有站点" === get_location_name_by_id($queryArray["location"])) {
+                unset($map["location"]);
+            }
+        }
         return $map;
     }
 

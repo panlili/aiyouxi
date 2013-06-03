@@ -3,6 +3,8 @@
 [<a href="#" id="changelink">修改密码</a>][<a href="__JS__/系统使用说明20120926.doc">系统指南下载</a>]<br/>
 目前您在系统看到和操作的所有数据属于：<span style="color: red"><?php echo $_SESSION["locationname"]; ?>[站点序号<?php echo $_SESSION["locationid"]?>]</span>
 
+<!--<?php var_dump(is_all_user()); ?>-->
+
 <!-- 修改密码的对话框 -->
 <div id="changeps" style="display: none">
     <p><label>旧密码：</label><input name="oldpassword" type="password" /></p><br>

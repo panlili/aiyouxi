@@ -43,7 +43,7 @@ function get_session_user_id() {
 }
 
 //获取用户登录后的location id
-function get_location_id(){
+function get_location_id() {
     if (isset($_SESSION["locationid"]))
         return $_SESSION["locationid"];
 }
@@ -69,15 +69,30 @@ function get_family_agent_by_id($id) {
 }
 
 //根据站点id获取站点名
-function get_location_name_by_id($id){
+function get_location_name_by_id($id) {
     return !empty($id) ? M("Location")->where("id=$id")->getField("name") : "";
+}
+
+//判断用户是不是属于"所有站点"的用户，
+//如果是"所有站点"，那么将显示所有数据,包括捐赠人,受捐家庭,物资,检索结果
+//同时需要在这些数据后面加上其站点名称
+//如果是单个站点的用户登录,在捐赠人,家庭,物资等页面的显示中就没有必要显示其站点名称
+function is_all_user() {
+    if (isset($_SESSION["locationname"])) {
+        if ("所有站点" === $_SESSION["locationname"]) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    return FALSE;
 }
 
 function auto_charset_my($fContents, $from = 'gbk', $to = 'utf-8') {
     $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
     $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;
     if (strtoupper($from) === strtoupper($to) || empty($fContents) || (is_scalar($fContents) && !is_string($fContents))) {
-    //如果编码相同或者非字符串标量则不转换
+        //如果编码相同或者非字符串标量则不转换
         return $fContents;
     }
     if (is_string($fContents)) {
@@ -206,4 +221,5 @@ function _U2_Utf8_Gb($_C) {
 
     return iconv('UTF-8', 'GB2312', $_String);
 }
+
 ?>

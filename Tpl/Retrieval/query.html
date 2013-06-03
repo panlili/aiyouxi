@@ -17,18 +17,22 @@
                 <th>物资编号</th>
                 <th>物资</th>
                 <th>物资状态</th>
-                <th>捐赠日期</th>
-                <th>捐赠人</th>
-                <th>捐赠人编号</th>
-                <th>收据编号</th>
-                <th>受助家庭</th>
-                <th>家庭代表</th>
-                <!--<th>地址</th>-->
-                <th>领物编号</th>
-                <th>领物日期</th>
-                <th>经手人</th>
-                <th>审核人</th>
-            </tr>
+                <!-- 如果是所有站点用户，需要显示物资属于哪个站点 -->
+        <if condition="is_all_user() eq TRUE">
+            <th>所属站点</th>
+        </if>
+        <th>捐赠日期</th>
+        <th>捐赠人</th>
+        <th>捐赠人编号</th>
+        <th>收据编号</th>
+        <th>受助家庭</th>
+        <th>家庭代表</th>
+        <!--<th>地址</th>-->
+        <th>领物编号</th>
+        <th>领物日期</th>
+        <th>经手人</th>
+        <th>审核人</th>
+        </tr>
         </thead>
         <tbody>
         <volist name="result" id="each">
@@ -37,17 +41,21 @@
                 <td>{$each.goodserial}</td>
                 <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
                 <td>{$each.step}</td>
-                <td>{$each.donatetime}</td>
-                <td>{$each.donatername}</td>
-                <td>{$each.donaterserial}</td>
-                <td>{$each.receipt}</td>
-                <td>{$each.familyserial}</td>
-                <td>{$each.agent}</td>
-                <!--<td>{$each.address}</td>-->
-                <td>{$each.recordserial}</td>
-                <td>{$each.distributeday}</td>
-                <td>{$each.handman|get_user_truename_by_id}</td>
-                <td>{$each.verifier|get_user_truename_by_id}</td>
+                <!-- 如果是所有站点用户，需要显示物资属于哪个站点 -->
+            <if condition="is_all_user() eq TRUE">
+                <td>{$each.location|get_location_name_by_id}</td>
+            </if>
+            <td>{$each.donatetime}</td>
+            <td>{$each.donatername}</td>
+            <td>{$each.donaterserial}</td>
+            <td>{$each.receipt}</td>
+            <td>{$each.familyserial}</td>
+            <td>{$each.agent}</td>
+            <!--<td>{$each.address}</td>-->
+            <td>{$each.recordserial}</td>
+            <td>{$each.distributeday}</td>
+            <td>{$each.handman|get_user_truename_by_id}</td>
+            <td>{$each.verifier|get_user_truename_by_id}</td>
             </tr>
         </volist>
         </tbody>
@@ -57,7 +65,7 @@
 </notpresent>
 
 <script type="text/javascript">
-    $(function(){
+    $(function() {
         setNumber();
         $("#toexcel").button();
         $("#page a").button().css({
