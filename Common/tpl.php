@@ -41,6 +41,12 @@ function location_select($selected = "") {
     $html = "";
     $m_location = M("Location");
     $locations = $m_location->select();
+    //去掉下拉选项中所有站点的选项
+    foreach ($locations as $key => $location) {
+        if ('所有站点' === $location["name"])
+            unset($locations[$key]);
+    }
+
     if ("" == $selected) {
         $html = '<select name="location">';
         foreach ($locations as $location) {

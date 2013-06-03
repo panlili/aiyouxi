@@ -15,14 +15,20 @@
             <tbody>
             <volist name="users" id="each">
                 <tr class="userlist">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Admin/getEditForm",$(this).text(),callback_get_user_edit_form);return false;'>{$each.id}</a></td>
-                    <td>{$each.username}</td>
-                    <td>{$each.truename}</td>
-                    <td>{$each.location|get_location_name_by_id}</td>
-                    <td>{$each.right}</td>
-                    <td>{$each.comment}</td>
-                    <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
                     <td>
+                <!-- 限定死了admin只属于所有站点，修改本生数据的功能也被取消，但密码可以修改 -->
+                <if condition="$each.username eq admin">
+                    {$each.id}<else />
+                    <a class="change" href="#" onclick='get_data("__APP__/Admin/getEditForm", $(this).text(), callback_get_user_edit_form);
+                            return false;'>{$each.id}</a></td>
+                </if>
+                <td>{$each.username}</td>
+                <td>{$each.truename}</td>
+                <td>{$each.location|get_location_name_by_id}</td>
+                <td>{$each.right}</td>
+                <td>{$each.comment}</td>
+                <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
+                <td>
                 <notempty name="each.lastlogintime">
                     {$each.lastlogintime|date="Y-m-d,H:i:s",###}
                 </notempty>
@@ -31,7 +37,8 @@
                 <td>{$each.logincount}</td>
                 <td>
                     <a id="status_{$each.id}" class="status" href="#"
-                       onclick="toggle_status('__APP__/Admin/changeStatus','{$each.id}',callback_toggle_user_status);return false;">
+                       onclick="toggle_status('__APP__/Admin/changeStatus', '{$each.id}', callback_toggle_user_status);
+                            return false;">
                         {$each.status|get_status_str_by_int}
                     </a>
                 </td>
@@ -50,7 +57,7 @@
             <p><label>备注：</label><textarea name="comment" rows="4" cols="30" wrap="virtual"></textarea></p>
             <p><label>&nbsp;</label>
                 <input type="button" value="添加用户"
-                       onclick="add_data('__APP__/Admin/add',$('#tabs-2 .common_form').serialize(),callback_add_user);"/>
+                       onclick="add_data('__APP__/Admin/add', $('#tabs-2 .common_form').serialize(), callback_add_user);"/>
                 <input type="reset" value="重置" /></p>
         </form>
     </div>
@@ -60,19 +67,21 @@
 </div>
 
 <script type="text/javascript">
-    $(function(){
-        $("#tabs").tabs();
-        //按钮和重置键用Jquery ui 的button美化
-        $("input:button,input:reset").button();
-        //数据的id和禁用链接的数据提示
-        $("a.status").qtip({
-            content: {text:function(){return $.trim($(this).text())=="启用中"?"点击禁用用户":"点击启用用户";}},
-            position: {my: 'right center',at: 'left center'}
-        });
+                        $(function() {
+                            $("#tabs").tabs();
+                            //按钮和重置键用Jquery ui 的button美化
+                            $("input:button,input:reset").button();
+                            //数据的id和禁用链接的数据提示
+                            $("a.status").qtip({
+                                content: {text: function() {
+                                        return $.trim($(this).text()) == "启用中" ? "点击禁用用户" : "点击启用用户";
+                                    }},
+                                position: {my: 'right center', at: 'left center'}
+                            });
 
-        $("a.change").qtip({
-            content: {text:"点击修改用户数据"},
-            position: {my:  'left center',at: 'right center'}
-        });
-    });
+                            $("a.change").qtip({
+                                content: {text: "点击修改用户数据"},
+                                position: {my: 'left center', at: 'right center'}
+                            });
+                        });
 </script>
