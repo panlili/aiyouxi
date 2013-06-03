@@ -42,6 +42,12 @@ function get_session_user_id() {
         return $_SESSION["uid"];
 }
 
+//获取用户登录后的location id
+function get_location_id(){
+    if (isset($_SESSION["locationid"]))
+        return $_SESSION["locationid"];
+}
+
 //根据用户id获取姓名
 function get_user_truename_by_id($id) {
     return !empty($id) ? M("User")->where("id=$id")->getField("truename") : "";
@@ -62,11 +68,16 @@ function get_family_agent_by_id($id) {
     return !empty($id) ? M("Family")->where("id=$id")->getField("agent") : "";
 }
 
+//根据站点id获取站点名
+function get_location_name_by_id($id){
+    return !empty($id) ? M("Location")->where("id=$id")->getField("name") : "";
+}
+
 function auto_charset_my($fContents, $from = 'gbk', $to = 'utf-8') {
     $from = strtoupper($from) == 'UTF8' ? 'utf-8' : $from;
     $to = strtoupper($to) == 'UTF8' ? 'utf-8' : $to;
     if (strtoupper($from) === strtoupper($to) || empty($fContents) || (is_scalar($fContents) && !is_string($fContents))) {
-//如果编码相同或者非字符串标量则不转换
+    //如果编码相同或者非字符串标量则不转换
         return $fContents;
     }
     if (is_string($fContents)) {
@@ -89,11 +100,6 @@ function auto_charset_my($fContents, $from = 'gbk', $to = 'utf-8') {
     else {
         return $fContents;
     }
-}
-
-//根据站点id获取站点名
-function get_location_name_by_id($id){
-    return !empty($id) ? M("Location")->where("id=$id")->getField("name") : "";
 }
 
 //生成汉语拼音

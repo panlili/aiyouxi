@@ -13,6 +13,7 @@ class GoodModel extends RelationModel {
         //物资入库第一次填数据，及入库人为handman
         //在出库时更新数据，及出库中后出库确认人为verifier
         array('handman', 'get_session_user_id', Model::MODEL_BOTH, 'function'),
+        array('location', 'get_location_id', Model::MODEL_BOTH, 'function'),
         //第一次添加的物资自动设置step(enum type)为1，即库存中状态
         array('step', "1", Model::MODEL_INSERT),
         array('addtime', 'time', Model::MODEL_INSERT, 'function'),
@@ -27,7 +28,7 @@ class GoodModel extends RelationModel {
     }
 
     public $_link = array(
-        //has one record 
+        //has one record
         "Record" => array(
             "class_name" => "Record",
             "mapping_name" => "record",

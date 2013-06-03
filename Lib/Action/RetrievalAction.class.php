@@ -63,6 +63,7 @@ class RetrievalAction extends BaseAction {
         }
 
         $map["donatetime"] = array('between', array($donatetimestart, $donatetimeend));
+        $map["location"] = session("locationid");
         return $map;
     }
 

@@ -9,6 +9,7 @@ class FamilyModel extends RelationModel {
     protected $_auto = array(
         array("status", "1", Model::MODEL_INSERT),
         array('handman', 'get_session_user_id', Model::MODEL_BOTH, 'function'),
+        array('location', 'get_location_id', Model::MODEL_BOTH, 'function'),
         array('addtime', 'time', Model::MODEL_INSERT, 'function'),
         array('uptime', 'time', Model::MODEL_UPDATE, 'function'),
     );

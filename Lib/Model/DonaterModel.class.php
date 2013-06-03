@@ -14,6 +14,7 @@ class DonaterModel extends RelationModel {
         array('status', '1', Model::MODEL_INSERT),
         //数据操作人员，自动获取用户登陆后的$_SESSOIN["id"]
         array('handman', 'get_session_user_id', Model::MODEL_BOTH, 'function'),
+        array('location', 'get_location_id', Model::MODEL_BOTH, 'function'),
     );
 
     //不create也能用
