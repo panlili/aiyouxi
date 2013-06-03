@@ -9,6 +9,7 @@
         <tr>
             <th>物资编号</th>
             <th>物资</th>
+            <th>物资所属站点</th>
             <th>物资状态</th>
             <th>捐赠日期</th>
             <th>捐赠人</th>
@@ -32,6 +33,7 @@
         <tr>
             <td>{$each.goodserial}</td>
             <td>{$each.goodname},{$each.number}{$each.unit},{$each.measure}</td>
+            <td>{$each.location|get_location_name_by_id}</td>
             <td>{$each.step}</td>
             <td>{$each.donatetime}</td>
             <td>{$each.donatername}</td>
