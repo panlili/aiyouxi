@@ -15,9 +15,13 @@
             <tbody>
             <volist name="locations" id="each">
                 <tr class="locationlist">
-                    <td><a class="change" href="#" onclick='get_data("__APP__/Location/getEditForm", $(this).text(), callback_get_location_edit_form);
-                            return false;'>{$each.id}</a></td>
-
+                    <td>
+                <if condition="$each.name eq '所有站点'">
+                    {$each.id}<else />
+                        <a class="change" href="#" onclick='get_data("__APP__/Location/getEditForm", $(this).text(), callback_get_location_edit_form);
+                            return false;'>{$each.id}</a>
+                </if>
+                </td>
                     <td>{$each.name}</td>
                     <td>{$each.number}</td>
                     <td>{$each.comment}</td>
