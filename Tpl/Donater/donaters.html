@@ -33,11 +33,11 @@
                     {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
-
+                
+                <td>{$each.handman|get_user_truename_by_id}</td>
                 <if condition="is_all_user() eq TRUE">
                     <td>{$each.location|get_location_name_by_id}</td>
                 </if>
-                <td>{$each.handman|get_user_truename_by_id}</td>
                 <!-- 数据删除不真删除，而是将其status转换为0 -->
                 <td>
                     <a class="delete" href="#"

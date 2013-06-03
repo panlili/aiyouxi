@@ -27,6 +27,7 @@ class GoodAction extends BaseAction {
                 $data["status"] = 1;
                 $data["handman"] = get_session_user_id();
                 $data["addtime"] = time();
+                $data["location"]=session("locationid");//加入站点名
                 $donater_id = $m_donater->data($data)->add();
             }
             //至此根据表单输入获取或添加数据的donater id以存放在$donater_id中
@@ -218,6 +219,7 @@ class GoodAction extends BaseAction {
                 $data["status"] = 1;
                 $data["handman"] = get_session_user_id();
                 $data["addtime"] = time();
+                $data["location"]=session("locationid");//加入站点名
                 $family_id = $m_family->data($data)->add();
             }
 

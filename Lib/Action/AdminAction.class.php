@@ -13,13 +13,19 @@ class AdminAction extends BaseAction {
     public function location() {
         $m_location = D("Location");
         $v_fullgood = M("Fullgood");
+        $m_donater=D("Donater");
+        $m_family=D("Family");
 
         $locationList = $m_location->select();
         foreach ($locationList as &$location) {
             if ("所有站点" !== $location["name"]) {
-                $location["number"] = $v_fullgood->where("location='$location[id]'")->count();
+                $location["number0"] = $v_fullgood->where("location='$location[id]'")->count();  //统计物资数目
+                $location["number1"] = $m_donater->where("location='$location[id]'")->count(); //统计捐赠人数
+                $location["number2"] = $m_family->where("location='$location[id]'")->count();   //统计受助家庭数
             } else {
-                $location["number"] = $v_fullgood->count();
+                $location["number0"] = $v_fullgood->count();
+                $location["number1"] = $m_donater->count();
+                $location["number2"] = $m_family->count();
             }
         }
         $this->assign("locations", $locationList);
