@@ -14,27 +14,35 @@
     <css href="__CSS__/jquery.qtip.css" />
 </head>
 <body onresize="resetwindow()" onload="resetwindow()">
-    <div id="container">
-        <div id="topContent">
-            <include file="Public:top" />
-        </div>
-        <div class="kkk">
-            <div id="leftContent">
-                <include file="Public:left" />
-            </div>
-            <div id="rightContent">
-                <div id="rightTop">
-                    <include file="Public:righttop" />
-                </div>
-                <div id="rightBottom">
-                    {__CONTENT__}
-                </div>
-            </div>
-            <div id="message"></div>
-            <div style="clear: both;width: 100%;height: 1px;"></div>
-        </div>
-        <div style="clear: both;width: 100%;border-top: solid 1px #b2b2b2;height: 80px;line-height: 35px;background-color:#F7FBFE">
-            {:W('Information')}</div>
+<if condition="'所有站点' eq session('locationname')">
+    <script type="text/javascript">
+     $(function() {
+         $("div#message").html("请不要用您登陆的此帐号进行数据的添加修改删除操作<br>此帐号只能用来查询统计所有站点的综合数据<br>若要进行数据添加修改删除操作请用特点站点下的帐号登陆").show().css("left","20%");
+     });
+    </script>
+</if>
+
+<div id="container">
+    <div id="topContent">
+        <include file="Public:top" />
     </div>
+    <div class="kkk">
+        <div id="leftContent">
+            <include file="Public:left" />
+        </div>
+        <div id="rightContent">
+            <div id="rightTop">
+                <include file="Public:righttop" />
+            </div>
+            <div id="rightBottom">
+                {__CONTENT__}
+            </div>
+        </div>
+        <div id="message"></div>
+        <div style="clear: both;width: 100%;height: 1px;"></div>
+    </div>
+    <div style="clear: both;width: 100%;border-top: solid 1px #b2b2b2;height: 80px;line-height: 35px;background-color:#F7FBFE">
+        {:W('Information')}</div>
+</div>
 </body>
 </html>
