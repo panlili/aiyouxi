@@ -5,11 +5,11 @@
             <tr>
                 <th>编号</th><th>家庭代表</th><th>性别</th>
                 <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th>
-                <if condition="is_all_user() eq TRUE">
+        <if condition="is_all_user() eq TRUE">
             <th>所属站点</th>
         </if>
-                <th>详情</th>
-            </tr>
+        <th>详情</th>
+        </tr>
         </thead>
         <tbody>
         <volist name="datalist" id="each">
@@ -21,19 +21,20 @@
                 <td>{$each.address}</td>
                 <td>{$each.idcard}</td>
                 <td>{$each.phone}</td>
-                 <if condition="is_all_user() eq TRUE">
+            <if condition="is_all_user() eq TRUE">
                 <td>{$each.location|get_location_name_by_id}</td>
             </if>
-                <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a></td>
+            <td><a href="#" id="{$each.id}" onclick="show_family_detail('__APP__/Family/getOneDetail', $.trim($(this).attr('id')));
+                        return false;">查看</a></td>
             </tr>
         </volist>
         </tbody>
     </table>
     <div class="green-black" id="pages1">{$page}</div>
     <script type="text/javascript">
-        $(function(){
-            $("#pages1 a").button();
-        });
+                    $(function() {
+                        $("#pages1 a").button();
+                    });
     </script>
 </present>
 
@@ -72,8 +73,13 @@
         <p><label>*家庭代表名：</label><input type="text" name="agent" value="{$olddata.agent}"/></p>
         <p><label>更改家庭图片：</label><input type="file" name="photo" />【jpg,jpeg,gif,png,小于4M】
         <p><label>性别：</label>
-            <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked"/>{$olddata.sex}
+        <notempty name="olddata.sex">
+            <input type ="radio" name="sex" value="{$olddata.sex}" checked="checked" />{$olddata.sex}
             <input type ="radio" name="sex" value="{$olddata.sex|reverseIt}" />{$olddata.sex|reverseIt}
+            <else/>
+            <input type ="radio" name="sex" value="男" checked="checked"/>男
+            <input type ="radio" name="sex" value="女" />女
+        </notempty>
         </p>
         <p><label>出生日期：</label><input type="text" name="birthday" value="{$olddata.birthday}"/></p>
         <p><label>证件号码：</label><input type="text" name="idcard" value="{$olddata.idcard}"/></p>
