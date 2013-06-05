@@ -33,7 +33,7 @@
                     {$each.uptime|date="Y-m-d,H:i",###}
                 </notempty>
                 </td>
-                
+
                 <td>{$each.handman|get_user_truename_by_id}</td>
                 <if condition="is_all_user() eq TRUE">
                     <td>{$each.location|get_location_name_by_id}</td>
@@ -77,28 +77,36 @@
 </div>
 
 <script type="text/javascript">
-                        $(function() {
-                            $("#tabs").tabs();
-                            $("input:button,input:reset").button();
+        $(function() {
+            $("#tabs").tabs();
+            $("input:button,input:reset").button();
 
-                            $("input[name=name]").blur(function() {
-                                var text = $.trim($(this).val());
-                                if ("" != text) {
-                                    $.getJSON('__APP__/Donater/getPinyin', {text: text}, function(json) {
-                                        $("input[name=serial]").val(json.data);
-                                    });
-                                }
-                            });
+            $("#tabs").tabs({
+                select: function(event, ui) {
+                    $.cookie("current", ui.index + 1);
+                }
+            });
 
-                            $("a.change").qtip({
-                                content: {text: "点击修改捐赠者数据"},
-                                position: {my: 'left center', at: 'right center'}
-                            });
+            $("#tabs").tabs().tabs("select", $.cookie("current"));
 
-                            $("#page a").button().css({
-                                "margin-right": "0",
-                                "font-size": "13px",
-                                "padding": 0
-                            });
-                        });
+            $("input[name=name]").blur(function() {
+                var text = $.trim($(this).val());
+                if ("" != text) {
+                    $.getJSON('__APP__/Donater/getPinyin', {text: text}, function(json) {
+                        $("input[name=serial]").val(json.data);
+                    });
+                }
+            });
+
+            $("a.change").qtip({
+                content: {text: "点击修改捐赠者数据"},
+                position: {my: 'left center', at: 'right center'}
+            });
+
+            $("#page a").button().css({
+                "margin-right": "0",
+                "font-size": "13px",
+                "padding": 0
+            });
+        });
 </script>
