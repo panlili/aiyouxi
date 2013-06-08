@@ -21,13 +21,13 @@ class GoodAction extends BaseAction {
             //如果有获取捐赠人的id，否则插入一条记录并获取id
             $donater_name = empty($_POST["donater_name"]) ? "匿名捐赠人" : trim($_POST["donater_name"]);
             $m_donater = M("Donater");
-            $donater_id = $m_donater->where("name='$donater_name'")->getField("id");
+            $donater_id = $m_donater->where("name='$donater_name' AND location=" . session("locationid"))->getField("id");
             if (!is_numeric($donater_id)) {
                 $data["name"] = $donater_name;
                 $data["status"] = 1;
                 $data["handman"] = get_session_user_id();
                 $data["addtime"] = time();
-                $data["location"]=session("locationid");//加入站点名
+                $data["location"] = session("locationid"); //加入站点id
                 $donater_id = $m_donater->data($data)->add();
             }
             //至此根据表单输入获取或添加数据的donater id以存放在$donater_id中
@@ -190,36 +190,35 @@ class GoodAction extends BaseAction {
         $this->display();
     }
 
-    public function getGoodList() {
-        if ($this->isAjax()) {
-            $text = $this->_param("serial");
-            $m_good = M("Good");
-            $map["serial"] = array('like', "%" . $text . "%");
-            $map["step"] = 2;
-            $list = $m_good->field("serial,id,name,number,unit")->where($map)->select();
-            if (is_null($list)) {
-                $this->error("无此物资或物资非出库状态,请先确认物资,跳转到相关页面？");
-            } else {
-                $this->ajaxReturn($list);
-            }
-        } else {
-            $this->redirect("Search/index");
-        }
-    }
-
+//    public function getGoodList() {
+//        if ($this->isAjax()) {
+//            $text = $this->_param("serial");
+//            $m_good = M("Good");
+//            $map["serial"] = array('like', "%" . $text . "%");
+//            $map["step"] = 2;
+//            $list = $m_good->field("serial,id,name,number,unit")->where($map)->select();
+//            if (is_null($list)) {
+//                $this->error("无此物资或物资非出库状态,请先确认物资,跳转到相关页面？");
+//            } else {
+//                $this->ajaxReturn($list);
+//            }
+//        } else {
+//            $this->redirect("Search/index");
+//        }
+//    }
     //领物回来添加record数据
     public function addRecord() {
         if ($this->isAjax()) {
             //领用家庭姓名要求输名字，不用serial，故添加内容获取family id
             $family_agent = empty($_POST["family_agent"]) ? "匿名受助家庭" : trim($_POST["family_agent"]);
             $m_family = M("Family");
-            $family_id = $m_family->where("agent='$family_agent'")->getField("id");
+            $family_id = $m_family->where("agent='$family_agent' AND location=" . session("locationid"))->getField("id");
             if (!is_numeric($family_id)) {
                 $data["agent"] = $family_agent;
                 $data["status"] = 1;
                 $data["handman"] = get_session_user_id();
                 $data["addtime"] = time();
-                $data["location"]=session("locationid");//加入站点名
+                $data["location"] = session("locationid"); //加入站点id
                 $family_id = $m_family->data($data)->add();
             }
 

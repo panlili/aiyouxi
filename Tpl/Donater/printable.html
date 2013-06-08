@@ -44,7 +44,7 @@
             <tbody>
                 <tr><td>捐赠人编号：</td><td>{$donater.serial|default="&nbsp;"}</td></tr>
             <if condition="is_all_user() eq TRUE"><tr><td>所属站点：</td>
-                    <td>{$each.location|get_location_name_by_id}</td>
+                    <td>{$donater.location|get_location_name_by_id}</td>
                 </tr></if>
             <tr><td>姓名：</td><td>{$donater.name|default="&nbsp;"}</td></tr>
             <tr><td>性别：</td><td>{$donater.sex|default="&nbsp;"}</td></tr>            

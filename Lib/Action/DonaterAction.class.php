@@ -42,6 +42,7 @@ class DonaterAction extends BaseAction {
             $text = $this->_param("serial");
             $m_donater = M("Donater");
             $map["name"] = array('like', "%" . $text . "%");
+            $map["location"] = session("locationid");
             $list = $m_donater->field("serial,id,name,phone")->where($map)->select();
             if (is_null($list)) {
                 $this->error("无此捐赠者,系统将自动跳到添加捐赠人页面");
@@ -59,8 +60,8 @@ class DonaterAction extends BaseAction {
         $text = strtoupper(Pinyin($text, 1, 1) . date("Ym"));
         $this->ajaxReturn($text, "", 1);
     }
-    
-      //获取单条数据的详细信息，返回的数据放在一个div里面作为模式对话框显示
+
+    //获取单条数据的详细信息，返回的数据放在一个div里面作为模式对话框显示
     public function getOneDetail() {
         if ($this->isAjax()) {
             $id = $this->_param("id");
@@ -77,8 +78,9 @@ class DonaterAction extends BaseAction {
             $this->redirect("Search/index");
         }
     }
+
     //输出捐赠者的详细信息，以及捐赠的物品
-       public function printable() {
+    public function printable() {
         $donaterid = $this->_param("id");
         $m_donater = M("Donater");
         $v_good = M("Good");
@@ -97,7 +99,6 @@ class DonaterAction extends BaseAction {
             $this->error("捐赠人数据不存在！");
         }
     }
-
 
 }
 

@@ -98,10 +98,7 @@
     <p><label>性别：</label>{$onedonaterdata.sex|default="&nbsp;"}</p>            
     <p><label>联系电话：</label>{$onedonaterdata.phone|default="&nbsp;"}</p>
     <p><label>备注：</label>{$onedonaterdata.comment|default="&nbsp;"}</p>          
-            
+    <p><label>最后操作人：</label>{$onedonaterdata.handman|get_user_truename_by_id}</p>       
     <p><label>添加日期：</label>{$onedonaterdata.addtime|date="Y-m-d,H:i:s",###}</p>
     <p><label>更新日期：</label><notempty name="donater.uptime">{$onedonaterdata.uptime|date="Y-m-d,H:i:s",###}</notempty></p>
-<p><label>最后操作人：</label>{$onedonaterdata.handman|get_user_truename_by_id}</p>
-    
-
 </present>

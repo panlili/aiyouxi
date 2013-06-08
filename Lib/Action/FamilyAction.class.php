@@ -179,6 +179,7 @@ class FamilyAction extends BaseAction {
             $text = $this->_param("serial");
             $m_family = M("Family");
             $map["agent"] = array('like', "%" . $text . "%");
+            $map["location"]=session("locationid");
             $list = $m_family->field("serial,id,agent")->where($map)->select();
             if (is_null($list)) {
                 $this->error("无此家庭或未分配家庭编号,请确认家庭信息,跳转到相关页面？");
