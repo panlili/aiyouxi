@@ -1,0 +1,23 @@
+1.改ayx_good
+
+SELECT * FROM `ayx_good` where serial like "x%" AND status=1;
+update ayx_good set location=5 where serial like "x%" AND status=1;
+
+2.改ayx_donater
+
+SELECT DISTINCT ayx_donater.id,ayx_donater.location FROM `ayx_donater`,ayx_good where ayx_donater.id=ayx_good.donater_id AND ayx_good.location=5; 
+
+update ayx_donater b1, ayx_good b2 set b1.location=5 where  b1.id=b2.donater_id AND b2.location=5; 
+
+3.改ayx_record表
+
+SELECT DISTINCT ayx_record.id,ayx_record.location FROM `ayx_record`,ayx_good where ayx_good.id=ayx_record.good_id AND 
+ayx_good.location=5; 
+
+update ayx_record b1, ayx_good b2 set b1.location=5 where  b1.good_id=b2.id AND b2.location=5;
+
+4.ayx_family
+
+ update ayx_family b1, ayx_record b2 set b1.location=5 where b1.id=b2.family_id AND b2.location=5;
+
+5. update ayx_family set location = 5 where serial like "xjh-%";
