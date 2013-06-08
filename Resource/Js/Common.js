@@ -161,6 +161,21 @@ function callback_get_location_edit_form(json){
     }
 }
 //donater相关
+function show_donater_detail(path,id){
+    $.get(path,{
+        id:id
+    },function(json){
+        if(0==json.status){
+            alert(json.info)
+        }else{
+            $("<div class='common_form'>").html(json.data).dialog({
+                modal: true,
+                width: 500,
+                height: 650
+            });
+        }
+    },"JSON");
+}
 function callback_toggle_donater_status(json){
     if(1==json.status){
         $(".common_table tr#"+json.data).fadeOut("fast");

@@ -1,0 +1,97 @@
+{__NOLAYOUT__}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>捐赠人详细表格</title>
+    <js href="__JS__/jquery172.js,__JS__/Common.js" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        .common_table{
+            margin-bottom: 10px;
+            width:100%;
+            border-collapse:collapse;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        }
+        .common_table tr td{
+            height: 15px;
+            font-size:13px;
+            border:1px solid #b2b2b2;
+            padding:3px 7px 2px 7px;
+        }
+        .common_table tr{
+            color:#000000;
+        }
+        .common_table th{
+            height: 25px;
+            border:1px solid #b2b2b2;
+            font-size:13px;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color:gray;
+            color:#ffffff;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            setNumber();
+        });
+    </script>
+</head>
+<body>
+    <div style="margin: 50px auto;width: 800px;">
+        <table class="common_table">
+            <thead><tr><th style="width: 15%">数据项</th><th>详细数据</th></tr></thead>
+            <tbody>
+                <tr><td>捐赠人编号：</td><td>{$donater.serial|default="&nbsp;"}</td></tr>
+            <if condition="is_all_user() eq TRUE"><tr><td>所属站点：</td>
+                    <td>{$each.location|get_location_name_by_id}</td>
+                </tr></if>
+            <tr><td>姓名：</td><td>{$donater.name|default="&nbsp;"}</td></tr>
+            <tr><td>性别：</td><td>{$donater.sex|default="&nbsp;"}</td></tr>            
+            <tr><td>联系电话：</td><td>{$donater.phone|default="&nbsp;"}</td></tr>
+            <tr><td>备注：</td><td>{$donater.comment|default="&nbsp;"}</td></tr>          
+            
+            <tr><td>添加日期：</td><td>{$donater.addtime|date="Y-m-d,H:i:s",###}</td></tr>
+            <tr><td>更新日期：</td><td><notempty name="donater.uptime">{$donater.uptime|date="Y-m-d,H:i:s",###}</notempty></td></tr>
+            <tr><td>最后操作人：</td><td>{$donater.handman|get_user_truename_by_id}</td></tr>
+            </tbody>
+        </table>
+        <!-- 物资信息表格 -->
+        <table class="common_table">
+            <thead><tr><th style="width: 15%" colspan="2">捐赠物资</th><th colspan="9">{$goodcount}件</th></tr></thead>
+            <present name="goods">
+                <thead>
+                    <tr>
+                        <td>序号</td>
+                        <td>物资编号</td>
+                        <td>物资</td>
+                        <td>捐赠日期</td>
+                        <td>捐赠人</td>
+                        <td>捐赠人编号</td>
+                        <td>出库日期</td>
+                                              
+                        <td>经手人</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name="goods" id="each">
+                    <tr>
+                        <td class="number"></td>
+                        <td>{$each.serial}</td>
+                        <td>{$each.name},{$each.number}{$each.unit},{$each.measure}</td>
+                        <td>{$each.donateday}</td>
+                        <td>{$donater.name}</td>
+                        <td>{$donater.serial}</td>
+                        <td><notempty name="each.checkouttime">{$each.checkouttime|date="Y-m-d",###}</notempty></td>
+                       
+                        <td>{$each.handman|get_user_truename_by_id}</td>
+                        
+                    </tr>
+                </volist>
+                </tbody>
+            </present>
+        </table>
+    </div>
+</body>
+</html>

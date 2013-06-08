@@ -27,9 +27,9 @@ class BaseAction extends Action {
             //普通工作人员
             "0" => array(
                 "Admin" => array("changepassword"),
-                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit", "unitsearch", "getpinyin"),
+                "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit", "unitsearch", "getpinyin","getonedetail","printable"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial", "getfamilylist",
-                    "add", "geteditform", "edit", "unitsearch", "_uploadphoto"),
+                    "add", "geteditform", "edit", "unitsearch", "_uploadphoto","printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
                     "endgood", "goods", "getgoodlist", "addrecord", "editrecord", "getdoneeditform", "geteditform", "edit", "unitsearch"),
                 "Retrieval" => array("index", "query")
@@ -38,7 +38,7 @@ class BaseAction extends Action {
             "1" => array(
                 "Admin" => array("index", "analyse", "tongji", "changepassword", "recyle", "recyledata",),
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform",
-                    "edit", "changestatus", "unitsearch", "getpinyin"),
+                    "edit", "changestatus", "unitsearch", "getpinyin","getonedetail","printable"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
                     "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch", "_uploadphoto", "printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",
@@ -50,7 +50,7 @@ class BaseAction extends Action {
                 "Admin" => array("index", "users", "analyse", "tongji", "changestatus", "changepassword",
                     "recyle", "recyledata", "deletedata", "add", "geteditform", "edit", "location"),
                 "Donater" => array("index", "donaters", "getdonaterlist", "add", "geteditform", "edit",
-                    "changestatus", "unitsearch", "getpinyin"),
+                    "changestatus", "unitsearch", "getpinyin","getonedetail","printable"),
                 "Family" => array("index", "families", "survey", "getonedetail", "setserial",
                     "getfamilylist", "add", "geteditform", "edit", "changestatus", "unitsearch", "_uploadphoto", "printable"),
                 "Good" => array("index", "checkin", "add", "checkout", "getcheckoutgood", "docheckout", "rollback",

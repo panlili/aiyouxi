@@ -14,6 +14,7 @@
                 <th>所属站点</th>
             </if>
             <th>删除</th>
+            <th>详情</th>
             </tr>
             </thead>
             <tbody>
@@ -44,6 +45,10 @@
                        onclick="toggle_status('__APP__/Donater/changeStatus', '{$each.id}', callback_toggle_donater_status);
                             return false;">
                         删除</a>
+                </td>
+                <td>
+                <a href="#" id="{$each.id}" onclick="show_donater_detail('__APP__/donater/getOneDetail',$.trim($(this).attr('id')));return false;">查看</a>
+                <a href="__URL__/printable?id={$each.id}" target="_blank">详情表格</a>
                 </td>
                 </tr>
             </volist>

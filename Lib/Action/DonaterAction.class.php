@@ -59,6 +59,45 @@ class DonaterAction extends BaseAction {
         $text = strtoupper(Pinyin($text, 1, 1) . date("Ym"));
         $this->ajaxReturn($text, "", 1);
     }
+    
+      //获取单条数据的详细信息，返回的数据放在一个div里面作为模式对话框显示
+    public function getOneDetail() {
+        if ($this->isAjax()) {
+            $id = $this->_param("id");
+            $m_donater = M("Donater");
+            $data = $m_donater->where("id=$id")->find();
+            if (!empty($data)) {
+                $this->assign("onedonaterdata", $data);
+                $content = $this->fetch("_donater");
+                $this->ajaxReturn($content, "数据获取成功", 1);
+            } else {
+                $this->error("数据不存在");
+            }
+        } else {
+            $this->redirect("Search/index");
+        }
+    }
+    //输出捐赠者的详细信息，以及捐赠的物品
+       public function printable() {
+        $donaterid = $this->_param("id");
+        $m_donater = M("Donater");
+        $v_good = M("Good");
+        $donaterdetail = $m_donater->where("id='$donaterid'")->find();
+        if ($donaterdetail) {
+            //$serial = $donaterdetail["serial"];
+            $goodcount = $v_good->where("donater_id='$donaterid'")->count();
+            if ($goodcount > 0) {
+                $goods = $v_good->where("donater_id='$donaterid'")->select();
+                $this->assign("goods", $goods);
+            }
+            $this->assign("goodcount", $goodcount);
+            $this->assign("donater", $donaterdetail);
+            $this->display();
+        } else {
+            $this->error("捐赠人数据不存在！");
+        }
+    }
+
 
 }
 
