@@ -15,8 +15,8 @@ class FamilyAction extends BaseAction {
         $map["status"] = 1;
         $map["serial"] = array("neq", "");
         //多站点
-        if (FALSE === is_all_user()){
-            $map["location"]=array("eq",session("locationid"));
+        if (FALSE === is_all_user()) {
+            $map["location"] = array("eq", session("locationid"));
         }
         $count = $m_family->where($map)->count();
         $p = new Page($count, self::RECORDS_ONE_PAGE);
@@ -54,22 +54,28 @@ class FamilyAction extends BaseAction {
 
     public function survey() {
         $m_family = M("Family");
+        $m_record = M("Record");
         import("ORG.Util.Page");
 
-         if (FALSE === is_all_user()){
-        $count = $m_family->where("status=1 and location=" . session("locationid"))->count();
-
-        }  else {
+        if (FALSE === is_all_user()) {
+            $count = $m_family->where("status=1 and location=" . session("locationid"))->count();
+        } else {
             $count = $m_family->where("status=1")->count();
         }
 
         $p = new Page($count, self::RECORDS_ONE_PAGE);
         $page = $p->show();
 
-        if (FALSE === is_all_user()){
+        if (FALSE === is_all_user()) {
             $familyList = $m_family->order("id desc")->where("status=1 and location=" . session("locationid"))->limit($p->firstRow . ',' . $p->listRows)->select();
-        }  else {
+        } else {
             $familyList = $m_family->order("id desc")->where("status=1")->limit($p->firstRow . ',' . $p->listRows)->select();
+        }
+
+        foreach ($familyList as &$family) {
+            $familyId = $family["id"];
+            $goodNumber = $m_record->where("family_id='$familyId'")->count();
+            $family["goodNumber"] = $goodNumber;
         }
 
         $this->assign("families", $familyList);
@@ -179,7 +185,7 @@ class FamilyAction extends BaseAction {
             $text = $this->_param("serial");
             $m_family = M("Family");
             $map["agent"] = array('like', "%" . $text . "%");
-            $map["location"]=session("locationid");
+            $map["location"] = session("locationid");
             $list = $m_family->field("serial,id,agent")->where($map)->select();
             if (is_null($list)) {
                 $this->error("无此家庭或未分配家庭编号,请确认家庭信息,跳转到相关页面？");

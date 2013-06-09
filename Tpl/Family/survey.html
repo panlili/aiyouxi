@@ -8,7 +8,7 @@
         <table class="common_table">
             <thead>
                 <tr>
-                    <th>序号</th><th>家庭代表</th><th>性别</th>
+                    <th>序号</th><th>家庭代表</th><th>已领捐赠</th><th>性别</th>
                     <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th>
                     <if condition="is_all_user() eq TRUE">
                 <th>所属站点</th>
@@ -21,6 +21,7 @@
                 <tr class="familylist" id="{$each.id}">
                     <td><a class="change" href="#" onclick='get_data("__APP__/Family/getEditForm",$(this).text(),callback_get_family_edit_form);return false;'>{$each.id}</a></td>
                     <td>{$each.agent}</td>
+                    <td>{$each.goodNumber}</td>
                     <td>{$each.sex}</td>
                     <td>
                         <neq name="each.birthday" value="0000-00-00">
