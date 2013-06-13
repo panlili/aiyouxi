@@ -1,3 +1,10 @@
+<?php 
+    if (!isset($_SESSION["querytext"])){
+        header("Location: http://www.ayxyicang.com/index.php/Retrieval/index"); 
+        exit();
+    }
+?>           
+
 <present name="noresult">
     <div style="float: left;margin:30px auto auto 50px;text-align: left;font-size: 1.2em;">
         <p>没有相关结果！可能原因有：</p><br/>
