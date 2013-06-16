@@ -9,7 +9,7 @@
             <thead>
                 <tr>
                     <th>序号</th><th>编号</th><th>捐赠人姓名</th><th>联系电话</th>
-                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th>
+                    <th>性别</th><th>备注</th><th>添加日期</th><th>更新日期</th><th>最后操作人</th><th>站点</th>
                     <th>恢复</th><th>删除</th>
                 </tr>
             </thead>
@@ -25,6 +25,7 @@
                     <td>{$each.addtime|date="Y-m-d,H:i:s",###}</td>
                     <td><notempty name="each.uptime">{$each.uptime|date="Y-m-d,H:i:s",###}</notempty></td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td>{$each.location|get_location_name_by_id}</td>
                     <td><a href="#" class="{$each.id}"
                            onclick="recyle_data('__APP__/Admin/recyleData','Donater',$.trim($(this).attr('class')),callback_recyle_donater);return false;">
                             恢复</a>
@@ -44,7 +45,7 @@
                 <tr>
                     <th>序号</th>
                     <th>编号</th><th>家庭代表</th><th>性别</th>
-                    <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th>
+                    <th>出生日期</th><th>联系地址</th><th>证件号码</th><th>联系电话</th><th>站点</th>
                     <th>恢复</th><th>永久删除</th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
                     <td>{$each.address}</td>
                     <td>{$each.idcard}</td>
                     <td>{$each.phone}</td>
+                    <td>{$each.location|get_location_name_by_id}</td>
                     <td><a href="#" class="{$each.id}"
                            onclick="recyle_data('__APP__/Admin/recyleData','Family',$.trim($(this).attr('class')),callback_recyle_family);return false;">
                             恢复</a>
@@ -81,7 +83,7 @@
                     <th>数量</th><th>计量</th>
                     <th>捐赠日期</th><th>捐赠人</th>
                     <th>库存状态</th><th>收据号</th>
-                    <th>经手人</th><th>恢复</th><th>删除</th>
+                    <th>经手人</th><th>站点</th><th>恢复</th><th>删除</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,6 +99,7 @@
                     <td>{$each.step}</td>
                     <td>{$each.receipt}</td>
                     <td>{$each.handman|get_user_truename_by_id}</td>
+                    <td>{$each.location|get_location_name_by_id}</td>
                     <td><a href="#" class="{$each.id}"
                            onclick="recyle_data('__APP__/Admin/recyleData','Good',$.trim($(this).attr('class')),callback_recyle_good);return false;">
                             恢复</a>

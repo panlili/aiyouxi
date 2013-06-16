@@ -112,7 +112,7 @@ class AdminAction extends BaseAction {
                 if ("所有站点" !== $location["name"]) {
                     $model = D("fullgood");
                     //接收物资数量
-                    $map["donatetime"] = array("between", array(date("Y-m-d",$analyse_time1), date("Y-m-d",$analyse_time2)));
+                    $map["donatetime"] = array("between", array(date("Y-m-d", $analyse_time1), date("Y-m-d", $analyse_time2)));
                     $map["location"] = array("eq", $location[id]);
                     $location["get_wuzi"] = $model->where($map)->count();
                     $map = array();
@@ -144,37 +144,36 @@ class AdminAction extends BaseAction {
                     $location["good_outbase"] = $goods->where($map)->count();
                     $map["step"] = "已捐赠";
                     $location["good_finish"] = $goods->where($map)->count();
-                }  else {
-                     $model = D("fullgood");
+                } else {
+                    $model = D("fullgood");
                     //接收物资数量
-                    $map["donatetime"] = array("between", array(date("Y-m-d",$analyse_time1), date("Y-m-d",$analyse_time2)));                    
+                    $map["donatetime"] = array("between", array(date("Y-m-d", $analyse_time1), date("Y-m-d", $analyse_time2)));
                     $location["get_wuzi"] = $model->where($map)->count();
                     $map = array();
                     //发放物资的数量
-                    $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));                    
+                    $map["checkouttime"] = array("between", array($analyse_time1, $analyse_time2));
                     $location["checkout_wuzi"] = $model->where($map)->count();
                     $map = array();
 
-                    $donater = D("donater");                    
+                    $donater = D("donater");
                     $location["donater_total_count"] = $donater->count();
                     $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
                     $location["donater_add_count"] = $donater->where($map)->count();
                     $map = array();
 
-                    $family = D("family");                    
+                    $family = D("family");
                     $location["family_total_count"] = $family->count();
                     $map["addtime"] = array("between", array($analyse_time1, $analyse_time2));
                     $location["family_add_count"] = $family->where($map)->count();
                     $map = array();
 
-                    $goods = D("good");                    
+                    $goods = D("good");
                     $map["step"] = "库存中";
                     $location["good_inbase"] = $goods->where($map)->count();
                     $map["step"] = "出库中";
                     $location["good_outbase"] = $goods->where($map)->count();
                     $map["step"] = "已捐赠";
                     $location["good_finish"] = $goods->where($map)->count();
-                    
                 }
             }
             $this->assign("analyse_time1", date("Y-m-d", $analyse_time1));
@@ -245,7 +244,9 @@ class AdminAction extends BaseAction {
         $m_family = M("Family");
         $m_good = M("Good");
         $map["status"] = 0;
-
+        if (FALSE === is_all_user()) {
+            $map["location"] = session("locationid");
+        }
         $donaters = $m_donater->where($map)->select();
         $families = $m_family->where($map)->select();
         $goods = $m_good->where($map)->select();
@@ -289,4 +290,5 @@ class AdminAction extends BaseAction {
     }
 
 }
+
 ?>
